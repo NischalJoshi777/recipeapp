@@ -14,6 +14,7 @@ mixin _$AppThemeTailorMixin on ThemeExtension<AppTheme> {
   TextStyle get bodyRegular;
   TextStyle get bodyLarge;
   TextStyle get bodySmall;
+  Color get scaffoldBackGround;
 
   @override
   AppTheme copyWith({
@@ -22,6 +23,7 @@ mixin _$AppThemeTailorMixin on ThemeExtension<AppTheme> {
     TextStyle? bodyRegular,
     TextStyle? bodyLarge,
     TextStyle? bodySmall,
+    Color? scaffoldBackGround,
   }) {
     return AppTheme(
       h1: h1 ?? this.h1,
@@ -29,6 +31,7 @@ mixin _$AppThemeTailorMixin on ThemeExtension<AppTheme> {
       bodyRegular: bodyRegular ?? this.bodyRegular,
       bodyLarge: bodyLarge ?? this.bodyLarge,
       bodySmall: bodySmall ?? this.bodySmall,
+      scaffoldBackGround: scaffoldBackGround ?? this.scaffoldBackGround,
     );
   }
 
@@ -41,6 +44,8 @@ mixin _$AppThemeTailorMixin on ThemeExtension<AppTheme> {
       bodyRegular: TextStyle.lerp(bodyRegular, other.bodyRegular, t)!,
       bodyLarge: TextStyle.lerp(bodyLarge, other.bodyLarge, t)!,
       bodySmall: TextStyle.lerp(bodySmall, other.bodySmall, t)!,
+      scaffoldBackGround:
+          Color.lerp(scaffoldBackGround, other.scaffoldBackGround, t)!,
     );
   }
 
@@ -54,7 +59,9 @@ mixin _$AppThemeTailorMixin on ThemeExtension<AppTheme> {
             const DeepCollectionEquality()
                 .equals(bodyRegular, other.bodyRegular) &&
             const DeepCollectionEquality().equals(bodyLarge, other.bodyLarge) &&
-            const DeepCollectionEquality().equals(bodySmall, other.bodySmall));
+            const DeepCollectionEquality().equals(bodySmall, other.bodySmall) &&
+            const DeepCollectionEquality()
+                .equals(scaffoldBackGround, other.scaffoldBackGround));
   }
 
   @override
@@ -66,6 +73,7 @@ mixin _$AppThemeTailorMixin on ThemeExtension<AppTheme> {
       const DeepCollectionEquality().hash(bodyRegular),
       const DeepCollectionEquality().hash(bodyLarge),
       const DeepCollectionEquality().hash(bodySmall),
+      const DeepCollectionEquality().hash(scaffoldBackGround),
     );
   }
 }

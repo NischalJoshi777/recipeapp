@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:myrecipeapp/config/theme/color.dart';
 
 class TextStyles {
   static const _base = TextStyle(
-    color: Colors.black,
+    color: Palette.darkGray,
     fontFamily: 'Poppins',
     leadingDistribution: TextLeadingDistribution.even,
   );
