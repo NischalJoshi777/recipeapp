@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myrecipeapp/main_view.dart';
+import 'package:myrecipeapp/config/routes/app_routes.dart';
 
 import 'config/theme/app_theme.dart';
 
@@ -12,10 +12,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: lightThemeData,
-      home: const MainView(),
+      routerConfig: myRouter,
     );
   }
 }

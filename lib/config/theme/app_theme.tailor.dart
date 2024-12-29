@@ -15,6 +15,8 @@ mixin _$AppThemeTailorMixin on ThemeExtension<AppTheme> {
   TextStyle get bodyLarge;
   TextStyle get bodySmall;
   Color get scaffoldBackGround;
+  Color get primaryColor;
+  Color get secondaryColor;
 
   @override
   AppTheme copyWith({
@@ -24,6 +26,8 @@ mixin _$AppThemeTailorMixin on ThemeExtension<AppTheme> {
     TextStyle? bodyLarge,
     TextStyle? bodySmall,
     Color? scaffoldBackGround,
+    Color? primaryColor,
+    Color? secondaryColor,
   }) {
     return AppTheme(
       h1: h1 ?? this.h1,
@@ -32,6 +36,8 @@ mixin _$AppThemeTailorMixin on ThemeExtension<AppTheme> {
       bodyLarge: bodyLarge ?? this.bodyLarge,
       bodySmall: bodySmall ?? this.bodySmall,
       scaffoldBackGround: scaffoldBackGround ?? this.scaffoldBackGround,
+      primaryColor: primaryColor ?? this.primaryColor,
+      secondaryColor: secondaryColor ?? this.secondaryColor,
     );
   }
 
@@ -46,6 +52,8 @@ mixin _$AppThemeTailorMixin on ThemeExtension<AppTheme> {
       bodySmall: TextStyle.lerp(bodySmall, other.bodySmall, t)!,
       scaffoldBackGround:
           Color.lerp(scaffoldBackGround, other.scaffoldBackGround, t)!,
+      primaryColor: Color.lerp(primaryColor, other.primaryColor, t)!,
+      secondaryColor: Color.lerp(secondaryColor, other.secondaryColor, t)!,
     );
   }
 
@@ -61,7 +69,11 @@ mixin _$AppThemeTailorMixin on ThemeExtension<AppTheme> {
             const DeepCollectionEquality().equals(bodyLarge, other.bodyLarge) &&
             const DeepCollectionEquality().equals(bodySmall, other.bodySmall) &&
             const DeepCollectionEquality()
-                .equals(scaffoldBackGround, other.scaffoldBackGround));
+                .equals(scaffoldBackGround, other.scaffoldBackGround) &&
+            const DeepCollectionEquality()
+                .equals(primaryColor, other.primaryColor) &&
+            const DeepCollectionEquality()
+                .equals(secondaryColor, other.secondaryColor));
   }
 
   @override
@@ -74,6 +86,8 @@ mixin _$AppThemeTailorMixin on ThemeExtension<AppTheme> {
       const DeepCollectionEquality().hash(bodyLarge),
       const DeepCollectionEquality().hash(bodySmall),
       const DeepCollectionEquality().hash(scaffoldBackGround),
+      const DeepCollectionEquality().hash(primaryColor),
+      const DeepCollectionEquality().hash(secondaryColor),
     );
   }
 }

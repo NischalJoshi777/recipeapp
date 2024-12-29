@@ -19,6 +19,10 @@ class AppTheme extends ThemeExtension<AppTheme> with _$AppThemeTailorMixin {
   final TextStyle bodySmall;
   @override
   final Color scaffoldBackGround;
+  @override
+  final Color primaryColor;
+  @override
+  final Color secondaryColor;
 
   AppTheme({
     required this.h1,
@@ -27,6 +31,8 @@ class AppTheme extends ThemeExtension<AppTheme> with _$AppThemeTailorMixin {
     required this.bodyLarge,
     required this.bodySmall,
     required this.scaffoldBackGround,
+    required this.primaryColor,
+    required this.secondaryColor,
   });
 }
 
@@ -37,6 +43,8 @@ AppTheme myTheme = AppTheme(
   bodyLarge: TextStyles.bodyLargeStyle,
   bodySmall: TextStyles.bodySmallStyle,
   scaffoldBackGround: Palette.lightGray,
+  primaryColor: Palette.primaryGreen,
+  secondaryColor: Palette.accentOrange,
 );
 
 //LightThemeData
@@ -44,7 +52,7 @@ final lightThemeData = ThemeData(
   useMaterial3: true,
   brightness: Brightness.light,
   extensions: [myTheme],
-  primaryColor: Palette.primaryGreen,
+  primaryColor: myTheme.primaryColor,
   scaffoldBackgroundColor: Palette.lightGray,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
