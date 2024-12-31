@@ -6,7 +6,7 @@ final GoRouter myRouter = GoRouter(
   routes: <RouteBase>[
     GoRoute(
       path: "/",
-      builder: (_, __) => MainView(),
+      builder: (_, __) => const MainView(),
       routes: <RouteBase>[
         GoRoute(
           path: "/details",
