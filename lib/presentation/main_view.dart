@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myrecipeapp/presentation/bookmarks/bookmarks_screen.dart';
 import 'package:myrecipeapp/presentation/custom_navbar_cubit/custom_nav_bar.dart';
 import 'package:myrecipeapp/presentation/details/details_screen.dart';
-import 'package:myrecipeapp/presentation/home/home_screen.dart';
+import 'package:myrecipeapp/presentation/home/widget/home_screen.dart';
 import 'package:myrecipeapp/presentation/profile/profile_screen.dart';
 
 import 'custom_navbar_cubit/custom_navbar_cubit.dart';

@@ -61,6 +61,23 @@ final lightThemeData = ThemeData(
       backgroundColor: Palette.primaryGreen,
     ),
   ),
+  inputDecorationTheme: InputDecorationTheme(
+    filled: true,
+    fillColor: Colors.white,
+    enabledBorder: OutlineInputBorder(
+        borderSide: const BorderSide(
+          color: Colors.white,
+          width: 0.0,
+        ),
+        borderRadius: BorderRadius.circular(30.0)),
+    focusedBorder: OutlineInputBorder(
+      borderSide: const BorderSide(
+        width: 1.0,
+        color: Palette.primaryGreen,
+      ),
+      borderRadius: BorderRadius.circular(30.0),
+    ),
+  ),
   textTheme: TextTheme(
     headlineLarge: myTheme.h1,
     headlineMedium: myTheme.h2,

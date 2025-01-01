@@ -9,39 +9,44 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Builder(builder: (context) {
-      return Stack(
-        children: [
-          SizedBox(
-            height: 80.0,
-            width: size.width,
-            child: CustomPaint(
-              painter: MyCustomPainter(),
-            ),
-          ),
-          BlocBuilder<CustomNavBarCubit, int>(builder: (context, state) {
-            final CustomNavBarCubit cubit = context.read<CustomNavBarCubit>();
-            return Center(
-              heightFactor: 1.5,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _myIcons(Icons.home_filled, state == 0,
-                      onPressed: () => cubit.onNavBarItemPressed(0)),
-                  _myIcons(Icons.search_off, state == 1,
-                      onPressed: () => cubit.onNavBarItemPressed(1)),
-                  SizedBox(width: size.width * 0.20),
-                  _myIcons(Icons.bookmark_add_outlined, state == 2,
-                      onPressed: () => cubit.onNavBarItemPressed(2)),
-                  _myIcons(Icons.person, state == 3,
-                      onPressed: () => cubit.onNavBarItemPressed(3)),
-                ],
+    return Builder(
+      builder: (context) {
+        return Stack(
+          children: [
+            SizedBox(
+              height: 80.0,
+              width: size.width,
+              child: CustomPaint(
+                painter: MyCustomPainter(),
               ),
-            );
-          })
-        ],
-      );
-    });
+            ),
+            BlocBuilder<CustomNavBarCubit, int>(
+              builder: (context, state) {
+                final CustomNavBarCubit cubit =
+                    context.read<CustomNavBarCubit>();
+                return Center(
+                  heightFactor: 1.5,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _myIcons(Icons.home_filled, state == 0,
+                          onPressed: () => cubit.onNavBarItemPressed(0)),
+                      _myIcons(Icons.search_off, state == 1,
+                          onPressed: () => cubit.onNavBarItemPressed(1)),
+                      SizedBox(width: size.width * 0.20),
+                      _myIcons(Icons.bookmark_add_outlined, state == 2,
+                          onPressed: () => cubit.onNavBarItemPressed(2)),
+                      _myIcons(Icons.person, state == 3,
+                          onPressed: () => cubit.onNavBarItemPressed(3)),
+                    ],
+                  ),
+                );
+              },
+            )
+          ],
+        );
+      },
+    );
   }
 
   Widget _myIcons(IconData icons, bool isPressed, {VoidCallback? onPressed}) {
