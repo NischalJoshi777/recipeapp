@@ -28,6 +28,7 @@ class RemoteSourceImpl implements RemoteSource {
     }
   }
 
+  @override
   Future<Map<String, dynamic>> post({
     required String path,
     required Map<String, dynamic> queryParams,
@@ -48,9 +49,16 @@ class RemoteSourceImpl implements RemoteSource {
   }
 
   void _initialize() {
-    _dio = Dio(BaseOptions(
-      baseUrl: "",
-      headers: {},
-    ));
+    _dio = Dio(
+      BaseOptions(
+        baseUrl: "",
+        queryParameters: {
+          'apiKey': const String.fromEnvironment('API_KEY'),
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      ),
+    );
   }
 }

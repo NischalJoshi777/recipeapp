@@ -16,9 +16,17 @@ class MainView extends StatelessWidget {
     return BlocProvider(
       create: (_) => CustomNavBarCubit(),
       child: SafeArea(
-        child: Scaffold(
-          body: _Body(),
-          bottomNavigationBar: const CustomBottomNavigationBar(),
+        child: Stack(
+          children: [
+            Scaffold(
+              body: _Body(),
+            ),
+            Positioned(
+              bottom: 0.0,
+              width: MediaQuery.of(context).size.width,
+              child: const CustomBottomNavigationBar(),
+            ),
+          ],
         ),
       ),
     );
