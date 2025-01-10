@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myrecipeapp/config/theme/app_theme.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
+import 'package:myrecipeapp/config/theme/text_styles.dart';
 import 'package:myrecipeapp/presentation/home/widget/header_text.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -31,8 +32,8 @@ class DetailsScreen extends StatelessWidget {
                   vertical: 24.0,
                   horizontal: 12.0,
                 ),
-                child: SingleChildScrollView(
-                  child: const Column(
+                child: const SingleChildScrollView(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: 20.0,
                     children: [
@@ -69,6 +70,7 @@ class DetailsScreen extends StatelessWidget {
                       ),
                       HeaderText(text: 'Description'),
                       HeaderText(text: 'Ingredients'),
+                      IngredientsList(),
                     ],
                   ),
                 ),
@@ -108,5 +110,43 @@ class IconWithText extends StatelessWidget {
         )
       ],
     );
+  }
+}
+
+class IngredientsList extends StatelessWidget {
+  const IngredientsList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(spacing: 10.0, children: [
+      ListTile(
+        leading: Image.network(
+          'https://spoonacular.com/cdn/ingredients_100x100/butter-sliced.jpg',
+        ),
+        title: Text('Butter', style: context.appTheme.bodyRegular.semiBold),
+        subtitle: Text('1.0 Tbsp', style: context.appTheme.bodySmall),
+      ),
+      ListTile(
+        leading: Image.network(
+          'https://spoonacular.com/cdn/ingredients_100x100/butter-sliced.jpg',
+        ),
+        title: Text('Butter', style: context.appTheme.bodyRegular.semiBold),
+        subtitle: Text('1.0 Tbsp', style: context.appTheme.bodySmall),
+      ),
+      ListTile(
+        leading: Image.network(
+          'https://spoonacular.com/cdn/ingredients_100x100/butter-sliced.jpg',
+        ),
+        title: Text('Butter', style: context.appTheme.bodyRegular.semiBold),
+        subtitle: Text('1.0 Tbsp', style: context.appTheme.bodySmall),
+      ),
+      ListTile(
+        leading: Image.network(
+          'https://spoonacular.com/cdn/ingredients_100x100/butter-sliced.jpg',
+        ),
+        title: Text('Butter', style: context.appTheme.bodyRegular.semiBold),
+        subtitle: Text('1.0 Tbsp', style: context.appTheme.bodySmall),
+      ),
+    ]);
   }
 }

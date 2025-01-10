@@ -1,0 +1,37 @@
+import 'package:myrecipeapp/data/data_source/remote_source.dart';
+import 'package:myrecipeapp/data/model/recipe.dart';
+import 'package:myrecipeapp/data/services/recipe_service.dart';
+
+class RecipeServiceImpl implements RecipeService {
+  final RemoteSource remoteSource;
+
+  RecipeServiceImpl({
+    required this.remoteSource,
+  });
+
+  @override
+  Future<RecipeResponse> fetchRecipesByCategory({
+    required String type,
+    required,
+    int offset = 0,
+    int number = 10,
+  }) async {
+    try {
+      final response = await remoteSource.get(
+        path: _EndPoints.categorySearch,
+        queryParams: {
+          "type": type,
+          "offset": offset,
+          "number": number,
+        },
+      );
+      return RecipeResponse.fromJson(response);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+}
+
+class _EndPoints {
+  static const String categorySearch = "/complexSearch";
+}

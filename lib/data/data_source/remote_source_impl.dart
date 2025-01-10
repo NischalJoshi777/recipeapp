@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:myrecipeapp/data_source/remote_source.dart';
+import 'package:myrecipeapp/api_key.dart';
+import 'package:myrecipeapp/data/data_source/remote_source.dart';
 
 class RemoteSourceImpl implements RemoteSource {
   late Dio _dio;
@@ -51,9 +52,9 @@ class RemoteSourceImpl implements RemoteSource {
   void _initialize() {
     _dio = Dio(
       BaseOptions(
-        baseUrl: "",
+        baseUrl: "https://api.spoonacular.com/recipes/",
         queryParameters: {
-          'apiKey': const String.fromEnvironment('API_KEY'),
+          'apiKey': api_key,
         },
         headers: {
           "Content-Type": "application/json",

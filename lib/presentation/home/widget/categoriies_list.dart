@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myrecipeapp/config/theme/app_theme.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/config/theme/text_styles.dart';
+import 'package:myrecipeapp/presentation/home/recipe_category/recipe_category_cubit.dart';
 
 class CategoriesList extends StatelessWidget {
   List<String> icons = [
@@ -11,7 +13,13 @@ class CategoriesList extends StatelessWidget {
     "assets/image/sunnyside.png",
     "assets/image/snacks.png",
   ];
-  List<String> category = ["Lunch", "Breakfast", "Dinner", "Dessert", "Snacks"];
+  List<String> category = [
+    "Lunch",
+    "Breakfast",
+    "Dinner",
+    "Dessert",
+    "Snacks",
+  ];
 
   CategoriesList({super.key});
 
@@ -22,10 +30,21 @@ class CategoriesList extends StatelessWidget {
           const SizedBox(width: 12.0),
       scrollDirection: Axis.horizontal,
       itemCount: icons.length,
-      itemBuilder: (BuildContext context, int index) => _CategoryItem(
-        category: category[index],
-        isActive: index == 0,
-        img: icons[index],
+      itemBuilder: (BuildContext context, int index) =>
+          BlocConsumer<RecipeCategoryCubit, int>(
+        listener: (cubit, state) => {},
+        builder: (context, _) {
+          final cubit = context.read<RecipeCategoryCubit>();
+          return GestureDetector(
+            onTap: () =>
+                context.read<RecipeCategoryCubit>().onItemPressed(index),
+            child: _CategoryItem(
+              category: category[index],
+              isActive: index == cubit.state,
+              img: icons[index],
+            ),
+          );
+        },
       ),
     );
   }

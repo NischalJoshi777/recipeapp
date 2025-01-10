@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
+import 'package:myrecipeapp/presentation/home/recipe_category/recipe_category_cubit.dart';
 import 'package:myrecipeapp/presentation/home/widget/categoriies_list.dart';
 import 'package:myrecipeapp/presentation/home/widget/header_text.dart';
 import 'package:myrecipeapp/presentation/home/widget/recommendation_list.dart';
@@ -32,7 +34,10 @@ class HomeScreen extends StatelessWidget {
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * .075,
-            child: CategoriesList(),
+            child: BlocProvider(
+              create: (_) => RecipeCategoryCubit(),
+              child: CategoriesList(),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
