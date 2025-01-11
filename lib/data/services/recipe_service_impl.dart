@@ -23,6 +23,7 @@ class RecipeServiceImpl implements RecipeService {
           "type": type,
           "offset": offset,
           "number": number,
+          "addRecipeInformation": "True",
         },
       );
       return RecipeResponse.fromJson(response);

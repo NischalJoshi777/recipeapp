@@ -243,6 +243,7 @@ mixin _$Recipe {
   String get title => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
   String get imageType => throw _privateConstructorUsedError;
+  int? get readyInMinutes => throw _privateConstructorUsedError;
 
   /// Serializes this Recipe to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -258,7 +259,12 @@ abstract class $RecipeCopyWith<$Res> {
   factory $RecipeCopyWith(Recipe value, $Res Function(Recipe) then) =
       _$RecipeCopyWithImpl<$Res, Recipe>;
   @useResult
-  $Res call({int id, String title, String image, String imageType});
+  $Res call(
+      {int id,
+      String title,
+      String image,
+      String imageType,
+      int? readyInMinutes});
 }
 
 /// @nodoc
@@ -280,6 +286,7 @@ class _$RecipeCopyWithImpl<$Res, $Val extends Recipe>
     Object? title = null,
     Object? image = null,
     Object? imageType = null,
+    Object? readyInMinutes = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -298,6 +305,10 @@ class _$RecipeCopyWithImpl<$Res, $Val extends Recipe>
           ? _value.imageType
           : imageType // ignore: cast_nullable_to_non_nullable
               as String,
+      readyInMinutes: freezed == readyInMinutes
+          ? _value.readyInMinutes
+          : readyInMinutes // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -309,7 +320,12 @@ abstract class _$$RecipeImplCopyWith<$Res> implements $RecipeCopyWith<$Res> {
       __$$RecipeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String title, String image, String imageType});
+  $Res call(
+      {int id,
+      String title,
+      String image,
+      String imageType,
+      int? readyInMinutes});
 }
 
 /// @nodoc
@@ -329,6 +345,7 @@ class __$$RecipeImplCopyWithImpl<$Res>
     Object? title = null,
     Object? image = null,
     Object? imageType = null,
+    Object? readyInMinutes = freezed,
   }) {
     return _then(_$RecipeImpl(
       id: null == id
@@ -347,6 +364,10 @@ class __$$RecipeImplCopyWithImpl<$Res>
           ? _value.imageType
           : imageType // ignore: cast_nullable_to_non_nullable
               as String,
+      readyInMinutes: freezed == readyInMinutes
+          ? _value.readyInMinutes
+          : readyInMinutes // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -358,7 +379,8 @@ class _$RecipeImpl implements _Recipe {
       {required this.id,
       required this.title,
       required this.image,
-      required this.imageType});
+      required this.imageType,
+      required this.readyInMinutes});
 
   factory _$RecipeImpl.fromJson(Map<String, dynamic> json) =>
       _$$RecipeImplFromJson(json);
@@ -371,10 +393,12 @@ class _$RecipeImpl implements _Recipe {
   final String image;
   @override
   final String imageType;
+  @override
+  final int? readyInMinutes;
 
   @override
   String toString() {
-    return 'Recipe(id: $id, title: $title, image: $image, imageType: $imageType)';
+    return 'Recipe(id: $id, title: $title, image: $image, imageType: $imageType, readyInMinutes: $readyInMinutes)';
   }
 
   @override
@@ -386,12 +410,15 @@ class _$RecipeImpl implements _Recipe {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.imageType, imageType) ||
-                other.imageType == imageType));
+                other.imageType == imageType) &&
+            (identical(other.readyInMinutes, readyInMinutes) ||
+                other.readyInMinutes == readyInMinutes));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, image, imageType);
+  int get hashCode =>
+      Object.hash(runtimeType, id, title, image, imageType, readyInMinutes);
 
   /// Create a copy of Recipe
   /// with the given fields replaced by the non-null parameter values.
@@ -414,7 +441,8 @@ abstract class _Recipe implements Recipe {
       {required final int id,
       required final String title,
       required final String image,
-      required final String imageType}) = _$RecipeImpl;
+      required final String imageType,
+      required final int? readyInMinutes}) = _$RecipeImpl;
 
   factory _Recipe.fromJson(Map<String, dynamic> json) = _$RecipeImpl.fromJson;
 
@@ -426,6 +454,8 @@ abstract class _Recipe implements Recipe {
   String get image;
   @override
   String get imageType;
+  @override
+  int? get readyInMinutes;
 
   /// Create a copy of Recipe
   /// with the given fields replaced by the non-null parameter values.

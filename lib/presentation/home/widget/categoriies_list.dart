@@ -4,6 +4,7 @@ import 'package:myrecipeapp/config/theme/app_theme.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/config/theme/text_styles.dart';
 import 'package:myrecipeapp/presentation/home/recipe_category/recipe_category_cubit.dart';
+import 'package:myrecipeapp/presentation/home/recipe_list/recipe_list_cubit/recipe_list_cubit.dart';
 
 class CategoriesList extends StatelessWidget {
   List<String> icons = [
@@ -32,12 +33,17 @@ class CategoriesList extends StatelessWidget {
       itemCount: icons.length,
       itemBuilder: (BuildContext context, int index) =>
           BlocConsumer<RecipeCategoryCubit, int>(
-        listener: (cubit, state) => {},
+        listener: (cubit, state) => {
+          context.read<RecipeListCubit>().fetchRecipeListBasedOnCategory(
+                category: category[state],
+              )
+        },
         builder: (context, _) {
           final cubit = context.read<RecipeCategoryCubit>();
           return GestureDetector(
-            onTap: () =>
-                context.read<RecipeCategoryCubit>().onItemPressed(index),
+            onTap: () => index == cubit.state
+                ? null
+                : context.read<RecipeCategoryCubit>().onItemPressed(index),
             child: _CategoryItem(
               category: category[index],
               isActive: index == cubit.state,

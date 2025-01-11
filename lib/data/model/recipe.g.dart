@@ -30,6 +30,7 @@ _$RecipeImpl _$$RecipeImplFromJson(Map<String, dynamic> json) => _$RecipeImpl(
       title: json['title'] as String,
       image: json['image'] as String,
       imageType: json['imageType'] as String,
+      readyInMinutes: (json['readyInMinutes'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$RecipeImplToJson(_$RecipeImpl instance) =>
@@ -38,4 +39,5 @@ Map<String, dynamic> _$$RecipeImplToJson(_$RecipeImpl instance) =>
       'title': instance.title,
       'image': instance.image,
       'imageType': instance.imageType,
+      'readyInMinutes': instance.readyInMinutes,
     };
