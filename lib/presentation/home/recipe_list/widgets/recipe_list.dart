@@ -3,7 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myrecipeapp/config/theme/app_theme.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/config/theme/text_styles.dart';
+import 'package:myrecipeapp/presentation/home/recipe_category/constants.dart';
+import 'package:myrecipeapp/presentation/home/recipe_category/recipe_category_cubit.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/recipe_list_cubit/recipe_list_cubit.dart';
+import 'package:myrecipeapp/presentation/home/recipe_list/view_model/recipe_view_model.dart';
+import 'package:myrecipeapp/presentation/home/recipe_list/widgets/recipe_shimmer_list.dart';
+import 'package:myrecipeapp/presentation/home/widget/paginated_list_view.dart';
 
 class RecipeList extends StatelessWidget {
   const RecipeList({super.key});
@@ -11,24 +16,45 @@ class RecipeList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RecipeListCubit, RecipeListState>(
-        builder: (cubit, state) {
-      return state.listStatus.when(
-        loading: () => const Text('loading'),
-        loaded: () => ListView.separated(
-          separatorBuilder: (BuildContext context, int index) =>
-              const SizedBox(width: 12.0),
-          scrollDirection: Axis.horizontal,
-          itemCount: state.recipes.length,
-          itemBuilder: (BuildContext context, int index) => _RecipeItem(
-            image: state.recipes[index].image,
-            title: state.recipes[index].title,
-            chef: state.recipes[index].chef,
-            cookingMins: state.recipes[index].cookingMinutes,
-          ),
-        ),
-        error: (message) => ErrorWidget(message),
-      );
-    });
+      builder: (cubit, state) {
+        if (state.isFirstFetch) {
+          return state.listStatus.when(
+            loading: () => const RecipeShimmerList(),
+            loaded: () => _RecipeListWidget(recipeList: state.recipes),
+            error: (message) => Text(message),
+          );
+        }
+        return _RecipeListWidget(recipeList: state.recipes);
+      },
+    );
+  }
+}
+
+class _RecipeListWidget extends StatelessWidget {
+  final List<RecipeVM> recipeList;
+
+  const _RecipeListWidget({
+    required this.recipeList,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return PaginatedList(
+      onLoadMore: () =>
+          context.read<RecipeListCubit>().fetchRecipeListBasedOnCategory(
+                category: category[context.read<RecipeCategoryCubit>().state],
+              ),
+      hasMore: context.read<RecipeListCubit>().hasMore,
+      hasError: context.read<RecipeListCubit>().hasError,
+      itemBuilder: (BuildContext context, int index) => _RecipeItem(
+        image: recipeList[index].image,
+        title: recipeList[index].title,
+        chef: recipeList[index].chef,
+        cookingMins: recipeList[index].cookingMinutes,
+      ),
+      itemCount: recipeList.length,
+      loadingWidget: const RecipeShimmerItem(),
+    );
   }
 }
 

@@ -6,4 +6,9 @@ class RecipeCategoryCubit extends Cubit<int> {
   void onItemPressed(int index) {
     emit(index);
   }
+
+  @override
+  Future<void> close() async {
+    return super.close();
+  }
 }

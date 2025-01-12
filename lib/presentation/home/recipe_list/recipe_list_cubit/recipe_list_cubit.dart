@@ -13,29 +13,67 @@ class RecipeListCubit extends Cubit<RecipeListState> {
     required this.recipeService,
   }) : super(const RecipeListState(listStatus: RecipeListStatus.loading()));
 
+  ///page being fetched
+  int _offset = 0;
+
+  ///number of items in the page
+  final int _number = 10;
+
+  ///The recipe list to be rendered
+  List<RecipeVM> recommendations = [];
+
+  bool get hasMore => recommendations.length >= ((_offset) * _number);
+  bool get hasError => state.listStatus is RecipeListStatusError;
+
+  /// current selected category
+  String _currentCategory = "";
+
   Future<void> fetchRecipeListBasedOnCategory({
     String category = "lunch",
   }) async {
     try {
-      final recipes =
-          await recipeService.fetchRecipesByCategory(type: category);
+      if (_currentCategory != category.toLowerCase()) {
+        recommendations.clear();
+        _offset = 0;
+        _currentCategory = category.toLowerCase();
+      }
       emit(
         state.copyWith(
-          recipes: recipes.results
-              .map((recipe) => RecipeVM(
-                    id: recipe.id,
-                    title: recipe.title,
-                    chef: "-",
-                    image: recipe.image,
-                    cookingMinutes: recipe.readyInMinutes ?? 0,
-                  ))
-              .toList(),
+          isFirstFetch: _offset == 0,
+          listStatus: const RecipeListStatus.loading(),
+        ),
+      );
+
+      final recipes = await recipeService.fetchRecipesByCategory(
+        type: _currentCategory,
+        offset: _offset,
+        number: _number,
+      );
+      recommendations.addAll(
+        recipes.results
+            .map((recipe) => RecipeVM(
+                  id: recipe.id,
+                  title: recipe.title,
+                  chef: "-",
+                  image: recipe.image,
+                  cookingMinutes: recipe.readyInMinutes ?? 0,
+                ))
+            .toList(),
+      );
+      emit(
+        state.copyWith(
+          isFirstFetch: _offset == 0,
+          recipes: recommendations,
           listStatus: const RecipeListStatus.loaded(),
         ),
       );
+
+      ///offset should be incremented to retrive new page;
+      _offset++;
     } catch (e) {
       emit(
         state.copyWith(
+          isFirstFetch: _offset == 0,
           listStatus: RecipeListStatus.error(message: e.toString()),
         ),
       );

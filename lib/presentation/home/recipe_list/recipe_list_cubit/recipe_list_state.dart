@@ -11,11 +11,11 @@ class RecipeListState with _$RecipeListState {
 
 @freezed
 class RecipeListStatus with _$RecipeListStatus {
-  const factory RecipeListStatus.loading() = _RecipeListStatusLoading;
+  const factory RecipeListStatus.loading() = RecipeListStatusLoading;
 
-  const factory RecipeListStatus.loaded() = _RecipeListStatusLoaded;
+  const factory RecipeListStatus.loaded() = RecipeListStatusLoaded;
 
   const factory RecipeListStatus.error({
     required String message,
-  }) = _RecipeListStatusError;
+  }) = RecipeListStatusError;
 }

@@ -3,25 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myrecipeapp/config/theme/app_theme.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/config/theme/text_styles.dart';
+import 'package:myrecipeapp/presentation/home/recipe_category/constants.dart';
 import 'package:myrecipeapp/presentation/home/recipe_category/recipe_category_cubit.dart';
-import 'package:myrecipeapp/presentation/home/recipe_list/recipe_list_cubit/recipe_list_cubit.dart';
+
+import '../recipe_list/recipe_list_cubit/recipe_list_cubit.dart';
 
 class CategoriesList extends StatelessWidget {
-  List<String> icons = [
-    "assets/image/corndog.png",
-    "assets/image/friedrice.png",
-    "assets/image/pasta.png",
-    "assets/image/sunnyside.png",
-    "assets/image/snacks.png",
-  ];
-  List<String> category = [
-    "Lunch",
-    "Breakfast",
-    "Dinner",
-    "Dessert",
-    "Snacks",
-  ];
-
   CategoriesList({super.key});
 
   @override
@@ -33,10 +20,11 @@ class CategoriesList extends StatelessWidget {
       itemCount: icons.length,
       itemBuilder: (BuildContext context, int index) =>
           BlocConsumer<RecipeCategoryCubit, int>(
-        listener: (cubit, state) => {
+        listenWhen: (previous, current) => previous != current,
+        listener: (cubit, state) {
           context.read<RecipeListCubit>().fetchRecipeListBasedOnCategory(
                 category: category[state],
-              )
+              );
         },
         builder: (context, _) {
           final cubit = context.read<RecipeCategoryCubit>();

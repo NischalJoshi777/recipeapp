@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/data/services/recipe_service.dart';
 import 'package:myrecipeapp/di.dart';
+import 'package:myrecipeapp/presentation/home/recipe_category/category_list.dart';
 import 'package:myrecipeapp/presentation/home/recipe_category/recipe_category_cubit.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/recipe_list_cubit/recipe_list_cubit.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/widgets/recipe_list.dart';
-import 'package:myrecipeapp/presentation/home/widget/categoriies_list.dart';
 import 'package:myrecipeapp/presentation/home/widget/header_text.dart';
 import 'package:myrecipeapp/presentation/home/widget/search_text_field.dart';
 import 'package:myrecipeapp/presentation/home/widget/see_all_text_button.dart';
@@ -17,10 +17,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => RecipeListCubit(
-        recipeService: getIt<RecipeService>(),
-      )..fetchRecipeListBasedOnCategory(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => RecipeCategoryCubit()),
+        BlocProvider(
+            create: (_) =>
+                RecipeListCubit(recipeService: getIt<RecipeService>())
+                  ..fetchRecipeListBasedOnCategory()),
+      ],
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -41,10 +45,7 @@ class HomeScreen extends StatelessWidget {
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * .075,
-              child: BlocProvider(
-                create: (_) => RecipeCategoryCubit(),
-                child: CategoriesList(),
-              ),
+              child: CategoriesList(),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

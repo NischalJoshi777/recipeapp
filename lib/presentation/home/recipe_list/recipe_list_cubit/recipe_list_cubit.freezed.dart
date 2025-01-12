@@ -242,23 +242,23 @@ mixin _$RecipeListStatus {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_RecipeListStatusLoading value) loading,
-    required TResult Function(_RecipeListStatusLoaded value) loaded,
-    required TResult Function(_RecipeListStatusError value) error,
+    required TResult Function(RecipeListStatusLoading value) loading,
+    required TResult Function(RecipeListStatusLoaded value) loaded,
+    required TResult Function(RecipeListStatusError value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_RecipeListStatusLoading value)? loading,
-    TResult? Function(_RecipeListStatusLoaded value)? loaded,
-    TResult? Function(_RecipeListStatusError value)? error,
+    TResult? Function(RecipeListStatusLoading value)? loading,
+    TResult? Function(RecipeListStatusLoaded value)? loaded,
+    TResult? Function(RecipeListStatusError value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_RecipeListStatusLoading value)? loading,
-    TResult Function(_RecipeListStatusLoaded value)? loaded,
-    TResult Function(_RecipeListStatusError value)? error,
+    TResult Function(RecipeListStatusLoading value)? loading,
+    TResult Function(RecipeListStatusLoaded value)? loaded,
+    TResult Function(RecipeListStatusError value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -308,7 +308,7 @@ class __$$RecipeListStatusLoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RecipeListStatusLoadingImpl implements _RecipeListStatusLoading {
+class _$RecipeListStatusLoadingImpl implements RecipeListStatusLoading {
   const _$RecipeListStatusLoadingImpl();
 
   @override
@@ -363,9 +363,9 @@ class _$RecipeListStatusLoadingImpl implements _RecipeListStatusLoading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_RecipeListStatusLoading value) loading,
-    required TResult Function(_RecipeListStatusLoaded value) loaded,
-    required TResult Function(_RecipeListStatusError value) error,
+    required TResult Function(RecipeListStatusLoading value) loading,
+    required TResult Function(RecipeListStatusLoaded value) loaded,
+    required TResult Function(RecipeListStatusError value) error,
   }) {
     return loading(this);
   }
@@ -373,9 +373,9 @@ class _$RecipeListStatusLoadingImpl implements _RecipeListStatusLoading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_RecipeListStatusLoading value)? loading,
-    TResult? Function(_RecipeListStatusLoaded value)? loaded,
-    TResult? Function(_RecipeListStatusError value)? error,
+    TResult? Function(RecipeListStatusLoading value)? loading,
+    TResult? Function(RecipeListStatusLoaded value)? loaded,
+    TResult? Function(RecipeListStatusError value)? error,
   }) {
     return loading?.call(this);
   }
@@ -383,9 +383,9 @@ class _$RecipeListStatusLoadingImpl implements _RecipeListStatusLoading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_RecipeListStatusLoading value)? loading,
-    TResult Function(_RecipeListStatusLoaded value)? loaded,
-    TResult Function(_RecipeListStatusError value)? error,
+    TResult Function(RecipeListStatusLoading value)? loading,
+    TResult Function(RecipeListStatusLoaded value)? loaded,
+    TResult Function(RecipeListStatusError value)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -395,8 +395,8 @@ class _$RecipeListStatusLoadingImpl implements _RecipeListStatusLoading {
   }
 }
 
-abstract class _RecipeListStatusLoading implements RecipeListStatus {
-  const factory _RecipeListStatusLoading() = _$RecipeListStatusLoadingImpl;
+abstract class RecipeListStatusLoading implements RecipeListStatus {
+  const factory RecipeListStatusLoading() = _$RecipeListStatusLoadingImpl;
 }
 
 /// @nodoc
@@ -422,7 +422,7 @@ class __$$RecipeListStatusLoadedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RecipeListStatusLoadedImpl implements _RecipeListStatusLoaded {
+class _$RecipeListStatusLoadedImpl implements RecipeListStatusLoaded {
   const _$RecipeListStatusLoadedImpl();
 
   @override
@@ -477,9 +477,9 @@ class _$RecipeListStatusLoadedImpl implements _RecipeListStatusLoaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_RecipeListStatusLoading value) loading,
-    required TResult Function(_RecipeListStatusLoaded value) loaded,
-    required TResult Function(_RecipeListStatusError value) error,
+    required TResult Function(RecipeListStatusLoading value) loading,
+    required TResult Function(RecipeListStatusLoaded value) loaded,
+    required TResult Function(RecipeListStatusError value) error,
   }) {
     return loaded(this);
   }
@@ -487,9 +487,9 @@ class _$RecipeListStatusLoadedImpl implements _RecipeListStatusLoaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_RecipeListStatusLoading value)? loading,
-    TResult? Function(_RecipeListStatusLoaded value)? loaded,
-    TResult? Function(_RecipeListStatusError value)? error,
+    TResult? Function(RecipeListStatusLoading value)? loading,
+    TResult? Function(RecipeListStatusLoaded value)? loaded,
+    TResult? Function(RecipeListStatusError value)? error,
   }) {
     return loaded?.call(this);
   }
@@ -497,9 +497,9 @@ class _$RecipeListStatusLoadedImpl implements _RecipeListStatusLoaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_RecipeListStatusLoading value)? loading,
-    TResult Function(_RecipeListStatusLoaded value)? loaded,
-    TResult Function(_RecipeListStatusError value)? error,
+    TResult Function(RecipeListStatusLoading value)? loading,
+    TResult Function(RecipeListStatusLoaded value)? loaded,
+    TResult Function(RecipeListStatusError value)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -509,8 +509,8 @@ class _$RecipeListStatusLoadedImpl implements _RecipeListStatusLoaded {
   }
 }
 
-abstract class _RecipeListStatusLoaded implements RecipeListStatus {
-  const factory _RecipeListStatusLoaded() = _$RecipeListStatusLoadedImpl;
+abstract class RecipeListStatusLoaded implements RecipeListStatus {
+  const factory RecipeListStatusLoaded() = _$RecipeListStatusLoadedImpl;
 }
 
 /// @nodoc
@@ -549,7 +549,7 @@ class __$$RecipeListStatusErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RecipeListStatusErrorImpl implements _RecipeListStatusError {
+class _$RecipeListStatusErrorImpl implements RecipeListStatusError {
   const _$RecipeListStatusErrorImpl({required this.message});
 
   @override
@@ -617,9 +617,9 @@ class _$RecipeListStatusErrorImpl implements _RecipeListStatusError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_RecipeListStatusLoading value) loading,
-    required TResult Function(_RecipeListStatusLoaded value) loaded,
-    required TResult Function(_RecipeListStatusError value) error,
+    required TResult Function(RecipeListStatusLoading value) loading,
+    required TResult Function(RecipeListStatusLoaded value) loaded,
+    required TResult Function(RecipeListStatusError value) error,
   }) {
     return error(this);
   }
@@ -627,9 +627,9 @@ class _$RecipeListStatusErrorImpl implements _RecipeListStatusError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_RecipeListStatusLoading value)? loading,
-    TResult? Function(_RecipeListStatusLoaded value)? loaded,
-    TResult? Function(_RecipeListStatusError value)? error,
+    TResult? Function(RecipeListStatusLoading value)? loading,
+    TResult? Function(RecipeListStatusLoaded value)? loaded,
+    TResult? Function(RecipeListStatusError value)? error,
   }) {
     return error?.call(this);
   }
@@ -637,9 +637,9 @@ class _$RecipeListStatusErrorImpl implements _RecipeListStatusError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_RecipeListStatusLoading value)? loading,
-    TResult Function(_RecipeListStatusLoaded value)? loaded,
-    TResult Function(_RecipeListStatusError value)? error,
+    TResult Function(RecipeListStatusLoading value)? loading,
+    TResult Function(RecipeListStatusLoaded value)? loaded,
+    TResult Function(RecipeListStatusError value)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -649,8 +649,8 @@ class _$RecipeListStatusErrorImpl implements _RecipeListStatusError {
   }
 }
 
-abstract class _RecipeListStatusError implements RecipeListStatus {
-  const factory _RecipeListStatusError({required final String message}) =
+abstract class RecipeListStatusError implements RecipeListStatus {
+  const factory RecipeListStatusError({required final String message}) =
       _$RecipeListStatusErrorImpl;
 
   String get message;

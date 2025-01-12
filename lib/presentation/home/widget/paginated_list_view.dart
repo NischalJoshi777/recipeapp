@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 
 class PaginatedList extends StatefulWidget {
+  final AsyncCallback onLoadMore;
+  final IndexedWidgetBuilder itemBuilder;
   final bool hasMore;
   final bool hasError;
   final int itemCount;
   final Widget? footerWidget;
   final Widget? loadingWidget;
-  final AsyncCallback onLoadMore;
-  final IndexedWidgetBuilder itemBuilder;
 
   const PaginatedList({
     super.key,
@@ -33,7 +33,14 @@ class PaginatedListState extends State<PaginatedList> {
   Widget build(BuildContext context) {
     return NotificationListener<ScrollNotification>(
       onNotification: (sn) {
-        if (sn is ScrollEndNotification) {
+        if (sn is ScrollUpdateNotification && sn.scrollDelta != null) {
+          if (sn.metrics.pixels >= sn.metrics.maxScrollExtent) {
+            if (widget.hasMore && !isLoading) {
+              isLoading = true;
+              widget.onLoadMore().whenComplete(() => isLoading = false);
+            }
+          }
+        } else if (sn is ScrollEndNotification) {
           if (sn.metrics.pixels >= sn.metrics.maxScrollExtent) {
             if (widget.hasMore && !isLoading) {
               isLoading = true;
@@ -66,7 +73,6 @@ class PaginatedListState extends State<PaginatedList> {
                   ),
                 );
           }
-          //Error Widget
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: widget.footerWidget,
