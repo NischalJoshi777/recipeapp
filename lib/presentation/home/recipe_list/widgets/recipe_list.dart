@@ -8,7 +8,7 @@ import 'package:myrecipeapp/presentation/home/recipe_category/recipe_category_cu
 import 'package:myrecipeapp/presentation/home/recipe_list/recipe_list_cubit/recipe_list_cubit.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/view_model/recipe_view_model.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/widgets/recipe_shimmer_list.dart';
-import 'package:myrecipeapp/presentation/home/widget/paginated_list_view.dart';
+import 'package:myrecipeapp/presentation/home/widget/paginated_list.dart';
 
 class RecipeList extends StatelessWidget {
   const RecipeList({super.key});

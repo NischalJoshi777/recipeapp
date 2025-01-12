@@ -5,11 +5,10 @@ import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/config/theme/text_styles.dart';
 import 'package:myrecipeapp/presentation/home/recipe_category/constants.dart';
 import 'package:myrecipeapp/presentation/home/recipe_category/recipe_category_cubit.dart';
-
-import '../recipe_list/recipe_list_cubit/recipe_list_cubit.dart';
+import 'package:myrecipeapp/presentation/home/recipe_list/recipe_list_cubit/recipe_list_cubit.dart';
 
 class CategoriesList extends StatelessWidget {
-  CategoriesList({super.key});
+  const CategoriesList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +62,7 @@ class _CategoryItem extends StatelessWidget {
         color: isActive ? Palette.primaryGreen : Palette.white,
         borderRadius: BorderRadius.circular(12.0),
       ),
-      width: 70.0,
+      width: 78.0,
       padding: const EdgeInsets.all(4.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -73,13 +72,17 @@ class _CategoryItem extends StatelessWidget {
             height: 30.0,
             width: 30.0,
           ),
-          Text(
-            category,
-            style: context.appTheme.bodySmall
-                .withColor(
-                  isActive ? Palette.white : Palette.darkGray,
-                )
-                .copyWith(fontSize: 10.0),
+          const SizedBox(height: 4.0),
+          Flexible(
+            flex: 1,
+            child: Text(
+              category,
+              style: context.appTheme.bodySmall
+                  .withColor(
+                    isActive ? Palette.white : Palette.darkGray,
+                  )
+                  .copyWith(fontSize: 10.0),
+            ),
           )
         ],
       ),
