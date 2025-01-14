@@ -12,7 +12,6 @@ class RecipeServiceImpl implements RecipeService {
   @override
   Future<RecipeResponse> fetchRecipesByCategory({
     required String type,
-    required,
     int offset = 0,
     int number = 10,
   }) async {

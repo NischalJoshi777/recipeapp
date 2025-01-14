@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:myrecipeapp/data/services/recipe_service.dart';
+import 'package:myrecipeapp/presentation/home/recipe_category/constants.dart';
+import 'package:myrecipeapp/presentation/home/recipe_category/recipe_category_cubit.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/view_model/recipe_view_model.dart';
 
 part 'recipe_list_cubit.freezed.dart';
@@ -8,10 +10,20 @@ part 'recipe_list_state.dart';
 
 class RecipeListCubit extends Cubit<RecipeListState> {
   final RecipeService recipeService;
+  final RecipeCategoryCubit categoryCubit;
 
   RecipeListCubit({
     required this.recipeService,
-  }) : super(const RecipeListState(listStatus: RecipeListStatus.loading()));
+    required this.categoryCubit,
+  }) : super(const RecipeListState(listStatus: RecipeListStatus.loading())) {
+    categoryCubit.stream.listen(
+      (data) {
+        fetchRecipeListBasedOnCategory(
+          category: category[data],
+        );
+      },
+    );
+  }
 
   ///page being fetched
   int _offset = 0;
@@ -23,6 +35,7 @@ class RecipeListCubit extends Cubit<RecipeListState> {
   List<RecipeVM> recommendations = [];
 
   bool get hasMore => recommendations.length >= ((_offset) * _number);
+
   bool get hasError => state.listStatus is RecipeListStatusError;
 
   /// current selected category

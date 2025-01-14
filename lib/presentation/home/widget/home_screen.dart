@@ -17,44 +17,55 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => RecipeCategoryCubit()),
-        BlocProvider(
-          create: (_) => RecipeListCubit(recipeService: getIt<RecipeService>())
-            ..fetchRecipeListBasedOnCategory(),
-        ),
-      ],
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 12.0,
-          children: [
-            const SizedBox(height: 10.0),
-            const _Header(),
-            const SizedBox(),
-            const SearchTextField(),
-            const HeaderText(text: 'Categories'),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * .075,
-              child: CategoriesList(),
+    return BlocProvider(
+      create: (_) => RecipeCategoryCubit(),
+      child: Builder(
+        builder: (context) {
+          return BlocProvider(
+            create: (_) => RecipeListCubit(
+              recipeService: getIt<RecipeService>(),
+              categoryCubit: context.read<RecipeCategoryCubit>(),
+            )..fetchRecipeListBasedOnCategory(),
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                spacing: 12.0,
+                children: [
+                  const SizedBox(height: 10.0),
+                  const _Header(),
+                  const SizedBox(),
+                  const SearchTextField(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const HeaderText(text: 'Categories'),
+                      SeeAllTextButton(
+                        onPressed: () {},
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * .075,
+                    child: const CategoriesList(),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const HeaderText(text: 'Recommendations'),
+                      SeeAllTextButton(
+                        onPressed: () {},
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * .50,
+                    child: const RecipeList(),
+                  ),
+                ],
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const HeaderText(text: 'Recommendations'),
-                SeeAllTextButton(
-                  onPressed: () {},
-                )
-              ],
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * .50,
-              child: const RecipeList(),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

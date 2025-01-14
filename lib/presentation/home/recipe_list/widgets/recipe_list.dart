@@ -40,10 +40,12 @@ class _RecipeListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PaginatedList(
-      onLoadMore: () =>
-          context.read<RecipeListCubit>().fetchRecipeListBasedOnCategory(
-                category: category[context.read<RecipeCategoryCubit>().state],
-              ),
+      onLoadMore: () {
+        final state = context.read<RecipeCategoryCubit>().state;
+        return context.read<RecipeListCubit>().fetchRecipeListBasedOnCategory(
+              category: category[state],
+            );
+      },
       hasMore: context.read<RecipeListCubit>().hasMore,
       hasError: context.read<RecipeListCubit>().hasError,
       itemBuilder: (BuildContext context, int index) => _RecipeItem(
