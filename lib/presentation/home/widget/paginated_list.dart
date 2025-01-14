@@ -33,53 +33,40 @@ class PaginatedListState extends State<PaginatedList> {
   Widget build(BuildContext context) {
     return NotificationListener<ScrollNotification>(
       onNotification: (sn) {
-        if (sn is ScrollUpdateNotification && sn.scrollDelta != null) {
-          if (sn.metrics.pixels >= sn.metrics.maxScrollExtent) {
-            if (widget.hasMore && !isLoading) {
-              isLoading = true;
-              widget.onLoadMore().whenComplete(() => isLoading = false);
-            }
-          }
-        } else if (sn is ScrollEndNotification) {
-          if (sn.metrics.pixels >= sn.metrics.maxScrollExtent) {
-            if (widget.hasMore && !isLoading) {
-              isLoading = true;
-              widget.onLoadMore().whenComplete(() => isLoading = false);
-            }
+        if (sn.metrics.pixels >= sn.metrics.maxScrollExtent) {
+          if (widget.hasMore && !isLoading) {
+            isLoading = true;
+            widget.onLoadMore().whenComplete(() => isLoading = false);
           }
         }
         return true;
       },
-      child: _buildList(),
-    );
-  }
-
-  Widget _buildList() {
-    return ListView.separated(
-      separatorBuilder: (BuildContext context, int index) =>
-          const SizedBox(width: 12.0),
-      scrollDirection: Axis.horizontal,
-      itemCount: widget.itemCount + 1,
-      itemBuilder: (context, index) {
-        if (index == widget.itemCount) {
-          if (widget.hasMore && !widget.hasError && isLoading) {
-            return widget.loadingWidget ??
-                const Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: CircularProgressIndicator(
-                      color: Palette.primaryGreen,
+      child: ListView.separated(
+        separatorBuilder: (BuildContext context, int index) =>
+            const SizedBox(width: 12.0),
+        scrollDirection: Axis.horizontal,
+        itemCount: widget.itemCount + 1,
+        itemBuilder: (context, index) {
+          if (index == widget.itemCount) {
+            if (widget.hasMore && !widget.hasError && isLoading) {
+              return widget.loadingWidget ??
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: CircularProgressIndicator(
+                        color: Palette.primaryGreen,
+                      ),
                     ),
-                  ),
-                );
+                  );
+            }
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: widget.footerWidget,
+            );
           }
-          return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: widget.footerWidget,
-          );
-        }
-        return widget.itemBuilder(context, index);
-      },
+          return widget.itemBuilder(context, index);
+        },
+      ),
     );
   }
 }

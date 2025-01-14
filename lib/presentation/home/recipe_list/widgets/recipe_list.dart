@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myrecipeapp/config/theme/app_theme.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/config/theme/text_styles.dart';
+import 'package:myrecipeapp/presentation/animations/size_transition_wrapper.dart';
 import 'package:myrecipeapp/presentation/home/recipe_category/constants.dart';
 import 'package:myrecipeapp/presentation/home/recipe_category/recipe_category_cubit.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/recipe_list_cubit/recipe_list_cubit.dart';
@@ -96,37 +97,9 @@ class _RecipeItem extends StatelessWidget {
                 ),
               ),
               Positioned(
-                right: 2.0,
-                bottom: 2.0,
-                child: ClipRRect(
-                  child: Container(
-                    padding: const EdgeInsets.all(4.0),
-                    decoration: const BoxDecoration(
-                      color: Palette.lightGray,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12.0),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      spacing: 2.0,
-                      children: [
-                        const Icon(
-                          Icons.watch_later_rounded,
-                          color: Palette.accentOrangeLight,
-                          size: 20.0,
-                        ),
-                        Text(
-                          "$cookingMins mins",
-                          style: context.appTheme.bodySmall
-                              .withColor(Palette.primaryGreen),
-                          maxLines: 2,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+                  right: 2.0,
+                  bottom: 2.0,
+                  child: _CookingTime(cookingMins: cookingMins)),
             ],
           ),
           Text(
@@ -135,6 +108,46 @@ class _RecipeItem extends StatelessWidget {
             maxLines: 2,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _CookingTime extends StatelessWidget {
+  final int cookingMins;
+
+  const _CookingTime({
+    super.key,
+    required this.cookingMins,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizeTransitionWrapper(
+      child: Container(
+        padding: const EdgeInsets.all(4.0),
+        decoration: const BoxDecoration(
+          color: Palette.lightGray,
+          borderRadius: BorderRadius.all(
+            Radius.circular(12.0),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          spacing: 2.0,
+          children: [
+            const Icon(
+              Icons.watch_later_rounded,
+              color: Palette.accentOrangeLight,
+              size: 20.0,
+            ),
+            Text(
+              "$cookingMins mins",
+              style: context.appTheme.bodySmall.withColor(Palette.primaryGreen),
+              maxLines: 2,
+            ),
+          ],
+        ),
       ),
     );
   }

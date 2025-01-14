@@ -29,21 +29,14 @@ class HomeScreen extends StatelessWidget {
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(20.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 12.0,
                 children: [
                   const SizedBox(height: 10.0),
                   const _Header(),
                   const SizedBox(),
                   const SearchTextField(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const HeaderText(text: 'Categories'),
-                      SeeAllTextButton(
-                        onPressed: () {},
-                      )
-                    ],
-                  ),
+                  const HeaderText(text: 'Categories'),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * .075,
                     child: const CategoriesList(),
