@@ -10,8 +10,9 @@ final GoRouter myRouter = GoRouter(
       routes: <RouteBase>[
         GoRoute(
           path: "/details",
-          builder: (_, __) => const DetailsScreen(),
-        )
+          name: 'details',
+          builder: (_, state) => DetailsScreen(id: state.extra as int),
+        ),
       ],
     ),
   ],

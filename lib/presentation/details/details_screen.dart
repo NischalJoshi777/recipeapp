@@ -1,11 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myrecipeapp/config/theme/app_theme.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/config/theme/text_styles.dart';
+import 'package:myrecipeapp/data/services/recipe_service.dart';
+import 'package:myrecipeapp/di.dart';
+import 'package:myrecipeapp/presentation/details/cubit/detail_cubit.dart';
+import 'package:myrecipeapp/presentation/details/view_model/recipe_detail_view_model.dart';
 import 'package:myrecipeapp/presentation/home/widget/header_text.dart';
 
 class DetailsScreen extends StatelessWidget {
-  const DetailsScreen({super.key});
+  final int id;
+
+  const DetailsScreen({
+    super.key,
+    required this.id,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => DetailCubit(recipeService: getIt<RecipeService>())
+        ..fetchRecipeDetails(id),
+      child: BlocBuilder<DetailCubit, DetailState>(
+        builder: (BuildContext context, state) {
+          return state.when(
+            loading: () => const CircularProgressIndicator(),
+            loaded: (recipe) => _Details(recipe: recipe),
+            error: (mes) => const Text('Error'),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _Details extends StatelessWidget {
+  final RecipeDetailVM recipe;
+
+  const _Details({
+    super.key,
+    required this.recipe,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,25 +50,30 @@ class DetailsScreen extends StatelessWidget {
         children: [
           Column(
             children: [
-              Image.asset(
-                'assets/image/chickenparm.jpg',
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height *
+                    .40, // Added height constraint
+                child: Image.network(
+                  recipe.image,
+                  fit: BoxFit.fitHeight, // Prevents overflow
+                ),
               ),
             ],
           ),
           Positioned(
-            top: 340.0,
-            width: MediaQuery.of(context)
-                .size
-                .width, // Ensures it spans the full screen width
+            top: MediaQuery.of(context).size.height * 0.38,
+            bottom: 0,
+            width: MediaQuery.of(context).size.width,
             child: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(24.0)),
               child: Container(
-                color: Colors.white,
+                color: Palette.lightGray,
                 padding: const EdgeInsets.symmetric(
                   vertical: 24.0,
-                  horizontal: 12.0,
+                  horizontal: 20.0,
                 ),
-                child: const SingleChildScrollView(
+                child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: 20.0,
@@ -43,34 +84,36 @@ class DetailsScreen extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              HeaderText(text: 'Chicken Parmesian'),
-                              Text('By: Nischal Joshi'),
+                              HeaderText(text: recipe.title),
+                              const Text('By: Nischal Joshi'),
                             ],
                           ),
-                          Icon(
-                            Icons.star,
-                            color: Palette.accentOrange,
-                            size: 24.0,
-                          )
                         ],
                       ),
                       Row(
                         spacing: 12.0,
                         children: [
-                          IconWithText(
-                              icon: Icons.watch_later_rounded,
-                              text: '10 minutes'),
-                          IconWithText(
-                              icon: Icons.watch_later_rounded,
-                              text: '10 minutes'),
-                          IconWithText(
-                              icon: Icons.watch_later_rounded,
-                              text: '10 minutes'),
+                          _IconWithText(
+                            icon: Icons.watch_later_rounded,
+                            text: '${recipe.cookingMinutes.toString()} mins',
+                          ),
+                          _IconWithText(
+                            icon: Icons.thumb_up_sharp,
+                            text: "${recipe.aggregatedLikes.toString()} likes",
+                          ),
                         ],
                       ),
-                      HeaderText(text: 'Description'),
-                      HeaderText(text: 'Ingredients'),
-                      IngredientsList(),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const HeaderText(text: 'Description'),
+                          const SizedBox(width: 4.0),
+                          Text(recipe.summary ?? '',
+                              style: context.appTheme.bodySmall),
+                        ],
+                      ),
+                      const HeaderText(text: 'Ingredients'),
+                      IngredientsList(ingredients: recipe.ingredients),
                     ],
                   ),
                 ),
@@ -83,11 +126,11 @@ class DetailsScreen extends StatelessWidget {
   }
 }
 
-class IconWithText extends StatelessWidget {
+class _IconWithText extends StatelessWidget {
   final IconData icon;
   final String text;
 
-  const IconWithText({
+  const _IconWithText({
     super.key,
     required this.icon,
     required this.text,
@@ -114,39 +157,37 @@ class IconWithText extends StatelessWidget {
 }
 
 class IngredientsList extends StatelessWidget {
-  const IngredientsList({super.key});
+  final List<IngredientsVM> ingredients;
+
+  const IngredientsList({
+    super.key,
+    required this.ingredients,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Column(spacing: 10.0, children: [
-      ListTile(
-        leading: Image.network(
-          'https://spoonacular.com/cdn/ingredients_100x100/butter-sliced.jpg',
-        ),
-        title: Text('Butter', style: context.appTheme.bodyRegular.semiBold),
-        subtitle: Text('1.0 Tbsp', style: context.appTheme.bodySmall),
-      ),
-      ListTile(
-        leading: Image.network(
-          'https://spoonacular.com/cdn/ingredients_100x100/butter-sliced.jpg',
-        ),
-        title: Text('Butter', style: context.appTheme.bodyRegular.semiBold),
-        subtitle: Text('1.0 Tbsp', style: context.appTheme.bodySmall),
-      ),
-      ListTile(
-        leading: Image.network(
-          'https://spoonacular.com/cdn/ingredients_100x100/butter-sliced.jpg',
-        ),
-        title: Text('Butter', style: context.appTheme.bodyRegular.semiBold),
-        subtitle: Text('1.0 Tbsp', style: context.appTheme.bodySmall),
-      ),
-      ListTile(
-        leading: Image.network(
-          'https://spoonacular.com/cdn/ingredients_100x100/butter-sliced.jpg',
-        ),
-        title: Text('Butter', style: context.appTheme.bodyRegular.semiBold),
-        subtitle: Text('1.0 Tbsp', style: context.appTheme.bodySmall),
-      ),
-    ]);
+    return Column(
+      spacing: 10.0,
+      children: ingredients
+          .map(
+            (e) => Container(
+              color: Palette.white,
+              child: ListTile(
+                leading: Image.network(
+                  height: 60.0,
+                  width: 60.0,
+                  'https://spoonacular.com/cdn/ingredients_100x100/${e.image}',
+                ),
+                contentPadding: const EdgeInsets.all(12.0),
+                title: Text(
+                  e.original,
+                  style: context.appTheme.bodySmall.semiBold,
+                ),
+                subtitle: Text(e.original, style: context.appTheme.bodySmall),
+              ),
+            ),
+          )
+          .toList(),
+    );
   }
 }

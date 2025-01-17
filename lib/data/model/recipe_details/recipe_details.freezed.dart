@@ -20,6 +20,7 @@ RecipeDetails _$RecipeDetailsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RecipeDetails {
+  int get id => throw _privateConstructorUsedError;
   bool get vegan => throw _privateConstructorUsedError;
   bool get vegetarian => throw _privateConstructorUsedError;
   bool get dairyFree => throw _privateConstructorUsedError;
@@ -30,7 +31,10 @@ mixin _$RecipeDetails {
   List<String> get dishTypes => throw _privateConstructorUsedError;
   String get summary => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
+  String get image => throw _privateConstructorUsedError;
   int get healthScore => throw _privateConstructorUsedError;
+  List<Ingredients> get extendedIngredients =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this RecipeDetails to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,7 +53,8 @@ abstract class $RecipeDetailsCopyWith<$Res> {
       _$RecipeDetailsCopyWithImpl<$Res, RecipeDetails>;
   @useResult
   $Res call(
-      {bool vegan,
+      {int id,
+      bool vegan,
       bool vegetarian,
       bool dairyFree,
       bool glutenFree,
@@ -59,7 +64,9 @@ abstract class $RecipeDetailsCopyWith<$Res> {
       List<String> dishTypes,
       String summary,
       String title,
-      int healthScore});
+      String image,
+      int healthScore,
+      List<Ingredients> extendedIngredients});
 }
 
 /// @nodoc
@@ -77,6 +84,7 @@ class _$RecipeDetailsCopyWithImpl<$Res, $Val extends RecipeDetails>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? vegan = null,
     Object? vegetarian = null,
     Object? dairyFree = null,
@@ -87,9 +95,15 @@ class _$RecipeDetailsCopyWithImpl<$Res, $Val extends RecipeDetails>
     Object? dishTypes = null,
     Object? summary = null,
     Object? title = null,
+    Object? image = null,
     Object? healthScore = null,
+    Object? extendedIngredients = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       vegan: null == vegan
           ? _value.vegan
           : vegan // ignore: cast_nullable_to_non_nullable
@@ -130,10 +144,18 @@ class _$RecipeDetailsCopyWithImpl<$Res, $Val extends RecipeDetails>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
       healthScore: null == healthScore
           ? _value.healthScore
           : healthScore // ignore: cast_nullable_to_non_nullable
               as int,
+      extendedIngredients: null == extendedIngredients
+          ? _value.extendedIngredients
+          : extendedIngredients // ignore: cast_nullable_to_non_nullable
+              as List<Ingredients>,
     ) as $Val);
   }
 }
@@ -147,7 +169,8 @@ abstract class _$$RecipeDetailsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool vegan,
+      {int id,
+      bool vegan,
       bool vegetarian,
       bool dairyFree,
       bool glutenFree,
@@ -157,7 +180,9 @@ abstract class _$$RecipeDetailsImplCopyWith<$Res>
       List<String> dishTypes,
       String summary,
       String title,
-      int healthScore});
+      String image,
+      int healthScore,
+      List<Ingredients> extendedIngredients});
 }
 
 /// @nodoc
@@ -173,6 +198,7 @@ class __$$RecipeDetailsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? vegan = null,
     Object? vegetarian = null,
     Object? dairyFree = null,
@@ -183,9 +209,15 @@ class __$$RecipeDetailsImplCopyWithImpl<$Res>
     Object? dishTypes = null,
     Object? summary = null,
     Object? title = null,
+    Object? image = null,
     Object? healthScore = null,
+    Object? extendedIngredients = null,
   }) {
     return _then(_$RecipeDetailsImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       vegan: null == vegan
           ? _value.vegan
           : vegan // ignore: cast_nullable_to_non_nullable
@@ -226,10 +258,18 @@ class __$$RecipeDetailsImplCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
       healthScore: null == healthScore
           ? _value.healthScore
           : healthScore // ignore: cast_nullable_to_non_nullable
               as int,
+      extendedIngredients: null == extendedIngredients
+          ? _value._extendedIngredients
+          : extendedIngredients // ignore: cast_nullable_to_non_nullable
+              as List<Ingredients>,
     ));
   }
 }
@@ -238,7 +278,8 @@ class __$$RecipeDetailsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$RecipeDetailsImpl implements _RecipeDetails {
   const _$RecipeDetailsImpl(
-      {this.vegan = false,
+      {required this.id,
+      this.vegan = false,
       this.vegetarian = false,
       this.dairyFree = false,
       this.glutenFree = false,
@@ -246,14 +287,19 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
       this.cookingMinutes = 0,
       this.aggregatedLikes = 0,
       final List<String> dishTypes = const [],
-      required this.summary,
-      required this.title,
-      this.healthScore = 0})
-      : _dishTypes = dishTypes;
+      this.summary = 'N/A',
+      this.title = 'N/A',
+      required this.image,
+      this.healthScore = 0,
+      final List<Ingredients> extendedIngredients = const []})
+      : _dishTypes = dishTypes,
+        _extendedIngredients = extendedIngredients;
 
   factory _$RecipeDetailsImpl.fromJson(Map<String, dynamic> json) =>
       _$$RecipeDetailsImplFromJson(json);
 
+  @override
+  final int id;
   @override
   @JsonKey()
   final bool vegan;
@@ -285,16 +331,29 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
   }
 
   @override
+  @JsonKey()
   final String summary;
   @override
+  @JsonKey()
   final String title;
+  @override
+  final String image;
   @override
   @JsonKey()
   final int healthScore;
+  final List<Ingredients> _extendedIngredients;
+  @override
+  @JsonKey()
+  List<Ingredients> get extendedIngredients {
+    if (_extendedIngredients is EqualUnmodifiableListView)
+      return _extendedIngredients;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_extendedIngredients);
+  }
 
   @override
   String toString() {
-    return 'RecipeDetails(vegan: $vegan, vegetarian: $vegetarian, dairyFree: $dairyFree, glutenFree: $glutenFree, preparationMinutes: $preparationMinutes, cookingMinutes: $cookingMinutes, aggregatedLikes: $aggregatedLikes, dishTypes: $dishTypes, summary: $summary, title: $title, healthScore: $healthScore)';
+    return 'RecipeDetails(id: $id, vegan: $vegan, vegetarian: $vegetarian, dairyFree: $dairyFree, glutenFree: $glutenFree, preparationMinutes: $preparationMinutes, cookingMinutes: $cookingMinutes, aggregatedLikes: $aggregatedLikes, dishTypes: $dishTypes, summary: $summary, title: $title, image: $image, healthScore: $healthScore, extendedIngredients: $extendedIngredients)';
   }
 
   @override
@@ -302,6 +361,7 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RecipeDetailsImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.vegan, vegan) || other.vegan == vegan) &&
             (identical(other.vegetarian, vegetarian) ||
                 other.vegetarian == vegetarian) &&
@@ -319,14 +379,18 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
                 .equals(other._dishTypes, _dishTypes) &&
             (identical(other.summary, summary) || other.summary == summary) &&
             (identical(other.title, title) || other.title == title) &&
+            (identical(other.image, image) || other.image == image) &&
             (identical(other.healthScore, healthScore) ||
-                other.healthScore == healthScore));
+                other.healthScore == healthScore) &&
+            const DeepCollectionEquality()
+                .equals(other._extendedIngredients, _extendedIngredients));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
       vegan,
       vegetarian,
       dairyFree,
@@ -337,7 +401,9 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
       const DeepCollectionEquality().hash(_dishTypes),
       summary,
       title,
-      healthScore);
+      image,
+      healthScore,
+      const DeepCollectionEquality().hash(_extendedIngredients));
 
   /// Create a copy of RecipeDetails
   /// with the given fields replaced by the non-null parameter values.
@@ -357,7 +423,8 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
 
 abstract class _RecipeDetails implements RecipeDetails {
   const factory _RecipeDetails(
-      {final bool vegan,
+      {required final int id,
+      final bool vegan,
       final bool vegetarian,
       final bool dairyFree,
       final bool glutenFree,
@@ -365,13 +432,17 @@ abstract class _RecipeDetails implements RecipeDetails {
       final int cookingMinutes,
       final int aggregatedLikes,
       final List<String> dishTypes,
-      required final String summary,
-      required final String title,
-      final int healthScore}) = _$RecipeDetailsImpl;
+      final String summary,
+      final String title,
+      required final String image,
+      final int healthScore,
+      final List<Ingredients> extendedIngredients}) = _$RecipeDetailsImpl;
 
   factory _RecipeDetails.fromJson(Map<String, dynamic> json) =
       _$RecipeDetailsImpl.fromJson;
 
+  @override
+  int get id;
   @override
   bool get vegan;
   @override
@@ -393,7 +464,11 @@ abstract class _RecipeDetails implements RecipeDetails {
   @override
   String get title;
   @override
+  String get image;
+  @override
   int get healthScore;
+  @override
+  List<Ingredients> get extendedIngredients;
 
   /// Create a copy of RecipeDetails
   /// with the given fields replaced by the non-null parameter values.
@@ -409,8 +484,9 @@ Ingredients _$IngredientsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Ingredients {
-  String get image => throw _privateConstructorUsedError;
+  String? get image => throw _privateConstructorUsedError;
   String get original => throw _privateConstructorUsedError;
+  Measure? get measures => throw _privateConstructorUsedError;
 
   /// Serializes this Ingredients to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -428,7 +504,9 @@ abstract class $IngredientsCopyWith<$Res> {
           Ingredients value, $Res Function(Ingredients) then) =
       _$IngredientsCopyWithImpl<$Res, Ingredients>;
   @useResult
-  $Res call({String image, String original});
+  $Res call({String? image, String original, Measure? measures});
+
+  $MeasureCopyWith<$Res>? get measures;
 }
 
 /// @nodoc
@@ -446,19 +524,38 @@ class _$IngredientsCopyWithImpl<$Res, $Val extends Ingredients>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? image = null,
+    Object? image = freezed,
     Object? original = null,
+    Object? measures = freezed,
   }) {
     return _then(_value.copyWith(
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       original: null == original
           ? _value.original
           : original // ignore: cast_nullable_to_non_nullable
               as String,
+      measures: freezed == measures
+          ? _value.measures
+          : measures // ignore: cast_nullable_to_non_nullable
+              as Measure?,
     ) as $Val);
+  }
+
+  /// Create a copy of Ingredients
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $MeasureCopyWith<$Res>? get measures {
+    if (_value.measures == null) {
+      return null;
+    }
+
+    return $MeasureCopyWith<$Res>(_value.measures!, (value) {
+      return _then(_value.copyWith(measures: value) as $Val);
+    });
   }
 }
 
@@ -470,7 +567,10 @@ abstract class _$$IngredientsImplCopyWith<$Res>
       __$$IngredientsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String image, String original});
+  $Res call({String? image, String original, Measure? measures});
+
+  @override
+  $MeasureCopyWith<$Res>? get measures;
 }
 
 /// @nodoc
@@ -486,18 +586,23 @@ class __$$IngredientsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? image = null,
+    Object? image = freezed,
     Object? original = null,
+    Object? measures = freezed,
   }) {
     return _then(_$IngredientsImpl(
-      image: null == image
+      image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       original: null == original
           ? _value.original
           : original // ignore: cast_nullable_to_non_nullable
               as String,
+      measures: freezed == measures
+          ? _value.measures
+          : measures // ignore: cast_nullable_to_non_nullable
+              as Measure?,
     ));
   }
 }
@@ -505,19 +610,22 @@ class __$$IngredientsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$IngredientsImpl implements _Ingredients {
-  const _$IngredientsImpl({required this.image, required this.original});
+  const _$IngredientsImpl({this.image, this.original = 'N/A', this.measures});
 
   factory _$IngredientsImpl.fromJson(Map<String, dynamic> json) =>
       _$$IngredientsImplFromJson(json);
 
   @override
-  final String image;
+  final String? image;
   @override
+  @JsonKey()
   final String original;
+  @override
+  final Measure? measures;
 
   @override
   String toString() {
-    return 'Ingredients(image: $image, original: $original)';
+    return 'Ingredients(image: $image, original: $original, measures: $measures)';
   }
 
   @override
@@ -527,12 +635,14 @@ class _$IngredientsImpl implements _Ingredients {
             other is _$IngredientsImpl &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.original, original) ||
-                other.original == original));
+                other.original == original) &&
+            (identical(other.measures, measures) ||
+                other.measures == measures));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, image, original);
+  int get hashCode => Object.hash(runtimeType, image, original, measures);
 
   /// Create a copy of Ingredients
   /// with the given fields replaced by the non-null parameter values.
@@ -552,21 +662,403 @@ class _$IngredientsImpl implements _Ingredients {
 
 abstract class _Ingredients implements Ingredients {
   const factory _Ingredients(
-      {required final String image,
-      required final String original}) = _$IngredientsImpl;
+      {final String? image,
+      final String original,
+      final Measure? measures}) = _$IngredientsImpl;
 
   factory _Ingredients.fromJson(Map<String, dynamic> json) =
       _$IngredientsImpl.fromJson;
 
   @override
-  String get image;
+  String? get image;
   @override
   String get original;
+  @override
+  Measure? get measures;
 
   /// Create a copy of Ingredients
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$IngredientsImplCopyWith<_$IngredientsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Measure _$MeasureFromJson(Map<String, dynamic> json) {
+  return _Measure.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Measure {
+  UnitMeasure get metric => throw _privateConstructorUsedError;
+  UnitMeasure get us => throw _privateConstructorUsedError;
+
+  /// Serializes this Measure to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of Measure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $MeasureCopyWith<Measure> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MeasureCopyWith<$Res> {
+  factory $MeasureCopyWith(Measure value, $Res Function(Measure) then) =
+      _$MeasureCopyWithImpl<$Res, Measure>;
+  @useResult
+  $Res call({UnitMeasure metric, UnitMeasure us});
+
+  $UnitMeasureCopyWith<$Res> get metric;
+  $UnitMeasureCopyWith<$Res> get us;
+}
+
+/// @nodoc
+class _$MeasureCopyWithImpl<$Res, $Val extends Measure>
+    implements $MeasureCopyWith<$Res> {
+  _$MeasureCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of Measure
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? metric = null,
+    Object? us = null,
+  }) {
+    return _then(_value.copyWith(
+      metric: null == metric
+          ? _value.metric
+          : metric // ignore: cast_nullable_to_non_nullable
+              as UnitMeasure,
+      us: null == us
+          ? _value.us
+          : us // ignore: cast_nullable_to_non_nullable
+              as UnitMeasure,
+    ) as $Val);
+  }
+
+  /// Create a copy of Measure
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UnitMeasureCopyWith<$Res> get metric {
+    return $UnitMeasureCopyWith<$Res>(_value.metric, (value) {
+      return _then(_value.copyWith(metric: value) as $Val);
+    });
+  }
+
+  /// Create a copy of Measure
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UnitMeasureCopyWith<$Res> get us {
+    return $UnitMeasureCopyWith<$Res>(_value.us, (value) {
+      return _then(_value.copyWith(us: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$MeasureImplCopyWith<$Res> implements $MeasureCopyWith<$Res> {
+  factory _$$MeasureImplCopyWith(
+          _$MeasureImpl value, $Res Function(_$MeasureImpl) then) =
+      __$$MeasureImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({UnitMeasure metric, UnitMeasure us});
+
+  @override
+  $UnitMeasureCopyWith<$Res> get metric;
+  @override
+  $UnitMeasureCopyWith<$Res> get us;
+}
+
+/// @nodoc
+class __$$MeasureImplCopyWithImpl<$Res>
+    extends _$MeasureCopyWithImpl<$Res, _$MeasureImpl>
+    implements _$$MeasureImplCopyWith<$Res> {
+  __$$MeasureImplCopyWithImpl(
+      _$MeasureImpl _value, $Res Function(_$MeasureImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Measure
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? metric = null,
+    Object? us = null,
+  }) {
+    return _then(_$MeasureImpl(
+      metric: null == metric
+          ? _value.metric
+          : metric // ignore: cast_nullable_to_non_nullable
+              as UnitMeasure,
+      us: null == us
+          ? _value.us
+          : us // ignore: cast_nullable_to_non_nullable
+              as UnitMeasure,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$MeasureImpl implements _Measure {
+  const _$MeasureImpl({required this.metric, required this.us});
+
+  factory _$MeasureImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MeasureImplFromJson(json);
+
+  @override
+  final UnitMeasure metric;
+  @override
+  final UnitMeasure us;
+
+  @override
+  String toString() {
+    return 'Measure(metric: $metric, us: $us)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MeasureImpl &&
+            (identical(other.metric, metric) || other.metric == metric) &&
+            (identical(other.us, us) || other.us == us));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, metric, us);
+
+  /// Create a copy of Measure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MeasureImplCopyWith<_$MeasureImpl> get copyWith =>
+      __$$MeasureImplCopyWithImpl<_$MeasureImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MeasureImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Measure implements Measure {
+  const factory _Measure(
+      {required final UnitMeasure metric,
+      required final UnitMeasure us}) = _$MeasureImpl;
+
+  factory _Measure.fromJson(Map<String, dynamic> json) = _$MeasureImpl.fromJson;
+
+  @override
+  UnitMeasure get metric;
+  @override
+  UnitMeasure get us;
+
+  /// Create a copy of Measure
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$MeasureImplCopyWith<_$MeasureImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+UnitMeasure _$UnitMeasureFromJson(Map<String, dynamic> json) {
+  return _UnitMeasure.fromJson(json);
+}
+
+/// @nodoc
+mixin _$UnitMeasure {
+  double get amount => throw _privateConstructorUsedError;
+  String get unitShort => throw _privateConstructorUsedError;
+  String get unitLong => throw _privateConstructorUsedError;
+
+  /// Serializes this UnitMeasure to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of UnitMeasure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $UnitMeasureCopyWith<UnitMeasure> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $UnitMeasureCopyWith<$Res> {
+  factory $UnitMeasureCopyWith(
+          UnitMeasure value, $Res Function(UnitMeasure) then) =
+      _$UnitMeasureCopyWithImpl<$Res, UnitMeasure>;
+  @useResult
+  $Res call({double amount, String unitShort, String unitLong});
+}
+
+/// @nodoc
+class _$UnitMeasureCopyWithImpl<$Res, $Val extends UnitMeasure>
+    implements $UnitMeasureCopyWith<$Res> {
+  _$UnitMeasureCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of UnitMeasure
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? amount = null,
+    Object? unitShort = null,
+    Object? unitLong = null,
+  }) {
+    return _then(_value.copyWith(
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
+      unitShort: null == unitShort
+          ? _value.unitShort
+          : unitShort // ignore: cast_nullable_to_non_nullable
+              as String,
+      unitLong: null == unitLong
+          ? _value.unitLong
+          : unitLong // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$UnitMeasureImplCopyWith<$Res>
+    implements $UnitMeasureCopyWith<$Res> {
+  factory _$$UnitMeasureImplCopyWith(
+          _$UnitMeasureImpl value, $Res Function(_$UnitMeasureImpl) then) =
+      __$$UnitMeasureImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({double amount, String unitShort, String unitLong});
+}
+
+/// @nodoc
+class __$$UnitMeasureImplCopyWithImpl<$Res>
+    extends _$UnitMeasureCopyWithImpl<$Res, _$UnitMeasureImpl>
+    implements _$$UnitMeasureImplCopyWith<$Res> {
+  __$$UnitMeasureImplCopyWithImpl(
+      _$UnitMeasureImpl _value, $Res Function(_$UnitMeasureImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of UnitMeasure
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? amount = null,
+    Object? unitShort = null,
+    Object? unitLong = null,
+  }) {
+    return _then(_$UnitMeasureImpl(
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
+      unitShort: null == unitShort
+          ? _value.unitShort
+          : unitShort // ignore: cast_nullable_to_non_nullable
+              as String,
+      unitLong: null == unitLong
+          ? _value.unitLong
+          : unitLong // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$UnitMeasureImpl implements _UnitMeasure {
+  const _$UnitMeasureImpl(
+      {required this.amount, required this.unitShort, this.unitLong = 'N/A'});
+
+  factory _$UnitMeasureImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UnitMeasureImplFromJson(json);
+
+  @override
+  final double amount;
+  @override
+  final String unitShort;
+  @override
+  @JsonKey()
+  final String unitLong;
+
+  @override
+  String toString() {
+    return 'UnitMeasure(amount: $amount, unitShort: $unitShort, unitLong: $unitLong)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UnitMeasureImpl &&
+            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.unitShort, unitShort) ||
+                other.unitShort == unitShort) &&
+            (identical(other.unitLong, unitLong) ||
+                other.unitLong == unitLong));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, amount, unitShort, unitLong);
+
+  /// Create a copy of UnitMeasure
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UnitMeasureImplCopyWith<_$UnitMeasureImpl> get copyWith =>
+      __$$UnitMeasureImplCopyWithImpl<_$UnitMeasureImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$UnitMeasureImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _UnitMeasure implements UnitMeasure {
+  const factory _UnitMeasure(
+      {required final double amount,
+      required final String unitShort,
+      final String unitLong}) = _$UnitMeasureImpl;
+
+  factory _UnitMeasure.fromJson(Map<String, dynamic> json) =
+      _$UnitMeasureImpl.fromJson;
+
+  @override
+  double get amount;
+  @override
+  String get unitShort;
+  @override
+  String get unitLong;
+
+  /// Create a copy of UnitMeasure
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UnitMeasureImplCopyWith<_$UnitMeasureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

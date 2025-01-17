@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myrecipeapp/presentation/bookmarks/bookmarks_screen.dart';
 import 'package:myrecipeapp/presentation/custom_navbar_cubit/custom_nav_bar.dart';
-import 'package:myrecipeapp/presentation/details/details_screen.dart';
 import 'package:myrecipeapp/presentation/home/widget/home_screen.dart';
 import 'package:myrecipeapp/presentation/profile/profile_screen.dart';
 
@@ -36,7 +35,7 @@ class MainView extends StatelessWidget {
 class _Body extends StatelessWidget {
   final List<Widget> _bodies = [
     const HomeScreen(),
-    const DetailsScreen(),
+    const BookmarksScreen(),
     const BookmarksScreen(),
     const ProfileScreen(),
   ];

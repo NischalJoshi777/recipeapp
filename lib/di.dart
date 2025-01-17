@@ -11,6 +11,8 @@ void setupLocator() {
   getIt.registerLazySingleton<RemoteSource>(() => RemoteSourceImpl());
 
   getIt.registerLazySingleton<RecipeService>(
-    () => RecipeServiceImpl(remoteSource: getIt<RemoteSource>()),
+    () => RecipeServiceImpl(
+      remoteSource: getIt<RemoteSource>(),
+    ),
   );
 }

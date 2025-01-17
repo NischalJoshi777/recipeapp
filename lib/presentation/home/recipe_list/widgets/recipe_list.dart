@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myrecipeapp/config/theme/app_theme.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/config/theme/text_styles.dart';
@@ -49,11 +50,14 @@ class _RecipeListWidget extends StatelessWidget {
       },
       hasMore: context.read<RecipeListCubit>().hasMore,
       hasError: context.read<RecipeListCubit>().hasError,
-      itemBuilder: (BuildContext context, int index) => _RecipeItem(
-        image: recipeList[index].image,
-        title: recipeList[index].title,
-        chef: recipeList[index].chef,
-        cookingMins: recipeList[index].cookingMinutes,
+      itemBuilder: (BuildContext context, int index) => GestureDetector(
+        onTap: () => context.push('/details', extra: recipeList[index].id),
+        child: _RecipeItem(
+          image: recipeList[index].image,
+          title: recipeList[index].title,
+          chef: recipeList[index].chef,
+          cookingMins: recipeList[index].cookingMinutes,
+        ),
       ),
       itemCount: recipeList.length,
       loadingWidget: const RecipeShimmerItem(),

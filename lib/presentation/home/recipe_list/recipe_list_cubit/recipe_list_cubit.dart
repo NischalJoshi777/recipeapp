@@ -92,4 +92,7 @@ class RecipeListCubit extends Cubit<RecipeListState> {
       );
     }
   }
+
+  @override
+  Future<void> close() async {}
 }
