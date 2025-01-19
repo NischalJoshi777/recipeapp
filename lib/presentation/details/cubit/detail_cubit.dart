@@ -20,10 +20,13 @@ class DetailCubit extends Cubit<DetailState> {
       emit(
         DetailState.loaded(
           RecipeDetailVM(
+            instructions: response.instructions,
             summary: response.summary,
-            aggregatedLikes: response.aggregatedLikes,
+            aggregatedLikes: response.aggregateLikes,
             cookingMinutes: response.preparationMinutes,
             isVegetarian: response.vegetarian,
+            isKetogenic: response.ketogenic,
+            servingSize: response.servings ?? 0,
             isVegan: response.vegan,
             id: response.id,
             title: response.title,
@@ -31,11 +34,18 @@ class DetailCubit extends Cubit<DetailState> {
             isDairyFree: response.dairyFree,
             isGlutenFree: response.glutenFree,
             dishTypes: response.dishTypes,
+            healthScore: response.healthScore,
             ingredients: response.extendedIngredients
-                .map((e) => IngredientsVM(
-                      image: e.image ?? '',
-                      original: e.original,
-                    ))
+                .map(
+                  (e) => IngredientsVM(
+                    image: e.image ?? '',
+                    original: e.name,
+                    measure: MeasureVM(
+                      amount: e.measures.metric.amount,
+                      unitLong: e.measures.metric.unitShort,
+                    ),
+                  ),
+                )
                 .toList(),
           ),
         ),

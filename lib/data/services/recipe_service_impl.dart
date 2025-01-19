@@ -37,7 +37,9 @@ class RecipeServiceImpl implements RecipeService {
     try {
       final json = await remoteSource.get(
         path: id.toString() + _EndPoints.details,
-        queryParams: {},
+        queryParams: {
+          "includeNutrition": true,
+        },
       );
       return RecipeDetails.fromJson(json);
     } catch (e) {
