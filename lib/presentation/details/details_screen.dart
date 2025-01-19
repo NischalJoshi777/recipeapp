@@ -22,23 +22,25 @@ class DetailsScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => DetailCubit(recipeService: getIt<RecipeService>())
         ..fetchRecipeDetails(id),
-      child: BlocBuilder<DetailCubit, DetailState>(
-        builder: (BuildContext context, state) {
-          return state.when(
-            loading: () => const CircularProgressIndicator(),
-            loaded: (recipe) => _Details(recipe: recipe),
-            error: (mes) => const Text('Error'),
-          );
-        },
+      child: Scaffold(
+        body: BlocBuilder<DetailCubit, DetailState>(
+          builder: (BuildContext context, state) {
+            return state.when(
+              loading: () => const Center(child: CircularProgressIndicator()),
+              loaded: (recipe) => _DetailsLoaded(recipe: recipe),
+              error: (mes) => const Text('Error'),
+            );
+          },
+        ),
       ),
     );
   }
 }
 
-class _Details extends StatelessWidget {
+class _DetailsLoaded extends StatelessWidget {
   final RecipeDetailVM recipe;
 
-  const _Details({
+  const _DetailsLoaded({
     super.key,
     required this.recipe,
   });
@@ -48,72 +50,53 @@ class _Details extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Column(
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height *
-                    .40, // Added height constraint
-                child: Image.network(
-                  recipe.image,
-                  fit: BoxFit.fitHeight, // Prevents overflow
-                ),
-              ),
-            ],
-          ),
+          _FoodImage(img: recipe.image),
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.38,
+            top: MediaQuery.of(context).size.height * 0.40,
             bottom: 0,
             width: MediaQuery.of(context).size.width,
             child: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(24.0)),
               child: Container(
-                color: Palette.lightGray,
-                padding: const EdgeInsets.symmetric(
-                  vertical: 24.0,
-                  horizontal: 20.0,
+                color: Palette.white,
+                padding: const EdgeInsets.only(
+                  top: 24.0,
+                  left: 20.0,
+                  right: 20.0,
                 ),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    spacing: 20.0,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              HeaderText(text: recipe.title),
-                              const Text('By: Nischal Joshi'),
-                            ],
+                      HeaderText(
+                        text:
+                            "${recipe.title} (${recipe.servingSize} servings)",
+                      ),
+                      const SizedBox(height: 12.0),
+                      _CookingTimeAndLikes(
+                        cookingMinutes: recipe.cookingMinutes,
+                        aggregatedLikes: recipe.aggregatedLikes,
+                        healthScore: recipe.healthScore,
+                      ),
+                      const SizedBox(height: 12.0),
+                      CategoriesTickList(recipe: recipe),
+                      const SizedBox(height: 8.0),
+                      ExpandableHeader(
+                        title: 'Instructions',
+                        content: [
+                          Text(
+                            recipe.instructions,
+                            style: context.appTheme.bodyRegular,
                           ),
                         ],
                       ),
-                      Row(
-                        spacing: 12.0,
-                        children: [
-                          _IconWithText(
-                            icon: Icons.watch_later_rounded,
-                            text: '${recipe.cookingMinutes.toString()} mins',
-                          ),
-                          _IconWithText(
-                            icon: Icons.thumb_up_sharp,
-                            text: "${recipe.aggregatedLikes.toString()} likes",
-                          ),
+                      ExpandableHeader(
+                        title: 'Ingredients',
+                        content: [
+                          IngredientsList(ingredients: recipe.ingredients),
+                          const SizedBox(height: 8.0),
                         ],
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const HeaderText(text: 'Description'),
-                          const SizedBox(width: 4.0),
-                          Text(recipe.summary ?? '',
-                              style: context.appTheme.bodySmall),
-                        ],
-                      ),
-                      const HeaderText(text: 'Ingredients'),
-                      IngredientsList(ingredients: recipe.ingredients),
                     ],
                   ),
                 ),
@@ -122,6 +105,166 @@ class _Details extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _FoodImage extends StatelessWidget {
+  final String img;
+
+  const _FoodImage({
+    super.key,
+    required this.img,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height *
+              .44, // Added height constraint
+          child: Image.network(
+            img,
+            fit: BoxFit.fitHeight, // Prevents overflow
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _CookingTimeAndLikes extends StatelessWidget {
+  final int cookingMinutes;
+  final int aggregatedLikes;
+  final double healthScore;
+
+  const _CookingTimeAndLikes({
+    super.key,
+    required this.cookingMinutes,
+    required this.aggregatedLikes,
+    required this.healthScore,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      spacing: 12.0,
+      children: [
+        _IconWithText(
+          icon: Icons.watch_later_outlined,
+          text: '${cookingMinutes.toString()} mins',
+        ),
+        _IconWithText(
+          icon: Icons.thumb_up_alt_outlined,
+          text: "${aggregatedLikes.toString()} likes",
+        ),
+        Text(
+          "Health Score: ${healthScore.toString()} ",
+          style: context.appTheme.bodySmall.semiBold,
+        ),
+      ],
+    );
+  }
+}
+
+class ExpandableHeader extends StatelessWidget {
+  final String title;
+  final List<Widget> content;
+
+  const ExpandableHeader({
+    super.key,
+    required this.content,
+    required this.title,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      iconColor: Palette.primaryGreen,
+      collapsedIconColor: Palette.darkGray,
+      childrenPadding: EdgeInsets.zero,
+      collapsedShape: const RoundedRectangleBorder(
+        side: BorderSide.none,
+      ),
+      shape: const RoundedRectangleBorder(
+        side: BorderSide.none,
+      ),
+      tilePadding: EdgeInsets.zero,
+      title: HeaderText(text: title),
+      children: content,
+    );
+  }
+}
+
+class CategoriesTickList extends StatelessWidget {
+  final RecipeDetailVM recipe;
+
+  const CategoriesTickList({
+    super.key,
+    required this.recipe,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      spacing: 12.0,
+      runSpacing: 12.0,
+      children: [
+        _buildCategoryContainer(
+          'Vegan',
+          recipe.isVegan,
+        ),
+        _buildCategoryContainer(
+          'Vegetarian',
+          recipe.isVegetarian,
+        ),
+        _buildCategoryContainer(
+          'Dairy Free',
+          recipe.isDairyFree,
+        ),
+        _buildCategoryContainer(
+          'Gluten Free',
+          recipe.isGlutenFree,
+        ),
+        _buildCategoryContainer(
+          'Ketogenic',
+          recipe.isKetogenic,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCategoryContainer(String category, bool isTrue) {
+    return Builder(
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.all(4.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.0),
+            border: Border.all(
+              width: 1.0,
+              color: isTrue ? Palette.primaryGreen : Colors.red,
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                height: 12.0,
+                width: 12.0,
+                isTrue ? 'assets/image/check.png' : 'assets/image/close.png',
+              ),
+              const SizedBox(width: 4.0),
+              Text(
+                category,
+                style: context.appTheme.bodySmall.semiBold,
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }
@@ -140,7 +283,7 @@ class _IconWithText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
-      spacing: 4.0,
+      spacing: 8.0,
       children: [
         Icon(
           icon,
@@ -167,23 +310,21 @@ class IngredientsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: 10.0,
       children: ingredients
           .map(
-            (e) => Container(
-              color: Palette.white,
-              child: ListTile(
-                leading: Image.network(
-                  height: 60.0,
-                  width: 60.0,
-                  'https://spoonacular.com/cdn/ingredients_100x100/${e.image}',
-                ),
-                contentPadding: const EdgeInsets.all(12.0),
-                title: Text(
-                  e.original,
-                  style: context.appTheme.bodySmall.semiBold,
-                ),
-                subtitle: Text(e.original, style: context.appTheme.bodySmall),
+            (e) => ListTile(
+              trailing: Text(
+                '${e.measure.amount.toString()} ${e.measure.unitLong}',
+              ),
+              leading: Image.network(
+                height: 50.0,
+                width: 50.0,
+                'https://spoonacular.com/cdn/ingredients_100x100/${e.image}',
+              ),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 12.0),
+              title: Text(
+                e.original.toUpperCase(),
+                style: context.appTheme.bodySmall.semiBold,
               ),
             ),
           )

@@ -10,7 +10,7 @@ class TextStyles {
 
   static final h1Style = _base.copyWith(fontSize: 40, height: 72 / 48);
   static final h2Style = _base.copyWith(fontSize: 36, height: 36 / 28);
-  static final bodyLargeStyle = _base.copyWith(fontSize: 24, height: 24 / 16);
+  static final bodyLargeStyle = _base.copyWith(fontSize: 20, height: 24 / 16);
   static final bodyRegularStyle = _base.copyWith(fontSize: 14, height: 24 / 16);
   static final bodySmallStyle = _base.copyWith(fontSize: 12.0, height: 24 / 16);
   static final bodyExtraSmallStyle =
