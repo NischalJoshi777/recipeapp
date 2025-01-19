@@ -13,9 +13,10 @@ _$RecipeDetailsImpl _$$RecipeDetailsImplFromJson(Map<String, dynamic> json) =>
       vegetarian: json['vegetarian'] as bool? ?? false,
       dairyFree: json['dairyFree'] as bool? ?? false,
       glutenFree: json['glutenFree'] as bool? ?? false,
+      ketogenic: json['ketogenic'] as bool? ?? false,
       preparationMinutes: (json['preparationMinutes'] as num?)?.toInt() ?? 0,
       cookingMinutes: (json['cookingMinutes'] as num?)?.toInt() ?? 0,
-      aggregatedLikes: (json['aggregatedLikes'] as num?)?.toInt() ?? 0,
+      aggregateLikes: (json['aggregateLikes'] as num?)?.toInt() ?? 0,
       dishTypes: (json['dishTypes'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -23,7 +24,9 @@ _$RecipeDetailsImpl _$$RecipeDetailsImplFromJson(Map<String, dynamic> json) =>
       summary: json['summary'] as String? ?? 'N/A',
       title: json['title'] as String? ?? 'N/A',
       image: json['image'] as String,
-      healthScore: (json['healthScore'] as num?)?.toInt() ?? 0,
+      instructions: json['instructions'] as String,
+      healthScore: (json['healthScore'] as num?)?.toDouble() ?? 0.0,
+      servings: (json['servings'] as num).toInt(),
       extendedIngredients: (json['extendedIngredients'] as List<dynamic>?)
               ?.map((e) => Ingredients.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -37,30 +40,31 @@ Map<String, dynamic> _$$RecipeDetailsImplToJson(_$RecipeDetailsImpl instance) =>
       'vegetarian': instance.vegetarian,
       'dairyFree': instance.dairyFree,
       'glutenFree': instance.glutenFree,
+      'ketogenic': instance.ketogenic,
       'preparationMinutes': instance.preparationMinutes,
       'cookingMinutes': instance.cookingMinutes,
-      'aggregatedLikes': instance.aggregatedLikes,
+      'aggregateLikes': instance.aggregateLikes,
       'dishTypes': instance.dishTypes,
       'summary': instance.summary,
       'title': instance.title,
       'image': instance.image,
+      'instructions': instance.instructions,
       'healthScore': instance.healthScore,
+      'servings': instance.servings,
       'extendedIngredients': instance.extendedIngredients,
     };
 
 _$IngredientsImpl _$$IngredientsImplFromJson(Map<String, dynamic> json) =>
     _$IngredientsImpl(
       image: json['image'] as String?,
-      original: json['original'] as String? ?? 'N/A',
-      measures: json['measures'] == null
-          ? null
-          : Measure.fromJson(json['measures'] as Map<String, dynamic>),
+      name: json['name'] as String? ?? 'N/A',
+      measures: Measure.fromJson(json['measures'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$IngredientsImplToJson(_$IngredientsImpl instance) =>
     <String, dynamic>{
       'image': instance.image,
-      'original': instance.original,
+      'name': instance.name,
       'measures': instance.measures,
     };
 

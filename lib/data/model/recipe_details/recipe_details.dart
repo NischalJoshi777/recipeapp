@@ -11,14 +11,17 @@ class RecipeDetails with _$RecipeDetails {
     @Default(false) bool vegetarian,
     @Default(false) bool dairyFree,
     @Default(false) bool glutenFree,
+    @Default(false) bool ketogenic,
     @Default(0) int preparationMinutes,
     @Default(0) int cookingMinutes,
-    @Default(0) int aggregatedLikes,
+    @Default(0) int aggregateLikes,
     @Default([]) List<String> dishTypes,
     @Default('N/A') String summary,
     @Default('N/A') String title,
     required String image,
-    @Default(0) int healthScore,
+    required String instructions,
+    @Default(0.0) double healthScore,
+    required int servings,
     @Default([]) List<Ingredients> extendedIngredients,
   }) = _RecipeDetails;
 
@@ -30,8 +33,8 @@ class RecipeDetails with _$RecipeDetails {
 class Ingredients with _$Ingredients {
   const factory Ingredients({
     String? image,
-    @Default('N/A') String original,
-    Measure? measures, // Made nullable to handle missing cases
+    @Default('N/A') String name,
+    required Measure measures, // Made nullable to handle missing cases
   }) = _Ingredients;
   factory Ingredients.fromJson(Map<String, dynamic> json) =>
       _$IngredientsFromJson(json);

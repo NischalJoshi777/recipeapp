@@ -25,14 +25,17 @@ mixin _$RecipeDetails {
   bool get vegetarian => throw _privateConstructorUsedError;
   bool get dairyFree => throw _privateConstructorUsedError;
   bool get glutenFree => throw _privateConstructorUsedError;
+  bool get ketogenic => throw _privateConstructorUsedError;
   int get preparationMinutes => throw _privateConstructorUsedError;
   int get cookingMinutes => throw _privateConstructorUsedError;
-  int get aggregatedLikes => throw _privateConstructorUsedError;
+  int get aggregateLikes => throw _privateConstructorUsedError;
   List<String> get dishTypes => throw _privateConstructorUsedError;
   String get summary => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
-  int get healthScore => throw _privateConstructorUsedError;
+  String get instructions => throw _privateConstructorUsedError;
+  double get healthScore => throw _privateConstructorUsedError;
+  int get servings => throw _privateConstructorUsedError;
   List<Ingredients> get extendedIngredients =>
       throw _privateConstructorUsedError;
 
@@ -58,14 +61,17 @@ abstract class $RecipeDetailsCopyWith<$Res> {
       bool vegetarian,
       bool dairyFree,
       bool glutenFree,
+      bool ketogenic,
       int preparationMinutes,
       int cookingMinutes,
-      int aggregatedLikes,
+      int aggregateLikes,
       List<String> dishTypes,
       String summary,
       String title,
       String image,
-      int healthScore,
+      String instructions,
+      double healthScore,
+      int servings,
       List<Ingredients> extendedIngredients});
 }
 
@@ -89,14 +95,17 @@ class _$RecipeDetailsCopyWithImpl<$Res, $Val extends RecipeDetails>
     Object? vegetarian = null,
     Object? dairyFree = null,
     Object? glutenFree = null,
+    Object? ketogenic = null,
     Object? preparationMinutes = null,
     Object? cookingMinutes = null,
-    Object? aggregatedLikes = null,
+    Object? aggregateLikes = null,
     Object? dishTypes = null,
     Object? summary = null,
     Object? title = null,
     Object? image = null,
+    Object? instructions = null,
     Object? healthScore = null,
+    Object? servings = null,
     Object? extendedIngredients = null,
   }) {
     return _then(_value.copyWith(
@@ -120,6 +129,10 @@ class _$RecipeDetailsCopyWithImpl<$Res, $Val extends RecipeDetails>
           ? _value.glutenFree
           : glutenFree // ignore: cast_nullable_to_non_nullable
               as bool,
+      ketogenic: null == ketogenic
+          ? _value.ketogenic
+          : ketogenic // ignore: cast_nullable_to_non_nullable
+              as bool,
       preparationMinutes: null == preparationMinutes
           ? _value.preparationMinutes
           : preparationMinutes // ignore: cast_nullable_to_non_nullable
@@ -128,9 +141,9 @@ class _$RecipeDetailsCopyWithImpl<$Res, $Val extends RecipeDetails>
           ? _value.cookingMinutes
           : cookingMinutes // ignore: cast_nullable_to_non_nullable
               as int,
-      aggregatedLikes: null == aggregatedLikes
-          ? _value.aggregatedLikes
-          : aggregatedLikes // ignore: cast_nullable_to_non_nullable
+      aggregateLikes: null == aggregateLikes
+          ? _value.aggregateLikes
+          : aggregateLikes // ignore: cast_nullable_to_non_nullable
               as int,
       dishTypes: null == dishTypes
           ? _value.dishTypes
@@ -148,9 +161,17 @@ class _$RecipeDetailsCopyWithImpl<$Res, $Val extends RecipeDetails>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
+      instructions: null == instructions
+          ? _value.instructions
+          : instructions // ignore: cast_nullable_to_non_nullable
+              as String,
       healthScore: null == healthScore
           ? _value.healthScore
           : healthScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      servings: null == servings
+          ? _value.servings
+          : servings // ignore: cast_nullable_to_non_nullable
               as int,
       extendedIngredients: null == extendedIngredients
           ? _value.extendedIngredients
@@ -174,14 +195,17 @@ abstract class _$$RecipeDetailsImplCopyWith<$Res>
       bool vegetarian,
       bool dairyFree,
       bool glutenFree,
+      bool ketogenic,
       int preparationMinutes,
       int cookingMinutes,
-      int aggregatedLikes,
+      int aggregateLikes,
       List<String> dishTypes,
       String summary,
       String title,
       String image,
-      int healthScore,
+      String instructions,
+      double healthScore,
+      int servings,
       List<Ingredients> extendedIngredients});
 }
 
@@ -203,14 +227,17 @@ class __$$RecipeDetailsImplCopyWithImpl<$Res>
     Object? vegetarian = null,
     Object? dairyFree = null,
     Object? glutenFree = null,
+    Object? ketogenic = null,
     Object? preparationMinutes = null,
     Object? cookingMinutes = null,
-    Object? aggregatedLikes = null,
+    Object? aggregateLikes = null,
     Object? dishTypes = null,
     Object? summary = null,
     Object? title = null,
     Object? image = null,
+    Object? instructions = null,
     Object? healthScore = null,
+    Object? servings = null,
     Object? extendedIngredients = null,
   }) {
     return _then(_$RecipeDetailsImpl(
@@ -234,6 +261,10 @@ class __$$RecipeDetailsImplCopyWithImpl<$Res>
           ? _value.glutenFree
           : glutenFree // ignore: cast_nullable_to_non_nullable
               as bool,
+      ketogenic: null == ketogenic
+          ? _value.ketogenic
+          : ketogenic // ignore: cast_nullable_to_non_nullable
+              as bool,
       preparationMinutes: null == preparationMinutes
           ? _value.preparationMinutes
           : preparationMinutes // ignore: cast_nullable_to_non_nullable
@@ -242,9 +273,9 @@ class __$$RecipeDetailsImplCopyWithImpl<$Res>
           ? _value.cookingMinutes
           : cookingMinutes // ignore: cast_nullable_to_non_nullable
               as int,
-      aggregatedLikes: null == aggregatedLikes
-          ? _value.aggregatedLikes
-          : aggregatedLikes // ignore: cast_nullable_to_non_nullable
+      aggregateLikes: null == aggregateLikes
+          ? _value.aggregateLikes
+          : aggregateLikes // ignore: cast_nullable_to_non_nullable
               as int,
       dishTypes: null == dishTypes
           ? _value._dishTypes
@@ -262,9 +293,17 @@ class __$$RecipeDetailsImplCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
+      instructions: null == instructions
+          ? _value.instructions
+          : instructions // ignore: cast_nullable_to_non_nullable
+              as String,
       healthScore: null == healthScore
           ? _value.healthScore
           : healthScore // ignore: cast_nullable_to_non_nullable
+              as double,
+      servings: null == servings
+          ? _value.servings
+          : servings // ignore: cast_nullable_to_non_nullable
               as int,
       extendedIngredients: null == extendedIngredients
           ? _value._extendedIngredients
@@ -283,14 +322,17 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
       this.vegetarian = false,
       this.dairyFree = false,
       this.glutenFree = false,
+      this.ketogenic = false,
       this.preparationMinutes = 0,
       this.cookingMinutes = 0,
-      this.aggregatedLikes = 0,
+      this.aggregateLikes = 0,
       final List<String> dishTypes = const [],
       this.summary = 'N/A',
       this.title = 'N/A',
       required this.image,
-      this.healthScore = 0,
+      required this.instructions,
+      this.healthScore = 0.0,
+      required this.servings,
       final List<Ingredients> extendedIngredients = const []})
       : _dishTypes = dishTypes,
         _extendedIngredients = extendedIngredients;
@@ -314,13 +356,16 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
   final bool glutenFree;
   @override
   @JsonKey()
+  final bool ketogenic;
+  @override
+  @JsonKey()
   final int preparationMinutes;
   @override
   @JsonKey()
   final int cookingMinutes;
   @override
   @JsonKey()
-  final int aggregatedLikes;
+  final int aggregateLikes;
   final List<String> _dishTypes;
   @override
   @JsonKey()
@@ -339,8 +384,12 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
   @override
   final String image;
   @override
+  final String instructions;
+  @override
   @JsonKey()
-  final int healthScore;
+  final double healthScore;
+  @override
+  final int servings;
   final List<Ingredients> _extendedIngredients;
   @override
   @JsonKey()
@@ -353,7 +402,7 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
 
   @override
   String toString() {
-    return 'RecipeDetails(id: $id, vegan: $vegan, vegetarian: $vegetarian, dairyFree: $dairyFree, glutenFree: $glutenFree, preparationMinutes: $preparationMinutes, cookingMinutes: $cookingMinutes, aggregatedLikes: $aggregatedLikes, dishTypes: $dishTypes, summary: $summary, title: $title, image: $image, healthScore: $healthScore, extendedIngredients: $extendedIngredients)';
+    return 'RecipeDetails(id: $id, vegan: $vegan, vegetarian: $vegetarian, dairyFree: $dairyFree, glutenFree: $glutenFree, ketogenic: $ketogenic, preparationMinutes: $preparationMinutes, cookingMinutes: $cookingMinutes, aggregateLikes: $aggregateLikes, dishTypes: $dishTypes, summary: $summary, title: $title, image: $image, instructions: $instructions, healthScore: $healthScore, servings: $servings, extendedIngredients: $extendedIngredients)';
   }
 
   @override
@@ -369,19 +418,25 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
                 other.dairyFree == dairyFree) &&
             (identical(other.glutenFree, glutenFree) ||
                 other.glutenFree == glutenFree) &&
+            (identical(other.ketogenic, ketogenic) ||
+                other.ketogenic == ketogenic) &&
             (identical(other.preparationMinutes, preparationMinutes) ||
                 other.preparationMinutes == preparationMinutes) &&
             (identical(other.cookingMinutes, cookingMinutes) ||
                 other.cookingMinutes == cookingMinutes) &&
-            (identical(other.aggregatedLikes, aggregatedLikes) ||
-                other.aggregatedLikes == aggregatedLikes) &&
+            (identical(other.aggregateLikes, aggregateLikes) ||
+                other.aggregateLikes == aggregateLikes) &&
             const DeepCollectionEquality()
                 .equals(other._dishTypes, _dishTypes) &&
             (identical(other.summary, summary) || other.summary == summary) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.image, image) || other.image == image) &&
+            (identical(other.instructions, instructions) ||
+                other.instructions == instructions) &&
             (identical(other.healthScore, healthScore) ||
                 other.healthScore == healthScore) &&
+            (identical(other.servings, servings) ||
+                other.servings == servings) &&
             const DeepCollectionEquality()
                 .equals(other._extendedIngredients, _extendedIngredients));
   }
@@ -395,14 +450,17 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
       vegetarian,
       dairyFree,
       glutenFree,
+      ketogenic,
       preparationMinutes,
       cookingMinutes,
-      aggregatedLikes,
+      aggregateLikes,
       const DeepCollectionEquality().hash(_dishTypes),
       summary,
       title,
       image,
+      instructions,
       healthScore,
+      servings,
       const DeepCollectionEquality().hash(_extendedIngredients));
 
   /// Create a copy of RecipeDetails
@@ -428,14 +486,17 @@ abstract class _RecipeDetails implements RecipeDetails {
       final bool vegetarian,
       final bool dairyFree,
       final bool glutenFree,
+      final bool ketogenic,
       final int preparationMinutes,
       final int cookingMinutes,
-      final int aggregatedLikes,
+      final int aggregateLikes,
       final List<String> dishTypes,
       final String summary,
       final String title,
       required final String image,
-      final int healthScore,
+      required final String instructions,
+      final double healthScore,
+      required final int servings,
       final List<Ingredients> extendedIngredients}) = _$RecipeDetailsImpl;
 
   factory _RecipeDetails.fromJson(Map<String, dynamic> json) =
@@ -452,11 +513,13 @@ abstract class _RecipeDetails implements RecipeDetails {
   @override
   bool get glutenFree;
   @override
+  bool get ketogenic;
+  @override
   int get preparationMinutes;
   @override
   int get cookingMinutes;
   @override
-  int get aggregatedLikes;
+  int get aggregateLikes;
   @override
   List<String> get dishTypes;
   @override
@@ -466,7 +529,11 @@ abstract class _RecipeDetails implements RecipeDetails {
   @override
   String get image;
   @override
-  int get healthScore;
+  String get instructions;
+  @override
+  double get healthScore;
+  @override
+  int get servings;
   @override
   List<Ingredients> get extendedIngredients;
 
@@ -485,8 +552,8 @@ Ingredients _$IngredientsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Ingredients {
   String? get image => throw _privateConstructorUsedError;
-  String get original => throw _privateConstructorUsedError;
-  Measure? get measures => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  Measure get measures => throw _privateConstructorUsedError;
 
   /// Serializes this Ingredients to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -504,9 +571,9 @@ abstract class $IngredientsCopyWith<$Res> {
           Ingredients value, $Res Function(Ingredients) then) =
       _$IngredientsCopyWithImpl<$Res, Ingredients>;
   @useResult
-  $Res call({String? image, String original, Measure? measures});
+  $Res call({String? image, String name, Measure measures});
 
-  $MeasureCopyWith<$Res>? get measures;
+  $MeasureCopyWith<$Res> get measures;
 }
 
 /// @nodoc
@@ -525,22 +592,22 @@ class _$IngredientsCopyWithImpl<$Res, $Val extends Ingredients>
   @override
   $Res call({
     Object? image = freezed,
-    Object? original = null,
-    Object? measures = freezed,
+    Object? name = null,
+    Object? measures = null,
   }) {
     return _then(_value.copyWith(
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
-      original: null == original
-          ? _value.original
-          : original // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
-      measures: freezed == measures
+      measures: null == measures
           ? _value.measures
           : measures // ignore: cast_nullable_to_non_nullable
-              as Measure?,
+              as Measure,
     ) as $Val);
   }
 
@@ -548,12 +615,8 @@ class _$IngredientsCopyWithImpl<$Res, $Val extends Ingredients>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $MeasureCopyWith<$Res>? get measures {
-    if (_value.measures == null) {
-      return null;
-    }
-
-    return $MeasureCopyWith<$Res>(_value.measures!, (value) {
+  $MeasureCopyWith<$Res> get measures {
+    return $MeasureCopyWith<$Res>(_value.measures, (value) {
       return _then(_value.copyWith(measures: value) as $Val);
     });
   }
@@ -567,10 +630,10 @@ abstract class _$$IngredientsImplCopyWith<$Res>
       __$$IngredientsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? image, String original, Measure? measures});
+  $Res call({String? image, String name, Measure measures});
 
   @override
-  $MeasureCopyWith<$Res>? get measures;
+  $MeasureCopyWith<$Res> get measures;
 }
 
 /// @nodoc
@@ -587,22 +650,22 @@ class __$$IngredientsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? image = freezed,
-    Object? original = null,
-    Object? measures = freezed,
+    Object? name = null,
+    Object? measures = null,
   }) {
     return _then(_$IngredientsImpl(
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
-      original: null == original
-          ? _value.original
-          : original // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
-      measures: freezed == measures
+      measures: null == measures
           ? _value.measures
           : measures // ignore: cast_nullable_to_non_nullable
-              as Measure?,
+              as Measure,
     ));
   }
 }
@@ -610,7 +673,8 @@ class __$$IngredientsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$IngredientsImpl implements _Ingredients {
-  const _$IngredientsImpl({this.image, this.original = 'N/A', this.measures});
+  const _$IngredientsImpl(
+      {this.image, this.name = 'N/A', required this.measures});
 
   factory _$IngredientsImpl.fromJson(Map<String, dynamic> json) =>
       _$$IngredientsImplFromJson(json);
@@ -619,13 +683,13 @@ class _$IngredientsImpl implements _Ingredients {
   final String? image;
   @override
   @JsonKey()
-  final String original;
+  final String name;
   @override
-  final Measure? measures;
+  final Measure measures;
 
   @override
   String toString() {
-    return 'Ingredients(image: $image, original: $original, measures: $measures)';
+    return 'Ingredients(image: $image, name: $name, measures: $measures)';
   }
 
   @override
@@ -634,15 +698,14 @@ class _$IngredientsImpl implements _Ingredients {
         (other.runtimeType == runtimeType &&
             other is _$IngredientsImpl &&
             (identical(other.image, image) || other.image == image) &&
-            (identical(other.original, original) ||
-                other.original == original) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.measures, measures) ||
                 other.measures == measures));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, image, original, measures);
+  int get hashCode => Object.hash(runtimeType, image, name, measures);
 
   /// Create a copy of Ingredients
   /// with the given fields replaced by the non-null parameter values.
@@ -663,8 +726,8 @@ class _$IngredientsImpl implements _Ingredients {
 abstract class _Ingredients implements Ingredients {
   const factory _Ingredients(
       {final String? image,
-      final String original,
-      final Measure? measures}) = _$IngredientsImpl;
+      final String name,
+      required final Measure measures}) = _$IngredientsImpl;
 
   factory _Ingredients.fromJson(Map<String, dynamic> json) =
       _$IngredientsImpl.fromJson;
@@ -672,9 +735,9 @@ abstract class _Ingredients implements Ingredients {
   @override
   String? get image;
   @override
-  String get original;
+  String get name;
   @override
-  Measure? get measures;
+  Measure get measures;
 
   /// Create a copy of Ingredients
   /// with the given fields replaced by the non-null parameter values.
