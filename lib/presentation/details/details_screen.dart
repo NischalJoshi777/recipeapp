@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:myrecipeapp/config/theme/app_theme.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
-import 'package:myrecipeapp/config/theme/text_styles.dart';
 import 'package:myrecipeapp/data/services/recipe_service.dart';
 import 'package:myrecipeapp/di.dart';
 import 'package:myrecipeapp/presentation/details/cubit/detail_cubit.dart';
 import 'package:myrecipeapp/presentation/details/view_model/recipe_detail_view_model.dart';
+import 'package:myrecipeapp/presentation/details/widget/categories_tick_list.dart';
+import 'package:myrecipeapp/presentation/details/widget/cookingtime_likes_score.dart';
+import 'package:myrecipeapp/presentation/details/widget/expandable_header.dart';
+import 'package:myrecipeapp/presentation/details/widget/ingredients_list.dart';
 import 'package:myrecipeapp/presentation/details/widget/macros_chart.dart';
 import 'package:myrecipeapp/presentation/home/widget/header_text.dart';
 
@@ -124,7 +127,7 @@ class _DetailBody extends StatelessWidget {
                   text: "${recipe.title} (${recipe.servingSize} servings)",
                 ),
                 const SizedBox(height: 12.0),
-                _CookingTimeAndLikes(
+                CookingTimeLikesScore(
                   cookingMinutes: recipe.cookingMinutes,
                   aggregatedLikes: recipe.aggregatedLikes,
                   healthScore: recipe.healthScore,
@@ -143,9 +146,8 @@ class _DetailBody extends StatelessWidget {
                 ExpandableHeader(
                   title: 'Instructions',
                   content: [
-                    Text(
+                    HtmlWidget(
                       recipe.instructions,
-                      style: context.appTheme.bodyRegular,
                     ),
                   ],
                 ),
@@ -161,224 +163,6 @@ class _DetailBody extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class _CookingTimeAndLikes extends StatelessWidget {
-  final int cookingMinutes;
-  final int aggregatedLikes;
-  final double healthScore;
-
-  const _CookingTimeAndLikes({
-    super.key,
-    required this.cookingMinutes,
-    required this.aggregatedLikes,
-    required this.healthScore,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      spacing: 12.0,
-      children: [
-        _IconWithText(
-          icon: Icons.watch_later_outlined,
-          text: '${cookingMinutes.toString()} mins',
-        ),
-        _IconWithText(
-          icon: Icons.thumb_up_alt_outlined,
-          text: "${aggregatedLikes.toString()} likes",
-        ),
-        Text(
-          "Health Score: ${healthScore.toString()} ",
-          style: context.appTheme.bodySmall.semiBold,
-        ),
-      ],
-    );
-  }
-}
-
-class ExpandableHeader extends StatelessWidget {
-  final String title;
-  final List<Widget> content;
-
-  const ExpandableHeader({
-    super.key,
-    required this.content,
-    required this.title,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final GlobalKey expansionTileKey = GlobalKey();
-    return ExpansionTile(
-      key: expansionTileKey,
-      onExpansionChanged: (value) {
-        if (value) {
-          _scrollToItem(expansionTileKey);
-        }
-      },
-      iconColor: Palette.primaryGreen,
-      collapsedIconColor: Palette.darkGray,
-      childrenPadding: EdgeInsets.zero,
-      collapsedShape: const RoundedRectangleBorder(
-        side: BorderSide.none,
-      ),
-      shape: const RoundedRectangleBorder(
-        side: BorderSide.none,
-      ),
-      tilePadding: EdgeInsets.zero,
-      title: HeaderText(text: title),
-      children: content,
-    );
-  }
-
-  void _scrollToItem(GlobalKey key) {
-    final currentContext = key.currentContext;
-    if (currentContext != null && currentContext.mounted) {
-      Future.delayed(const Duration(milliseconds: 200)).then((value) {
-        Scrollable.ensureVisible(
-          currentContext,
-          curve: Curves.easeInOut,
-          duration: const Duration(milliseconds: 200),
-        );
-      });
-    }
-  }
-}
-
-class CategoriesTickList extends StatelessWidget {
-  final RecipeDetailVM recipe;
-
-  const CategoriesTickList({
-    super.key,
-    required this.recipe,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 12.0,
-      runSpacing: 12.0,
-      children: [
-        _buildCategoryContainer(
-          'Vegan',
-          recipe.isVegan,
-        ),
-        _buildCategoryContainer(
-          'Vegetarian',
-          recipe.isVegetarian,
-        ),
-        _buildCategoryContainer(
-          'Dairy Free',
-          recipe.isDairyFree,
-        ),
-        _buildCategoryContainer(
-          'Gluten Free',
-          recipe.isGlutenFree,
-        ),
-        _buildCategoryContainer(
-          'Ketogenic',
-          recipe.isKetogenic,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCategoryContainer(String category, bool isTrue) {
-    return Builder(
-      builder: (context) {
-        return Container(
-          padding: const EdgeInsets.all(4.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.0),
-            border: Border.all(
-              width: 1.0,
-              color: isTrue ? Palette.primaryGreen : Colors.red,
-            ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                height: 12.0,
-                width: 12.0,
-                isTrue ? 'assets/image/check.png' : 'assets/image/close.png',
-              ),
-              const SizedBox(width: 4.0),
-              Text(
-                category,
-                style: context.appTheme.bodySmall.semiBold,
-              )
-            ],
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _IconWithText extends StatelessWidget {
-  final IconData icon;
-  final String text;
-
-  const _IconWithText({
-    super.key,
-    required this.icon,
-    required this.text,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      spacing: 8.0,
-      children: [
-        Icon(
-          icon,
-          size: 24.0,
-          color: Palette.darkGray,
-        ),
-        Text(
-          text,
-          style: context.appTheme.bodySmall,
-        )
-      ],
-    );
-  }
-}
-
-class IngredientsList extends StatelessWidget {
-  final List<IngredientsVM> ingredients;
-
-  const IngredientsList({
-    super.key,
-    required this.ingredients,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: ingredients
-          .map(
-            (e) => ListTile(
-              trailing: Text(
-                '${e.measure.amount.toString()} ${e.measure.unitLong}',
-              ),
-              leading: Image.network(
-                height: 50.0,
-                width: 50.0,
-                'https://spoonacular.com/cdn/ingredients_100x100/${e.image}',
-              ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12.0),
-              title: Text(
-                e.original.toUpperCase(),
-                style: context.appTheme.bodySmall.semiBold,
-              ),
-            ),
-          )
-          .toList(),
     );
   }
 }
