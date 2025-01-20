@@ -21,6 +21,8 @@ class RecipeDetailVM with _$RecipeDetailVM {
     required List<IngredientsVM> ingredients,
     required int servingSize,
     required double healthScore,
+    required CaloricBreakDownVM caloricBreakDown,
+    required double calories,
   }) = _RecipeVM;
 }
 
@@ -31,6 +33,15 @@ class IngredientsVM with _$IngredientsVM {
     required String original,
     required MeasureVM measure,
   }) = _IngredientsVM;
+}
+
+@freezed
+class CaloricBreakDownVM with _$CaloricBreakDownVM {
+  const factory CaloricBreakDownVM({
+    required double percentProtein,
+    required double percentFat,
+    required double percentCarbs,
+  }) = _CaloricBreakDownVM;
 }
 
 @freezed

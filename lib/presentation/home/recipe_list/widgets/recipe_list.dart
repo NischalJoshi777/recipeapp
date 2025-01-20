@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -53,6 +54,7 @@ class _RecipeListWidget extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) => GestureDetector(
         onTap: () => context.push('/details', extra: recipeList[index].id),
         child: _RecipeItem(
+          id: recipeList[index].id,
           image: recipeList[index].image,
           title: recipeList[index].title,
           chef: recipeList[index].chef,
@@ -66,6 +68,7 @@ class _RecipeListWidget extends StatelessWidget {
 }
 
 class _RecipeItem extends StatelessWidget {
+  final int id;
   final String image;
   final String title;
   final String chef;
@@ -77,6 +80,7 @@ class _RecipeItem extends StatelessWidget {
     required this.title,
     required this.chef,
     required this.cookingMins,
+    required this.id,
   });
 
   @override
@@ -95,9 +99,13 @@ class _RecipeItem extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(12.0),
-                child: Image.network(
-                  image,
+                child: CachedNetworkImage(
+                  imageUrl: image,
                   fit: BoxFit.cover,
+                  placeholder: (_, __) => const ShimmerItem(
+                    width: 160.0,
+                    height: 120.0,
+                  ),
                 ),
               ),
               Positioned(

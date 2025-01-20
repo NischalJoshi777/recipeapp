@@ -32,6 +32,8 @@ mixin _$RecipeDetailVM {
   List<IngredientsVM> get ingredients => throw _privateConstructorUsedError;
   int get servingSize => throw _privateConstructorUsedError;
   double get healthScore => throw _privateConstructorUsedError;
+  CaloricBreakDownVM get caloricBreakDown => throw _privateConstructorUsedError;
+  double get calories => throw _privateConstructorUsedError;
 
   /// Create a copy of RecipeDetailVM
   /// with the given fields replaced by the non-null parameter values.
@@ -62,7 +64,11 @@ abstract class $RecipeDetailVMCopyWith<$Res> {
       List<String> dishTypes,
       List<IngredientsVM> ingredients,
       int servingSize,
-      double healthScore});
+      double healthScore,
+      CaloricBreakDownVM caloricBreakDown,
+      double calories});
+
+  $CaloricBreakDownVMCopyWith<$Res> get caloricBreakDown;
 }
 
 /// @nodoc
@@ -96,6 +102,8 @@ class _$RecipeDetailVMCopyWithImpl<$Res, $Val extends RecipeDetailVM>
     Object? ingredients = null,
     Object? servingSize = null,
     Object? healthScore = null,
+    Object? caloricBreakDown = null,
+    Object? calories = null,
   }) {
     return _then(_value.copyWith(
       isKetogenic: null == isKetogenic
@@ -162,7 +170,25 @@ class _$RecipeDetailVMCopyWithImpl<$Res, $Val extends RecipeDetailVM>
           ? _value.healthScore
           : healthScore // ignore: cast_nullable_to_non_nullable
               as double,
+      caloricBreakDown: null == caloricBreakDown
+          ? _value.caloricBreakDown
+          : caloricBreakDown // ignore: cast_nullable_to_non_nullable
+              as CaloricBreakDownVM,
+      calories: null == calories
+          ? _value.calories
+          : calories // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
+  }
+
+  /// Create a copy of RecipeDetailVM
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CaloricBreakDownVMCopyWith<$Res> get caloricBreakDown {
+    return $CaloricBreakDownVMCopyWith<$Res>(_value.caloricBreakDown, (value) {
+      return _then(_value.copyWith(caloricBreakDown: value) as $Val);
+    });
   }
 }
 
@@ -190,7 +216,12 @@ abstract class _$$RecipeVMImplCopyWith<$Res>
       List<String> dishTypes,
       List<IngredientsVM> ingredients,
       int servingSize,
-      double healthScore});
+      double healthScore,
+      CaloricBreakDownVM caloricBreakDown,
+      double calories});
+
+  @override
+  $CaloricBreakDownVMCopyWith<$Res> get caloricBreakDown;
 }
 
 /// @nodoc
@@ -222,6 +253,8 @@ class __$$RecipeVMImplCopyWithImpl<$Res>
     Object? ingredients = null,
     Object? servingSize = null,
     Object? healthScore = null,
+    Object? caloricBreakDown = null,
+    Object? calories = null,
   }) {
     return _then(_$RecipeVMImpl(
       isKetogenic: null == isKetogenic
@@ -288,6 +321,14 @@ class __$$RecipeVMImplCopyWithImpl<$Res>
           ? _value.healthScore
           : healthScore // ignore: cast_nullable_to_non_nullable
               as double,
+      caloricBreakDown: null == caloricBreakDown
+          ? _value.caloricBreakDown
+          : caloricBreakDown // ignore: cast_nullable_to_non_nullable
+              as CaloricBreakDownVM,
+      calories: null == calories
+          ? _value.calories
+          : calories // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -311,7 +352,9 @@ class _$RecipeVMImpl implements _RecipeVM {
       required final List<String> dishTypes,
       required final List<IngredientsVM> ingredients,
       required this.servingSize,
-      required this.healthScore})
+      required this.healthScore,
+      required this.caloricBreakDown,
+      required this.calories})
       : _dishTypes = dishTypes,
         _ingredients = ingredients;
 
@@ -359,10 +402,14 @@ class _$RecipeVMImpl implements _RecipeVM {
   final int servingSize;
   @override
   final double healthScore;
+  @override
+  final CaloricBreakDownVM caloricBreakDown;
+  @override
+  final double calories;
 
   @override
   String toString() {
-    return 'RecipeDetailVM(isKetogenic: $isKetogenic, instructions: $instructions, summary: $summary, id: $id, title: $title, image: $image, cookingMinutes: $cookingMinutes, isVegan: $isVegan, isVegetarian: $isVegetarian, isDairyFree: $isDairyFree, isGlutenFree: $isGlutenFree, aggregatedLikes: $aggregatedLikes, dishTypes: $dishTypes, ingredients: $ingredients, servingSize: $servingSize, healthScore: $healthScore)';
+    return 'RecipeDetailVM(isKetogenic: $isKetogenic, instructions: $instructions, summary: $summary, id: $id, title: $title, image: $image, cookingMinutes: $cookingMinutes, isVegan: $isVegan, isVegetarian: $isVegetarian, isDairyFree: $isDairyFree, isGlutenFree: $isGlutenFree, aggregatedLikes: $aggregatedLikes, dishTypes: $dishTypes, ingredients: $ingredients, servingSize: $servingSize, healthScore: $healthScore, caloricBreakDown: $caloricBreakDown, calories: $calories)';
   }
 
   @override
@@ -396,7 +443,11 @@ class _$RecipeVMImpl implements _RecipeVM {
             (identical(other.servingSize, servingSize) ||
                 other.servingSize == servingSize) &&
             (identical(other.healthScore, healthScore) ||
-                other.healthScore == healthScore));
+                other.healthScore == healthScore) &&
+            (identical(other.caloricBreakDown, caloricBreakDown) ||
+                other.caloricBreakDown == caloricBreakDown) &&
+            (identical(other.calories, calories) ||
+                other.calories == calories));
   }
 
   @override
@@ -417,7 +468,9 @@ class _$RecipeVMImpl implements _RecipeVM {
       const DeepCollectionEquality().hash(_dishTypes),
       const DeepCollectionEquality().hash(_ingredients),
       servingSize,
-      healthScore);
+      healthScore,
+      caloricBreakDown,
+      calories);
 
   /// Create a copy of RecipeDetailVM
   /// with the given fields replaced by the non-null parameter values.
@@ -445,7 +498,9 @@ abstract class _RecipeVM implements RecipeDetailVM {
       required final List<String> dishTypes,
       required final List<IngredientsVM> ingredients,
       required final int servingSize,
-      required final double healthScore}) = _$RecipeVMImpl;
+      required final double healthScore,
+      required final CaloricBreakDownVM caloricBreakDown,
+      required final double calories}) = _$RecipeVMImpl;
 
   @override
   bool get isKetogenic;
@@ -479,6 +534,10 @@ abstract class _RecipeVM implements RecipeDetailVM {
   int get servingSize;
   @override
   double get healthScore;
+  @override
+  CaloricBreakDownVM get caloricBreakDown;
+  @override
+  double get calories;
 
   /// Create a copy of RecipeDetailVM
   /// with the given fields replaced by the non-null parameter values.
@@ -665,6 +724,177 @@ abstract class _IngredientsVM implements IngredientsVM {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$IngredientsVMImplCopyWith<_$IngredientsVMImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$CaloricBreakDownVM {
+  double get percentProtein => throw _privateConstructorUsedError;
+  double get percentFat => throw _privateConstructorUsedError;
+  double get percentCarbs => throw _privateConstructorUsedError;
+
+  /// Create a copy of CaloricBreakDownVM
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $CaloricBreakDownVMCopyWith<CaloricBreakDownVM> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CaloricBreakDownVMCopyWith<$Res> {
+  factory $CaloricBreakDownVMCopyWith(
+          CaloricBreakDownVM value, $Res Function(CaloricBreakDownVM) then) =
+      _$CaloricBreakDownVMCopyWithImpl<$Res, CaloricBreakDownVM>;
+  @useResult
+  $Res call({double percentProtein, double percentFat, double percentCarbs});
+}
+
+/// @nodoc
+class _$CaloricBreakDownVMCopyWithImpl<$Res, $Val extends CaloricBreakDownVM>
+    implements $CaloricBreakDownVMCopyWith<$Res> {
+  _$CaloricBreakDownVMCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of CaloricBreakDownVM
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? percentProtein = null,
+    Object? percentFat = null,
+    Object? percentCarbs = null,
+  }) {
+    return _then(_value.copyWith(
+      percentProtein: null == percentProtein
+          ? _value.percentProtein
+          : percentProtein // ignore: cast_nullable_to_non_nullable
+              as double,
+      percentFat: null == percentFat
+          ? _value.percentFat
+          : percentFat // ignore: cast_nullable_to_non_nullable
+              as double,
+      percentCarbs: null == percentCarbs
+          ? _value.percentCarbs
+          : percentCarbs // ignore: cast_nullable_to_non_nullable
+              as double,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$CaloricBreakDownVMImplCopyWith<$Res>
+    implements $CaloricBreakDownVMCopyWith<$Res> {
+  factory _$$CaloricBreakDownVMImplCopyWith(_$CaloricBreakDownVMImpl value,
+          $Res Function(_$CaloricBreakDownVMImpl) then) =
+      __$$CaloricBreakDownVMImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({double percentProtein, double percentFat, double percentCarbs});
+}
+
+/// @nodoc
+class __$$CaloricBreakDownVMImplCopyWithImpl<$Res>
+    extends _$CaloricBreakDownVMCopyWithImpl<$Res, _$CaloricBreakDownVMImpl>
+    implements _$$CaloricBreakDownVMImplCopyWith<$Res> {
+  __$$CaloricBreakDownVMImplCopyWithImpl(_$CaloricBreakDownVMImpl _value,
+      $Res Function(_$CaloricBreakDownVMImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CaloricBreakDownVM
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? percentProtein = null,
+    Object? percentFat = null,
+    Object? percentCarbs = null,
+  }) {
+    return _then(_$CaloricBreakDownVMImpl(
+      percentProtein: null == percentProtein
+          ? _value.percentProtein
+          : percentProtein // ignore: cast_nullable_to_non_nullable
+              as double,
+      percentFat: null == percentFat
+          ? _value.percentFat
+          : percentFat // ignore: cast_nullable_to_non_nullable
+              as double,
+      percentCarbs: null == percentCarbs
+          ? _value.percentCarbs
+          : percentCarbs // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CaloricBreakDownVMImpl implements _CaloricBreakDownVM {
+  const _$CaloricBreakDownVMImpl(
+      {required this.percentProtein,
+      required this.percentFat,
+      required this.percentCarbs});
+
+  @override
+  final double percentProtein;
+  @override
+  final double percentFat;
+  @override
+  final double percentCarbs;
+
+  @override
+  String toString() {
+    return 'CaloricBreakDownVM(percentProtein: $percentProtein, percentFat: $percentFat, percentCarbs: $percentCarbs)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CaloricBreakDownVMImpl &&
+            (identical(other.percentProtein, percentProtein) ||
+                other.percentProtein == percentProtein) &&
+            (identical(other.percentFat, percentFat) ||
+                other.percentFat == percentFat) &&
+            (identical(other.percentCarbs, percentCarbs) ||
+                other.percentCarbs == percentCarbs));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, percentProtein, percentFat, percentCarbs);
+
+  /// Create a copy of CaloricBreakDownVM
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CaloricBreakDownVMImplCopyWith<_$CaloricBreakDownVMImpl> get copyWith =>
+      __$$CaloricBreakDownVMImplCopyWithImpl<_$CaloricBreakDownVMImpl>(
+          this, _$identity);
+}
+
+abstract class _CaloricBreakDownVM implements CaloricBreakDownVM {
+  const factory _CaloricBreakDownVM(
+      {required final double percentProtein,
+      required final double percentFat,
+      required final double percentCarbs}) = _$CaloricBreakDownVMImpl;
+
+  @override
+  double get percentProtein;
+  @override
+  double get percentFat;
+  @override
+  double get percentCarbs;
+
+  /// Create a copy of CaloricBreakDownVM
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CaloricBreakDownVMImplCopyWith<_$CaloricBreakDownVMImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

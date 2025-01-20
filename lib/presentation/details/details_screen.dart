@@ -7,6 +7,7 @@ import 'package:myrecipeapp/data/services/recipe_service.dart';
 import 'package:myrecipeapp/di.dart';
 import 'package:myrecipeapp/presentation/details/cubit/detail_cubit.dart';
 import 'package:myrecipeapp/presentation/details/view_model/recipe_detail_view_model.dart';
+import 'package:myrecipeapp/presentation/details/widget/macros_chart.dart';
 import 'package:myrecipeapp/presentation/home/widget/header_text.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -50,59 +51,11 @@ class _DetailsLoaded extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          _FoodImage(img: recipe.image),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.40,
-            bottom: 0,
-            width: MediaQuery.of(context).size.width,
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(24.0)),
-              child: Container(
-                color: Palette.white,
-                padding: const EdgeInsets.only(
-                  top: 24.0,
-                  left: 20.0,
-                  right: 20.0,
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      HeaderText(
-                        text:
-                            "${recipe.title} (${recipe.servingSize} servings)",
-                      ),
-                      const SizedBox(height: 12.0),
-                      _CookingTimeAndLikes(
-                        cookingMinutes: recipe.cookingMinutes,
-                        aggregatedLikes: recipe.aggregatedLikes,
-                        healthScore: recipe.healthScore,
-                      ),
-                      const SizedBox(height: 12.0),
-                      CategoriesTickList(recipe: recipe),
-                      const SizedBox(height: 8.0),
-                      ExpandableHeader(
-                        title: 'Instructions',
-                        content: [
-                          Text(
-                            recipe.instructions,
-                            style: context.appTheme.bodyRegular,
-                          ),
-                        ],
-                      ),
-                      ExpandableHeader(
-                        title: 'Ingredients',
-                        content: [
-                          IngredientsList(ingredients: recipe.ingredients),
-                          const SizedBox(height: 8.0),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+          _FoodImage(
+            img: recipe.image,
+            id: recipe.id,
           ),
+          _DetailBody(recipe: recipe),
         ],
       ),
     );
@@ -111,9 +64,11 @@ class _DetailsLoaded extends StatelessWidget {
 
 class _FoodImage extends StatelessWidget {
   final String img;
+  final int id;
 
   const _FoodImage({
     super.key,
+    required this.id,
     required this.img,
   });
 
@@ -125,12 +80,87 @@ class _FoodImage extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height *
               .44, // Added height constraint
-          child: Image.network(
-            img,
-            fit: BoxFit.fitHeight, // Prevents overflow
+          child: Hero(
+            tag: id,
+            child: Image.network(
+              img,
+              fit: BoxFit.fitHeight, // Prevents overflow
+            ),
           ),
         ),
       ],
+    );
+  }
+}
+
+class _DetailBody extends StatelessWidget {
+  final RecipeDetailVM recipe;
+
+  const _DetailBody({
+    super.key,
+    required this.recipe,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: MediaQuery.of(context).size.height * 0.40,
+      bottom: 0,
+      width: MediaQuery.of(context).size.width,
+      child: ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(24.0)),
+        child: Container(
+          color: Palette.white,
+          padding: const EdgeInsets.only(
+            top: 24.0,
+            left: 20.0,
+            right: 20.0,
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                HeaderText(
+                  text: "${recipe.title} (${recipe.servingSize} servings)",
+                ),
+                const SizedBox(height: 12.0),
+                _CookingTimeAndLikes(
+                  cookingMinutes: recipe.cookingMinutes,
+                  aggregatedLikes: recipe.aggregatedLikes,
+                  healthScore: recipe.healthScore,
+                ),
+                const SizedBox(height: 12.0),
+                CategoriesTickList(recipe: recipe),
+                const SizedBox(height: 12.0),
+                const HeaderText(text: 'Calorie Count'),
+                const SizedBox(height: 12.0),
+                MacrosChart(
+                  calorieCount: recipe.calories,
+                  proteinPercentage: recipe.caloricBreakDown.percentProtein,
+                  carbsPercentage: recipe.caloricBreakDown.percentCarbs,
+                  fatsPercentage: recipe.caloricBreakDown.percentFat,
+                ),
+                ExpandableHeader(
+                  title: 'Instructions',
+                  content: [
+                    Text(
+                      recipe.instructions,
+                      style: context.appTheme.bodyRegular,
+                    ),
+                  ],
+                ),
+                ExpandableHeader(
+                  title: 'Ingredients',
+                  content: [
+                    IngredientsList(ingredients: recipe.ingredients),
+                  ],
+                ),
+                const SizedBox(height: 20.0),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -181,7 +211,14 @@ class ExpandableHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey expansionTileKey = GlobalKey();
     return ExpansionTile(
+      key: expansionTileKey,
+      onExpansionChanged: (value) {
+        if (value) {
+          _scrollToItem(expansionTileKey);
+        }
+      },
       iconColor: Palette.primaryGreen,
       collapsedIconColor: Palette.darkGray,
       childrenPadding: EdgeInsets.zero,
@@ -195,6 +232,19 @@ class ExpandableHeader extends StatelessWidget {
       title: HeaderText(text: title),
       children: content,
     );
+  }
+
+  void _scrollToItem(GlobalKey key) {
+    final currentContext = key.currentContext;
+    if (currentContext != null && currentContext.mounted) {
+      Future.delayed(const Duration(milliseconds: 200)).then((value) {
+        Scrollable.ensureVisible(
+          currentContext,
+          curve: Curves.easeInOut,
+          duration: const Duration(milliseconds: 200),
+        );
+      });
+    }
   }
 }
 

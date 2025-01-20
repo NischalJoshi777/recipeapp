@@ -23,7 +23,8 @@ class DetailCubit extends Cubit<DetailState> {
             instructions: response.instructions,
             summary: response.summary,
             aggregatedLikes: response.aggregateLikes,
-            cookingMinutes: response.preparationMinutes,
+            cookingMinutes:
+                response.preparationMinutes + response.cookingMinutes,
             isVegetarian: response.vegetarian,
             isKetogenic: response.ketogenic,
             servingSize: response.servings ?? 0,
@@ -35,6 +36,12 @@ class DetailCubit extends Cubit<DetailState> {
             isGlutenFree: response.glutenFree,
             dishTypes: response.dishTypes,
             healthScore: response.healthScore,
+            caloricBreakDown: CaloricBreakDownVM(
+              percentProtein:
+                  response.nutrition.caloricBreakdown.percentProtein,
+              percentFat: response.nutrition.caloricBreakdown.percentFat,
+              percentCarbs: response.nutrition.caloricBreakdown.percentCarbs,
+            ),
             ingredients: response.extendedIngredients
                 .map(
                   (e) => IngredientsVM(
@@ -47,6 +54,7 @@ class DetailCubit extends Cubit<DetailState> {
                   ),
                 )
                 .toList(),
+            calories: response.nutrition.nutrients[0].amount,
           ),
         ),
       );
