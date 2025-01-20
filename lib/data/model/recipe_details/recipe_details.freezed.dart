@@ -38,6 +38,7 @@ mixin _$RecipeDetails {
   int get servings => throw _privateConstructorUsedError;
   List<Ingredients> get extendedIngredients =>
       throw _privateConstructorUsedError;
+  Nutrition get nutrition => throw _privateConstructorUsedError;
 
   /// Serializes this RecipeDetails to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -72,7 +73,10 @@ abstract class $RecipeDetailsCopyWith<$Res> {
       String instructions,
       double healthScore,
       int servings,
-      List<Ingredients> extendedIngredients});
+      List<Ingredients> extendedIngredients,
+      Nutrition nutrition});
+
+  $NutritionCopyWith<$Res> get nutrition;
 }
 
 /// @nodoc
@@ -107,6 +111,7 @@ class _$RecipeDetailsCopyWithImpl<$Res, $Val extends RecipeDetails>
     Object? healthScore = null,
     Object? servings = null,
     Object? extendedIngredients = null,
+    Object? nutrition = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -177,7 +182,21 @@ class _$RecipeDetailsCopyWithImpl<$Res, $Val extends RecipeDetails>
           ? _value.extendedIngredients
           : extendedIngredients // ignore: cast_nullable_to_non_nullable
               as List<Ingredients>,
+      nutrition: null == nutrition
+          ? _value.nutrition
+          : nutrition // ignore: cast_nullable_to_non_nullable
+              as Nutrition,
     ) as $Val);
+  }
+
+  /// Create a copy of RecipeDetails
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $NutritionCopyWith<$Res> get nutrition {
+    return $NutritionCopyWith<$Res>(_value.nutrition, (value) {
+      return _then(_value.copyWith(nutrition: value) as $Val);
+    });
   }
 }
 
@@ -206,7 +225,11 @@ abstract class _$$RecipeDetailsImplCopyWith<$Res>
       String instructions,
       double healthScore,
       int servings,
-      List<Ingredients> extendedIngredients});
+      List<Ingredients> extendedIngredients,
+      Nutrition nutrition});
+
+  @override
+  $NutritionCopyWith<$Res> get nutrition;
 }
 
 /// @nodoc
@@ -239,6 +262,7 @@ class __$$RecipeDetailsImplCopyWithImpl<$Res>
     Object? healthScore = null,
     Object? servings = null,
     Object? extendedIngredients = null,
+    Object? nutrition = null,
   }) {
     return _then(_$RecipeDetailsImpl(
       id: null == id
@@ -309,6 +333,10 @@ class __$$RecipeDetailsImplCopyWithImpl<$Res>
           ? _value._extendedIngredients
           : extendedIngredients // ignore: cast_nullable_to_non_nullable
               as List<Ingredients>,
+      nutrition: null == nutrition
+          ? _value.nutrition
+          : nutrition // ignore: cast_nullable_to_non_nullable
+              as Nutrition,
     ));
   }
 }
@@ -333,7 +361,8 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
       required this.instructions,
       this.healthScore = 0.0,
       required this.servings,
-      final List<Ingredients> extendedIngredients = const []})
+      final List<Ingredients> extendedIngredients = const [],
+      required this.nutrition})
       : _dishTypes = dishTypes,
         _extendedIngredients = extendedIngredients;
 
@@ -401,8 +430,11 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
   }
 
   @override
+  final Nutrition nutrition;
+
+  @override
   String toString() {
-    return 'RecipeDetails(id: $id, vegan: $vegan, vegetarian: $vegetarian, dairyFree: $dairyFree, glutenFree: $glutenFree, ketogenic: $ketogenic, preparationMinutes: $preparationMinutes, cookingMinutes: $cookingMinutes, aggregateLikes: $aggregateLikes, dishTypes: $dishTypes, summary: $summary, title: $title, image: $image, instructions: $instructions, healthScore: $healthScore, servings: $servings, extendedIngredients: $extendedIngredients)';
+    return 'RecipeDetails(id: $id, vegan: $vegan, vegetarian: $vegetarian, dairyFree: $dairyFree, glutenFree: $glutenFree, ketogenic: $ketogenic, preparationMinutes: $preparationMinutes, cookingMinutes: $cookingMinutes, aggregateLikes: $aggregateLikes, dishTypes: $dishTypes, summary: $summary, title: $title, image: $image, instructions: $instructions, healthScore: $healthScore, servings: $servings, extendedIngredients: $extendedIngredients, nutrition: $nutrition)';
   }
 
   @override
@@ -438,7 +470,9 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
             (identical(other.servings, servings) ||
                 other.servings == servings) &&
             const DeepCollectionEquality()
-                .equals(other._extendedIngredients, _extendedIngredients));
+                .equals(other._extendedIngredients, _extendedIngredients) &&
+            (identical(other.nutrition, nutrition) ||
+                other.nutrition == nutrition));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -461,7 +495,8 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
       instructions,
       healthScore,
       servings,
-      const DeepCollectionEquality().hash(_extendedIngredients));
+      const DeepCollectionEquality().hash(_extendedIngredients),
+      nutrition);
 
   /// Create a copy of RecipeDetails
   /// with the given fields replaced by the non-null parameter values.
@@ -497,7 +532,8 @@ abstract class _RecipeDetails implements RecipeDetails {
       required final String instructions,
       final double healthScore,
       required final int servings,
-      final List<Ingredients> extendedIngredients}) = _$RecipeDetailsImpl;
+      final List<Ingredients> extendedIngredients,
+      required final Nutrition nutrition}) = _$RecipeDetailsImpl;
 
   factory _RecipeDetails.fromJson(Map<String, dynamic> json) =
       _$RecipeDetailsImpl.fromJson;
@@ -536,12 +572,583 @@ abstract class _RecipeDetails implements RecipeDetails {
   int get servings;
   @override
   List<Ingredients> get extendedIngredients;
+  @override
+  Nutrition get nutrition;
 
   /// Create a copy of RecipeDetails
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RecipeDetailsImplCopyWith<_$RecipeDetailsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Nutrition _$NutritionFromJson(Map<String, dynamic> json) {
+  return _Nutrition.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Nutrition {
+  CaloricBreakDown get caloricBreakdown => throw _privateConstructorUsedError;
+  List<Nutrients> get nutrients => throw _privateConstructorUsedError;
+
+  /// Serializes this Nutrition to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of Nutrition
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $NutritionCopyWith<Nutrition> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NutritionCopyWith<$Res> {
+  factory $NutritionCopyWith(Nutrition value, $Res Function(Nutrition) then) =
+      _$NutritionCopyWithImpl<$Res, Nutrition>;
+  @useResult
+  $Res call({CaloricBreakDown caloricBreakdown, List<Nutrients> nutrients});
+
+  $CaloricBreakDownCopyWith<$Res> get caloricBreakdown;
+}
+
+/// @nodoc
+class _$NutritionCopyWithImpl<$Res, $Val extends Nutrition>
+    implements $NutritionCopyWith<$Res> {
+  _$NutritionCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of Nutrition
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? caloricBreakdown = null,
+    Object? nutrients = null,
+  }) {
+    return _then(_value.copyWith(
+      caloricBreakdown: null == caloricBreakdown
+          ? _value.caloricBreakdown
+          : caloricBreakdown // ignore: cast_nullable_to_non_nullable
+              as CaloricBreakDown,
+      nutrients: null == nutrients
+          ? _value.nutrients
+          : nutrients // ignore: cast_nullable_to_non_nullable
+              as List<Nutrients>,
+    ) as $Val);
+  }
+
+  /// Create a copy of Nutrition
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $CaloricBreakDownCopyWith<$Res> get caloricBreakdown {
+    return $CaloricBreakDownCopyWith<$Res>(_value.caloricBreakdown, (value) {
+      return _then(_value.copyWith(caloricBreakdown: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$NutritionImplCopyWith<$Res>
+    implements $NutritionCopyWith<$Res> {
+  factory _$$NutritionImplCopyWith(
+          _$NutritionImpl value, $Res Function(_$NutritionImpl) then) =
+      __$$NutritionImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({CaloricBreakDown caloricBreakdown, List<Nutrients> nutrients});
+
+  @override
+  $CaloricBreakDownCopyWith<$Res> get caloricBreakdown;
+}
+
+/// @nodoc
+class __$$NutritionImplCopyWithImpl<$Res>
+    extends _$NutritionCopyWithImpl<$Res, _$NutritionImpl>
+    implements _$$NutritionImplCopyWith<$Res> {
+  __$$NutritionImplCopyWithImpl(
+      _$NutritionImpl _value, $Res Function(_$NutritionImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Nutrition
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? caloricBreakdown = null,
+    Object? nutrients = null,
+  }) {
+    return _then(_$NutritionImpl(
+      caloricBreakdown: null == caloricBreakdown
+          ? _value.caloricBreakdown
+          : caloricBreakdown // ignore: cast_nullable_to_non_nullable
+              as CaloricBreakDown,
+      nutrients: null == nutrients
+          ? _value._nutrients
+          : nutrients // ignore: cast_nullable_to_non_nullable
+              as List<Nutrients>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$NutritionImpl implements _Nutrition {
+  const _$NutritionImpl(
+      {required this.caloricBreakdown,
+      final List<Nutrients> nutrients = const []})
+      : _nutrients = nutrients;
+
+  factory _$NutritionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NutritionImplFromJson(json);
+
+  @override
+  final CaloricBreakDown caloricBreakdown;
+  final List<Nutrients> _nutrients;
+  @override
+  @JsonKey()
+  List<Nutrients> get nutrients {
+    if (_nutrients is EqualUnmodifiableListView) return _nutrients;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_nutrients);
+  }
+
+  @override
+  String toString() {
+    return 'Nutrition(caloricBreakdown: $caloricBreakdown, nutrients: $nutrients)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NutritionImpl &&
+            (identical(other.caloricBreakdown, caloricBreakdown) ||
+                other.caloricBreakdown == caloricBreakdown) &&
+            const DeepCollectionEquality()
+                .equals(other._nutrients, _nutrients));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, caloricBreakdown,
+      const DeepCollectionEquality().hash(_nutrients));
+
+  /// Create a copy of Nutrition
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NutritionImplCopyWith<_$NutritionImpl> get copyWith =>
+      __$$NutritionImplCopyWithImpl<_$NutritionImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$NutritionImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Nutrition implements Nutrition {
+  const factory _Nutrition(
+      {required final CaloricBreakDown caloricBreakdown,
+      final List<Nutrients> nutrients}) = _$NutritionImpl;
+
+  factory _Nutrition.fromJson(Map<String, dynamic> json) =
+      _$NutritionImpl.fromJson;
+
+  @override
+  CaloricBreakDown get caloricBreakdown;
+  @override
+  List<Nutrients> get nutrients;
+
+  /// Create a copy of Nutrition
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$NutritionImplCopyWith<_$NutritionImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Nutrients _$NutrientsFromJson(Map<String, dynamic> json) {
+  return _Nutrients.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Nutrients {
+  String get name => throw _privateConstructorUsedError;
+  double get amount => throw _privateConstructorUsedError;
+  String get unit => throw _privateConstructorUsedError;
+
+  /// Serializes this Nutrients to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of Nutrients
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $NutrientsCopyWith<Nutrients> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NutrientsCopyWith<$Res> {
+  factory $NutrientsCopyWith(Nutrients value, $Res Function(Nutrients) then) =
+      _$NutrientsCopyWithImpl<$Res, Nutrients>;
+  @useResult
+  $Res call({String name, double amount, String unit});
+}
+
+/// @nodoc
+class _$NutrientsCopyWithImpl<$Res, $Val extends Nutrients>
+    implements $NutrientsCopyWith<$Res> {
+  _$NutrientsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of Nutrients
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+    Object? amount = null,
+    Object? unit = null,
+  }) {
+    return _then(_value.copyWith(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$NutrientsImplCopyWith<$Res>
+    implements $NutrientsCopyWith<$Res> {
+  factory _$$NutrientsImplCopyWith(
+          _$NutrientsImpl value, $Res Function(_$NutrientsImpl) then) =
+      __$$NutrientsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String name, double amount, String unit});
+}
+
+/// @nodoc
+class __$$NutrientsImplCopyWithImpl<$Res>
+    extends _$NutrientsCopyWithImpl<$Res, _$NutrientsImpl>
+    implements _$$NutrientsImplCopyWith<$Res> {
+  __$$NutrientsImplCopyWithImpl(
+      _$NutrientsImpl _value, $Res Function(_$NutrientsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of Nutrients
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+    Object? amount = null,
+    Object? unit = null,
+  }) {
+    return _then(_$NutrientsImpl(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
+              as double,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$NutrientsImpl implements _Nutrients {
+  const _$NutrientsImpl(
+      {required this.name, required this.amount, required this.unit});
+
+  factory _$NutrientsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NutrientsImplFromJson(json);
+
+  @override
+  final String name;
+  @override
+  final double amount;
+  @override
+  final String unit;
+
+  @override
+  String toString() {
+    return 'Nutrients(name: $name, amount: $amount, unit: $unit)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NutrientsImpl &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.unit, unit) || other.unit == unit));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, name, amount, unit);
+
+  /// Create a copy of Nutrients
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NutrientsImplCopyWith<_$NutrientsImpl> get copyWith =>
+      __$$NutrientsImplCopyWithImpl<_$NutrientsImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$NutrientsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Nutrients implements Nutrients {
+  const factory _Nutrients(
+      {required final String name,
+      required final double amount,
+      required final String unit}) = _$NutrientsImpl;
+
+  factory _Nutrients.fromJson(Map<String, dynamic> json) =
+      _$NutrientsImpl.fromJson;
+
+  @override
+  String get name;
+  @override
+  double get amount;
+  @override
+  String get unit;
+
+  /// Create a copy of Nutrients
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$NutrientsImplCopyWith<_$NutrientsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+CaloricBreakDown _$CaloricBreakDownFromJson(Map<String, dynamic> json) {
+  return _CaloricBreakDown.fromJson(json);
+}
+
+/// @nodoc
+mixin _$CaloricBreakDown {
+  double get percentProtein => throw _privateConstructorUsedError;
+  double get percentFat => throw _privateConstructorUsedError;
+  double get percentCarbs => throw _privateConstructorUsedError;
+
+  /// Serializes this CaloricBreakDown to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of CaloricBreakDown
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $CaloricBreakDownCopyWith<CaloricBreakDown> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CaloricBreakDownCopyWith<$Res> {
+  factory $CaloricBreakDownCopyWith(
+          CaloricBreakDown value, $Res Function(CaloricBreakDown) then) =
+      _$CaloricBreakDownCopyWithImpl<$Res, CaloricBreakDown>;
+  @useResult
+  $Res call({double percentProtein, double percentFat, double percentCarbs});
+}
+
+/// @nodoc
+class _$CaloricBreakDownCopyWithImpl<$Res, $Val extends CaloricBreakDown>
+    implements $CaloricBreakDownCopyWith<$Res> {
+  _$CaloricBreakDownCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of CaloricBreakDown
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? percentProtein = null,
+    Object? percentFat = null,
+    Object? percentCarbs = null,
+  }) {
+    return _then(_value.copyWith(
+      percentProtein: null == percentProtein
+          ? _value.percentProtein
+          : percentProtein // ignore: cast_nullable_to_non_nullable
+              as double,
+      percentFat: null == percentFat
+          ? _value.percentFat
+          : percentFat // ignore: cast_nullable_to_non_nullable
+              as double,
+      percentCarbs: null == percentCarbs
+          ? _value.percentCarbs
+          : percentCarbs // ignore: cast_nullable_to_non_nullable
+              as double,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$CaloricBreakDownImplCopyWith<$Res>
+    implements $CaloricBreakDownCopyWith<$Res> {
+  factory _$$CaloricBreakDownImplCopyWith(_$CaloricBreakDownImpl value,
+          $Res Function(_$CaloricBreakDownImpl) then) =
+      __$$CaloricBreakDownImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({double percentProtein, double percentFat, double percentCarbs});
+}
+
+/// @nodoc
+class __$$CaloricBreakDownImplCopyWithImpl<$Res>
+    extends _$CaloricBreakDownCopyWithImpl<$Res, _$CaloricBreakDownImpl>
+    implements _$$CaloricBreakDownImplCopyWith<$Res> {
+  __$$CaloricBreakDownImplCopyWithImpl(_$CaloricBreakDownImpl _value,
+      $Res Function(_$CaloricBreakDownImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CaloricBreakDown
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? percentProtein = null,
+    Object? percentFat = null,
+    Object? percentCarbs = null,
+  }) {
+    return _then(_$CaloricBreakDownImpl(
+      percentProtein: null == percentProtein
+          ? _value.percentProtein
+          : percentProtein // ignore: cast_nullable_to_non_nullable
+              as double,
+      percentFat: null == percentFat
+          ? _value.percentFat
+          : percentFat // ignore: cast_nullable_to_non_nullable
+              as double,
+      percentCarbs: null == percentCarbs
+          ? _value.percentCarbs
+          : percentCarbs // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$CaloricBreakDownImpl implements _CaloricBreakDown {
+  const _$CaloricBreakDownImpl(
+      {required this.percentProtein,
+      required this.percentFat,
+      required this.percentCarbs});
+
+  factory _$CaloricBreakDownImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CaloricBreakDownImplFromJson(json);
+
+  @override
+  final double percentProtein;
+  @override
+  final double percentFat;
+  @override
+  final double percentCarbs;
+
+  @override
+  String toString() {
+    return 'CaloricBreakDown(percentProtein: $percentProtein, percentFat: $percentFat, percentCarbs: $percentCarbs)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CaloricBreakDownImpl &&
+            (identical(other.percentProtein, percentProtein) ||
+                other.percentProtein == percentProtein) &&
+            (identical(other.percentFat, percentFat) ||
+                other.percentFat == percentFat) &&
+            (identical(other.percentCarbs, percentCarbs) ||
+                other.percentCarbs == percentCarbs));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, percentProtein, percentFat, percentCarbs);
+
+  /// Create a copy of CaloricBreakDown
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CaloricBreakDownImplCopyWith<_$CaloricBreakDownImpl> get copyWith =>
+      __$$CaloricBreakDownImplCopyWithImpl<_$CaloricBreakDownImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CaloricBreakDownImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _CaloricBreakDown implements CaloricBreakDown {
+  const factory _CaloricBreakDown(
+      {required final double percentProtein,
+      required final double percentFat,
+      required final double percentCarbs}) = _$CaloricBreakDownImpl;
+
+  factory _CaloricBreakDown.fromJson(Map<String, dynamic> json) =
+      _$CaloricBreakDownImpl.fromJson;
+
+  @override
+  double get percentProtein;
+  @override
+  double get percentFat;
+  @override
+  double get percentCarbs;
+
+  /// Create a copy of CaloricBreakDown
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CaloricBreakDownImplCopyWith<_$CaloricBreakDownImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

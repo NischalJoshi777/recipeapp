@@ -23,10 +23,46 @@ class RecipeDetails with _$RecipeDetails {
     @Default(0.0) double healthScore,
     required int servings,
     @Default([]) List<Ingredients> extendedIngredients,
+    required Nutrition nutrition,
   }) = _RecipeDetails;
 
   factory RecipeDetails.fromJson(Map<String, dynamic> json) =>
       _$RecipeDetailsFromJson(json);
+}
+
+@freezed
+class Nutrition with _$Nutrition {
+  const factory Nutrition({
+    required CaloricBreakDown caloricBreakdown,
+    @Default([]) List<Nutrients> nutrients,
+  }) = _Nutrition;
+
+  factory Nutrition.fromJson(Map<String, dynamic> json) =>
+      _$NutritionFromJson(json);
+}
+
+@freezed
+class Nutrients with _$Nutrients {
+  const factory Nutrients({
+    required String name,
+    required double amount,
+    required String unit,
+  }) = _Nutrients;
+
+  factory Nutrients.fromJson(Map<String, dynamic> json) =>
+      _$NutrientsFromJson(json);
+}
+
+@freezed
+class CaloricBreakDown with _$CaloricBreakDown {
+  const factory CaloricBreakDown({
+    required double percentProtein,
+    required double percentFat,
+    required double percentCarbs,
+  }) = _CaloricBreakDown;
+
+  factory CaloricBreakDown.fromJson(Map<String, dynamic> json) =>
+      _$CaloricBreakDownFromJson(json);
 }
 
 @freezed
@@ -36,6 +72,7 @@ class Ingredients with _$Ingredients {
     @Default('N/A') String name,
     required Measure measures, // Made nullable to handle missing cases
   }) = _Ingredients;
+
   factory Ingredients.fromJson(Map<String, dynamic> json) =>
       _$IngredientsFromJson(json);
 }
@@ -46,6 +83,7 @@ class Measure with _$Measure {
     required UnitMeasure metric,
     required UnitMeasure us,
   }) = _Measure;
+
   factory Measure.fromJson(Map<String, dynamic> json) =>
       _$MeasureFromJson(json);
 }
@@ -57,6 +95,7 @@ class UnitMeasure with _$UnitMeasure {
     required String unitShort,
     @Default('N/A') String unitLong, // Added missing field
   }) = _UnitMeasure;
+
   factory UnitMeasure.fromJson(Map<String, dynamic> json) =>
       _$UnitMeasureFromJson(json);
 }

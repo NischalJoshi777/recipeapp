@@ -31,6 +31,7 @@ _$RecipeDetailsImpl _$$RecipeDetailsImplFromJson(Map<String, dynamic> json) =>
               ?.map((e) => Ingredients.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      nutrition: Nutrition.fromJson(json['nutrition'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$RecipeDetailsImplToJson(_$RecipeDetailsImpl instance) =>
@@ -52,6 +53,53 @@ Map<String, dynamic> _$$RecipeDetailsImplToJson(_$RecipeDetailsImpl instance) =>
       'healthScore': instance.healthScore,
       'servings': instance.servings,
       'extendedIngredients': instance.extendedIngredients,
+      'nutrition': instance.nutrition,
+    };
+
+_$NutritionImpl _$$NutritionImplFromJson(Map<String, dynamic> json) =>
+    _$NutritionImpl(
+      caloricBreakdown: CaloricBreakDown.fromJson(
+          json['caloricBreakdown'] as Map<String, dynamic>),
+      nutrients: (json['nutrients'] as List<dynamic>?)
+              ?.map((e) => Nutrients.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$$NutritionImplToJson(_$NutritionImpl instance) =>
+    <String, dynamic>{
+      'caloricBreakdown': instance.caloricBreakdown,
+      'nutrients': instance.nutrients,
+    };
+
+_$NutrientsImpl _$$NutrientsImplFromJson(Map<String, dynamic> json) =>
+    _$NutrientsImpl(
+      name: json['name'] as String,
+      amount: (json['amount'] as num).toDouble(),
+      unit: json['unit'] as String,
+    );
+
+Map<String, dynamic> _$$NutrientsImplToJson(_$NutrientsImpl instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'amount': instance.amount,
+      'unit': instance.unit,
+    };
+
+_$CaloricBreakDownImpl _$$CaloricBreakDownImplFromJson(
+        Map<String, dynamic> json) =>
+    _$CaloricBreakDownImpl(
+      percentProtein: (json['percentProtein'] as num).toDouble(),
+      percentFat: (json['percentFat'] as num).toDouble(),
+      percentCarbs: (json['percentCarbs'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$$CaloricBreakDownImplToJson(
+        _$CaloricBreakDownImpl instance) =>
+    <String, dynamic>{
+      'percentProtein': instance.percentProtein,
+      'percentFat': instance.percentFat,
+      'percentCarbs': instance.percentCarbs,
     };
 
 _$IngredientsImpl _$$IngredientsImplFromJson(Map<String, dynamic> json) =>
