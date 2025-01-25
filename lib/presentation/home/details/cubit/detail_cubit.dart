@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:myrecipeapp/data/services/recipe_service.dart';
-import 'package:myrecipeapp/presentation/details/view_model/recipe_detail_view_model.dart';
+import 'package:myrecipeapp/presentation/home/details/view_model/recipe_detail_view_model.dart';
 
 part 'detail_cubit.freezed.dart';
 part 'detail_state.dart';

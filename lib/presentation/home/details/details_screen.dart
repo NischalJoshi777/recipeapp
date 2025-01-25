@@ -4,13 +4,13 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/data/services/recipe_service.dart';
 import 'package:myrecipeapp/di.dart';
-import 'package:myrecipeapp/presentation/details/cubit/detail_cubit.dart';
-import 'package:myrecipeapp/presentation/details/view_model/recipe_detail_view_model.dart';
-import 'package:myrecipeapp/presentation/details/widget/categories_tick_list.dart';
-import 'package:myrecipeapp/presentation/details/widget/cookingtime_likes_score.dart';
-import 'package:myrecipeapp/presentation/details/widget/expandable_header.dart';
-import 'package:myrecipeapp/presentation/details/widget/ingredients_list.dart';
-import 'package:myrecipeapp/presentation/details/widget/macros_chart.dart';
+import 'package:myrecipeapp/presentation/home/details/cubit/detail_cubit.dart';
+import 'package:myrecipeapp/presentation/home/details/view_model/recipe_detail_view_model.dart';
+import 'package:myrecipeapp/presentation/home/details/widget/categories_tick_list.dart';
+import 'package:myrecipeapp/presentation/home/details/widget/cookingtime_likes_score.dart';
+import 'package:myrecipeapp/presentation/home/details/widget/expandable_header.dart';
+import 'package:myrecipeapp/presentation/home/details/widget/ingredients_list.dart';
+import 'package:myrecipeapp/presentation/home/details/widget/macros_chart.dart';
 import 'package:myrecipeapp/presentation/home/widget/header_text.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -113,7 +113,7 @@ class _DetailBody extends StatelessWidget {
       child: ClipRRect(
         borderRadius: const BorderRadius.all(Radius.circular(24.0)),
         child: Container(
-          color: Palette.white,
+          color: Palette.lightGray,
           padding: const EdgeInsets.only(
             top: 24.0,
             left: 20.0,
@@ -157,7 +157,7 @@ class _DetailBody extends StatelessWidget {
                     IngredientsList(ingredients: recipe.ingredients),
                   ],
                 ),
-                const SizedBox(height: 20.0),
+                const SizedBox(height: 80.0),
               ],
             ),
           ),

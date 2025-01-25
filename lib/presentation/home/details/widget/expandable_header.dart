@@ -33,6 +33,8 @@ class ExpandableHeader extends StatelessWidget {
       ),
       tilePadding: EdgeInsets.zero,
       title: HeaderText(text: title),
+      expansionAnimationStyle: AnimationStyle(
+          curve: Curves.easeInOut, duration: const Duration(milliseconds: 300)),
       children: content,
     );
   }

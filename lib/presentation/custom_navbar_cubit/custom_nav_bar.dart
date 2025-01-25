@@ -3,8 +3,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/presentation/custom_navbar_cubit/custom_navbar_cubit.dart';
 
+class NavBarItem {
+  final IconData icons;
+  final String? label;
+
+  NavBarItem({
+    required this.icons,
+    this.label,
+  });
+}
+
 class CustomBottomNavigationBar extends StatelessWidget {
-  const CustomBottomNavigationBar({super.key});
+  final ValueChanged<int>? onDestinationSelected;
+
+  CustomBottomNavigationBar({
+    super.key,
+    this.onDestinationSelected,
+  });
+
+  final List<NavBarItem> _items = [
+    NavBarItem(icons: Icons.home_filled),
+    NavBarItem(icons: Icons.search_off),
+    NavBarItem(icons: Icons.bookmark_add_outlined),
+    NavBarItem(icons: Icons.person),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +51,29 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      _myIcons(Icons.home_filled, state == 0,
-                          onPressed: () => cubit.onNavBarItemPressed(0)),
-                      _myIcons(Icons.search_off, state == 1,
-                          onPressed: () => cubit.onNavBarItemPressed(1)),
-                      SizedBox(width: size.width * 0.20),
-                      _myIcons(Icons.bookmark_add_outlined, state == 2,
-                          onPressed: () => cubit.onNavBarItemPressed(2)),
-                      _myIcons(Icons.person, state == 3,
-                          onPressed: () => cubit.onNavBarItemPressed(3)),
+                      ..._items.asMap().entries.expand(
+                        (e) {
+                          final widgets = <Widget>[
+                            _myIcons(
+                              e.value.icons,
+                              state == e.key,
+                              e.key,
+                              onPressed: (value) {
+                                if (value < 2) {
+                                  /// this logic will be removed
+                                  onDestinationSelected!(value);
+                                  cubit.onNavBarItemPressed(e.key);
+                                }
+                              },
+                            ),
+                          ];
+                          // Add SizedBox after index 1
+                          if (e.key == 1) {
+                            widgets.add(const SizedBox(width: 20));
+                          }
+                          return widgets;
+                        },
+                      ),
                     ],
                   ),
                 );
@@ -49,9 +85,14 @@ class CustomBottomNavigationBar extends StatelessWidget {
     );
   }
 
-  Widget _myIcons(IconData icons, bool isPressed, {VoidCallback? onPressed}) {
+  Widget _myIcons(
+    IconData icons,
+    bool isPressed,
+    int index, {
+    ValueChanged<int>? onPressed,
+  }) {
     return IconButton(
-      onPressed: onPressed,
+      onPressed: () => onPressed?.call(index),
       icon: Icon(
         icons,
         color: isPressed ? Palette.primaryGreen : Palette.darkGray,

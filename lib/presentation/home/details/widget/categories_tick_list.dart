@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myrecipeapp/config/theme/app_theme.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/config/theme/text_styles.dart';
-import 'package:myrecipeapp/presentation/details/view_model/recipe_detail_view_model.dart';
+import 'package:myrecipeapp/presentation/home/details/view_model/recipe_detail_view_model.dart';
 
 class CategoriesTickList extends StatelessWidget {
   final RecipeDetailVM recipe;
