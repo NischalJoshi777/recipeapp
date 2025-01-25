@@ -1,13 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:myrecipeapp/data/services/recipe_service.dart';
+import 'package:myrecipeapp/data/services/recipe_details_service/recipe_details_service.dart';
 import 'package:myrecipeapp/presentation/home/details/view_model/recipe_detail_view_model.dart';
 
 part 'detail_cubit.freezed.dart';
 part 'detail_state.dart';
 
 class DetailCubit extends Cubit<DetailState> {
-  final RecipeService recipeService;
+  final RecipeDetailService recipeService;
 
   DetailCubit({
     required this.recipeService,

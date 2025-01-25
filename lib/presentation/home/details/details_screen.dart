@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
-import 'package:myrecipeapp/data/services/recipe_service.dart';
+import 'package:myrecipeapp/data/services/recipe_details_service/recipe_details_service.dart';
 import 'package:myrecipeapp/di.dart';
 import 'package:myrecipeapp/presentation/home/details/cubit/detail_cubit.dart';
 import 'package:myrecipeapp/presentation/home/details/view_model/recipe_detail_view_model.dart';
@@ -24,7 +24,7 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => DetailCubit(recipeService: getIt<RecipeService>())
+      create: (_) => DetailCubit(recipeService: getIt<RecipeDetailService>())
         ..fetchRecipeDetails(id),
       child: Scaffold(
         body: BlocBuilder<DetailCubit, DetailState>(

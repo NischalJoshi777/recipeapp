@@ -1,5 +1,4 @@
 import 'package:myrecipeapp/data/model/recipe/recipe.dart';
-import 'package:myrecipeapp/data/model/recipe_details/recipe_details.dart';
 
 abstract class RecipeService {
   Future<RecipeResponse> fetchRecipesByCategory({
@@ -7,6 +6,4 @@ abstract class RecipeService {
     int offset = 0,
     int number = 10,
   });
-
-  Future<RecipeDetails> fetchRecipeDetails({required int id});
 }

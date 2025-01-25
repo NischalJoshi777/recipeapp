@@ -40,7 +40,6 @@ final GoRouter myRouter = GoRouter(
           ],
         ),
         StatefulShellBranch(
-          navigatorKey: _searchNavigatorKey,
           routes: [
             GoRoute(
               path: "/search",

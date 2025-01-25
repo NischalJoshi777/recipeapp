@@ -1,29 +1,31 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive/hive.dart';
 
 part 'recipe_details.freezed.dart';
 part 'recipe_details.g.dart';
 
 @freezed
 class RecipeDetails with _$RecipeDetails {
+  @HiveType(typeId: 0) // Hive adapter type ID
   const factory RecipeDetails({
-    required int id,
-    @Default(false) bool vegan,
-    @Default(false) bool vegetarian,
-    @Default(false) bool dairyFree,
-    @Default(false) bool glutenFree,
-    @Default(false) bool ketogenic,
-    @Default(0) int preparationMinutes,
-    @Default(0) int cookingMinutes,
-    @Default(0) int aggregateLikes,
-    @Default([]) List<String> dishTypes,
-    @Default('N/A') String summary,
-    @Default('N/A') String title,
-    required String image,
-    required String instructions,
-    @Default(0.0) double healthScore,
-    required int servings,
-    @Default([]) List<Ingredients> extendedIngredients,
-    required Nutrition nutrition,
+    @HiveField(0) required int id,
+    @HiveField(1) @Default(false) bool vegan,
+    @HiveField(2) @Default(false) bool vegetarian,
+    @HiveField(3) @Default(false) bool dairyFree,
+    @HiveField(4) @Default(false) bool glutenFree,
+    @HiveField(5) @Default(false) bool ketogenic,
+    @HiveField(6) @Default(0) int preparationMinutes,
+    @HiveField(7) @Default(0) int cookingMinutes,
+    @HiveField(8) @Default(0) int aggregateLikes,
+    @HiveField(9) @Default([]) List<String> dishTypes,
+    @HiveField(10) @Default('N/A') String summary,
+    @HiveField(11) @Default('N/A') String title,
+    @HiveField(12) required String image,
+    @HiveField(13) required String instructions,
+    @HiveField(14) @Default(0.0) double healthScore,
+    @HiveField(15) required int servings,
+    @HiveField(16) @Default([]) List<Ingredients> extendedIngredients,
+    @HiveField(17) required Nutrition nutrition,
   }) = _RecipeDetails;
 
   factory RecipeDetails.fromJson(Map<String, dynamic> json) =>
@@ -32,9 +34,10 @@ class RecipeDetails with _$RecipeDetails {
 
 @freezed
 class Nutrition with _$Nutrition {
+  @HiveType(typeId: 1) // Hive adapter type ID
   const factory Nutrition({
-    required CaloricBreakDown caloricBreakdown,
-    @Default([]) List<Nutrients> nutrients,
+    @HiveField(0) required CaloricBreakDown caloricBreakdown,
+    @HiveField(1) @Default([]) List<Nutrients> nutrients,
   }) = _Nutrition;
 
   factory Nutrition.fromJson(Map<String, dynamic> json) =>
@@ -43,10 +46,11 @@ class Nutrition with _$Nutrition {
 
 @freezed
 class Nutrients with _$Nutrients {
+  @HiveType(typeId: 2) // Hive adapter type ID
   const factory Nutrients({
-    required String name,
-    required double amount,
-    required String unit,
+    @HiveField(0) required String name,
+    @HiveField(1) required double amount,
+    @HiveField(2) required String unit,
   }) = _Nutrients;
 
   factory Nutrients.fromJson(Map<String, dynamic> json) =>
@@ -55,10 +59,11 @@ class Nutrients with _$Nutrients {
 
 @freezed
 class CaloricBreakDown with _$CaloricBreakDown {
+  @HiveType(typeId: 3) // Hive adapter type ID
   const factory CaloricBreakDown({
-    required double percentProtein,
-    required double percentFat,
-    required double percentCarbs,
+    @HiveField(0) required double percentProtein,
+    @HiveField(1) required double percentFat,
+    @HiveField(2) required double percentCarbs,
   }) = _CaloricBreakDown;
 
   factory CaloricBreakDown.fromJson(Map<String, dynamic> json) =>
@@ -67,9 +72,11 @@ class CaloricBreakDown with _$CaloricBreakDown {
 
 @freezed
 class Ingredients with _$Ingredients {
+  @HiveType(typeId: 4) // Hive adapter type ID
   const factory Ingredients({
-    String? image,
-    @Default('N/A') String name,
+    @HiveField(0) String? image,
+    @HiveField(1) @Default('N/A') String name,
+    @HiveField(2)
     required Measure measures, // Made nullable to handle missing cases
   }) = _Ingredients;
 
@@ -79,9 +86,10 @@ class Ingredients with _$Ingredients {
 
 @freezed
 class Measure with _$Measure {
+  @HiveType(typeId: 5) // Hive adapter type ID
   const factory Measure({
-    required UnitMeasure metric,
-    required UnitMeasure us,
+    @HiveField(0) required UnitMeasure metric,
+    @HiveField(1) required UnitMeasure us,
   }) = _Measure;
 
   factory Measure.fromJson(Map<String, dynamic> json) =>
@@ -90,9 +98,10 @@ class Measure with _$Measure {
 
 @freezed
 class UnitMeasure with _$UnitMeasure {
+  @HiveType(typeId: 6) // Hive adapter type ID
   const factory UnitMeasure({
-    required double amount,
-    required String unitShort,
+    @HiveField(0) required double amount,
+    @HiveField(1) required String unitShort,
     @Default('N/A') String unitLong, // Added missing field
   }) = _UnitMeasure;
 
