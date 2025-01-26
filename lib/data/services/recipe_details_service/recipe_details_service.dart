@@ -7,4 +7,12 @@ abstract class RecipeDetailService {
     required String key,
     required RecipeDetails recipeDetails,
   });
+
+  Future<void> removeFromFavorites({
+    required String key,
+  });
+
+  Future<RecipeDetails?> fetchFromLocal({
+    required String key,
+  });
 }

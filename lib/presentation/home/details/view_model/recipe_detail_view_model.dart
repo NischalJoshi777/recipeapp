@@ -23,6 +23,7 @@ class RecipeDetailVM with _$RecipeDetailVM {
     required double healthScore,
     required CaloricBreakDownVM caloricBreakDown,
     required double calories,
+    @Default(false) bool isFavorite,
   }) = _RecipeVM;
 }
 

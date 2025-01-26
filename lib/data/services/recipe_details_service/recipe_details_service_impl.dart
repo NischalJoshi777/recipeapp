@@ -5,7 +5,7 @@ import 'package:myrecipeapp/data/services/recipe_details_service/recipe_details_
 
 class RecipeDetailsServiceImpl extends RecipeDetailService {
   final RemoteSource remoteSource;
-  final LocalSource localSource;
+  final LocalSource<RecipeDetails> localSource;
 
   RecipeDetailsServiceImpl({
     required this.remoteSource,
@@ -37,6 +37,24 @@ class RecipeDetailsServiceImpl extends RecipeDetailService {
         key: key,
         value: recipeDetails,
       );
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<RecipeDetails?> fetchFromLocal({required String key}) async {
+    try {
+      return localSource.get(key: key);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<void> removeFromFavorites({required String key}) async {
+    try {
+      await localSource.delete(key: key);
     } catch (e) {
       throw Exception(e.toString());
     }

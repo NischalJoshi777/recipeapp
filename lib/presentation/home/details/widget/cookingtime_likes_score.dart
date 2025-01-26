@@ -17,7 +17,7 @@ class CookingTimeLikesScore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Wrap(
       spacing: 12.0,
       children: [
         _IconWithText(

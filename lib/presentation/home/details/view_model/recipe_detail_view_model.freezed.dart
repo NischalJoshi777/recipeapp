@@ -34,6 +34,7 @@ mixin _$RecipeDetailVM {
   double get healthScore => throw _privateConstructorUsedError;
   CaloricBreakDownVM get caloricBreakDown => throw _privateConstructorUsedError;
   double get calories => throw _privateConstructorUsedError;
+  bool get isFavorite => throw _privateConstructorUsedError;
 
   /// Create a copy of RecipeDetailVM
   /// with the given fields replaced by the non-null parameter values.
@@ -66,7 +67,8 @@ abstract class $RecipeDetailVMCopyWith<$Res> {
       int servingSize,
       double healthScore,
       CaloricBreakDownVM caloricBreakDown,
-      double calories});
+      double calories,
+      bool isFavorite});
 
   $CaloricBreakDownVMCopyWith<$Res> get caloricBreakDown;
 }
@@ -104,6 +106,7 @@ class _$RecipeDetailVMCopyWithImpl<$Res, $Val extends RecipeDetailVM>
     Object? healthScore = null,
     Object? caloricBreakDown = null,
     Object? calories = null,
+    Object? isFavorite = null,
   }) {
     return _then(_value.copyWith(
       isKetogenic: null == isKetogenic
@@ -178,6 +181,10 @@ class _$RecipeDetailVMCopyWithImpl<$Res, $Val extends RecipeDetailVM>
           ? _value.calories
           : calories // ignore: cast_nullable_to_non_nullable
               as double,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -218,7 +225,8 @@ abstract class _$$RecipeVMImplCopyWith<$Res>
       int servingSize,
       double healthScore,
       CaloricBreakDownVM caloricBreakDown,
-      double calories});
+      double calories,
+      bool isFavorite});
 
   @override
   $CaloricBreakDownVMCopyWith<$Res> get caloricBreakDown;
@@ -255,6 +263,7 @@ class __$$RecipeVMImplCopyWithImpl<$Res>
     Object? healthScore = null,
     Object? caloricBreakDown = null,
     Object? calories = null,
+    Object? isFavorite = null,
   }) {
     return _then(_$RecipeVMImpl(
       isKetogenic: null == isKetogenic
@@ -329,6 +338,10 @@ class __$$RecipeVMImplCopyWithImpl<$Res>
           ? _value.calories
           : calories // ignore: cast_nullable_to_non_nullable
               as double,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -354,7 +367,8 @@ class _$RecipeVMImpl implements _RecipeVM {
       required this.servingSize,
       required this.healthScore,
       required this.caloricBreakDown,
-      required this.calories})
+      required this.calories,
+      this.isFavorite = false})
       : _dishTypes = dishTypes,
         _ingredients = ingredients;
 
@@ -406,10 +420,13 @@ class _$RecipeVMImpl implements _RecipeVM {
   final CaloricBreakDownVM caloricBreakDown;
   @override
   final double calories;
+  @override
+  @JsonKey()
+  final bool isFavorite;
 
   @override
   String toString() {
-    return 'RecipeDetailVM(isKetogenic: $isKetogenic, instructions: $instructions, summary: $summary, id: $id, title: $title, image: $image, cookingMinutes: $cookingMinutes, isVegan: $isVegan, isVegetarian: $isVegetarian, isDairyFree: $isDairyFree, isGlutenFree: $isGlutenFree, aggregatedLikes: $aggregatedLikes, dishTypes: $dishTypes, ingredients: $ingredients, servingSize: $servingSize, healthScore: $healthScore, caloricBreakDown: $caloricBreakDown, calories: $calories)';
+    return 'RecipeDetailVM(isKetogenic: $isKetogenic, instructions: $instructions, summary: $summary, id: $id, title: $title, image: $image, cookingMinutes: $cookingMinutes, isVegan: $isVegan, isVegetarian: $isVegetarian, isDairyFree: $isDairyFree, isGlutenFree: $isGlutenFree, aggregatedLikes: $aggregatedLikes, dishTypes: $dishTypes, ingredients: $ingredients, servingSize: $servingSize, healthScore: $healthScore, caloricBreakDown: $caloricBreakDown, calories: $calories, isFavorite: $isFavorite)';
   }
 
   @override
@@ -447,30 +464,34 @@ class _$RecipeVMImpl implements _RecipeVM {
             (identical(other.caloricBreakDown, caloricBreakDown) ||
                 other.caloricBreakDown == caloricBreakDown) &&
             (identical(other.calories, calories) ||
-                other.calories == calories));
+                other.calories == calories) &&
+            (identical(other.isFavorite, isFavorite) ||
+                other.isFavorite == isFavorite));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      isKetogenic,
-      instructions,
-      summary,
-      id,
-      title,
-      image,
-      cookingMinutes,
-      isVegan,
-      isVegetarian,
-      isDairyFree,
-      isGlutenFree,
-      aggregatedLikes,
-      const DeepCollectionEquality().hash(_dishTypes),
-      const DeepCollectionEquality().hash(_ingredients),
-      servingSize,
-      healthScore,
-      caloricBreakDown,
-      calories);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        isKetogenic,
+        instructions,
+        summary,
+        id,
+        title,
+        image,
+        cookingMinutes,
+        isVegan,
+        isVegetarian,
+        isDairyFree,
+        isGlutenFree,
+        aggregatedLikes,
+        const DeepCollectionEquality().hash(_dishTypes),
+        const DeepCollectionEquality().hash(_ingredients),
+        servingSize,
+        healthScore,
+        caloricBreakDown,
+        calories,
+        isFavorite
+      ]);
 
   /// Create a copy of RecipeDetailVM
   /// with the given fields replaced by the non-null parameter values.
@@ -500,7 +521,8 @@ abstract class _RecipeVM implements RecipeDetailVM {
       required final int servingSize,
       required final double healthScore,
       required final CaloricBreakDownVM caloricBreakDown,
-      required final double calories}) = _$RecipeVMImpl;
+      required final double calories,
+      final bool isFavorite}) = _$RecipeVMImpl;
 
   @override
   bool get isKetogenic;
@@ -538,6 +560,8 @@ abstract class _RecipeVM implements RecipeDetailVM {
   CaloricBreakDownVM get caloricBreakDown;
   @override
   double get calories;
+  @override
+  bool get isFavorite;
 
   /// Create a copy of RecipeDetailVM
   /// with the given fields replaced by the non-null parameter values.
