@@ -61,7 +61,10 @@ class PaginatedListState extends State<PaginatedList> {
             }
             return Padding(
               padding: const EdgeInsets.all(16.0),
-              child: widget.footerWidget,
+              child: widget.footerWidget ??
+                  const Center(
+                    child: Text('Error'),
+                  ),
             );
           }
           return widget.itemBuilder(context, index);

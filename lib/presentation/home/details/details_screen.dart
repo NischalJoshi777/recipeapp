@@ -115,15 +115,17 @@ class _FavoriteButton extends StatelessWidget {
     return BlocBuilder<DetailCubit, DetailState>(builder: (__, _) {
       return IconButton(
         onPressed: () async {
-          await cubit.addToFavorites(id.toString()).then((_) {
-            if (context.mounted) {
-              if (cubit.state.isAddedToFavorites) {
-                _showSnackBar(context, 'Added to your favorites!');
-              } else {
-                _showSnackBar(context, 'Removed from your favorites');
+          await cubit.addToFavorites(id.toString()).then(
+            (_) {
+              if (context.mounted) {
+                if (cubit.state.isAddedToFavorites) {
+                  _showSnackBar(context, 'Added to your favorites!');
+                } else {
+                  _showSnackBar(context, 'Removed from your favorites');
+                }
               }
-            }
-          });
+            },
+          );
         },
         icon: CircleAvatar(
           backgroundColor: Palette.lightGray,

@@ -34,7 +34,9 @@ class RecipeListCubit extends Cubit<RecipeListState> {
   ///The recipe list to be rendered
   List<RecipeVM> recommendations = [];
 
-  bool get hasMore => recommendations.length >= ((_offset) * _number);
+  bool get hasMore => _hasMore;
+
+  bool _hasMore = true;
 
   bool get hasError => state.listStatus is RecipeListStatusError;
 
@@ -62,6 +64,12 @@ class RecipeListCubit extends Cubit<RecipeListState> {
         offset: _offset,
         number: _number,
       );
+
+      /// If fewer items are returned than expected, no more data is available.
+      if (recipes.results.length < _number) {
+        _hasMore = false;
+      }
+
       recommendations.addAll(
         recipes.results
             .map((recipe) => RecipeVM(
@@ -81,7 +89,7 @@ class RecipeListCubit extends Cubit<RecipeListState> {
         ),
       );
 
-      ///offset should be incremented to retrive new page;
+      ///offset should be incremented to retrieve new page;
       _offset++;
     } catch (e) {
       emit(
@@ -92,7 +100,4 @@ class RecipeListCubit extends Cubit<RecipeListState> {
       );
     }
   }
-
-  @override
-  Future<void> close() async {}
 }
