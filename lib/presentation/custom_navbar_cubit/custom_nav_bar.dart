@@ -59,7 +59,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                               state == e.key,
                               e.key,
                               onPressed: (value) {
-                                if (value < 2) {
+                                if (value < 3) {
                                   /// this logic will be removed
                                   onDestinationSelected!(value);
                                   cubit.onNavBarItemPressed(e.key);

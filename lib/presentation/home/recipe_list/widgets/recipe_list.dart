@@ -10,6 +10,8 @@ import 'package:myrecipeapp/presentation/home/recipe_category/constants.dart';
 import 'package:myrecipeapp/presentation/home/recipe_category/recipe_category_cubit.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/recipe_list_cubit/recipe_list_cubit.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/view_model/recipe_view_model.dart';
+import 'package:myrecipeapp/presentation/home/recipe_list/widgets/recipe_error_list.dart';
+import 'package:myrecipeapp/presentation/home/recipe_list/widgets/recipe_shimmer_item.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/widgets/recipe_shimmer_list.dart';
 import 'package:myrecipeapp/presentation/home/widget/paginated_list.dart';
 
@@ -24,7 +26,7 @@ class RecipeList extends StatelessWidget {
           return state.listStatus.when(
             loading: () => const RecipeShimmerList(),
             loaded: () => _RecipeListWidget(recipeList: state.recipes),
-            error: (message) => Text(message),
+            error: (message) => const RecipeListError(),
           );
         }
         return _RecipeListWidget(recipeList: state.recipes);
