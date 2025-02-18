@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:myrecipeapp/presentation/bookmarks/bookmarks_screen.dart';
 import 'package:myrecipeapp/presentation/custom_navbar_cubit/nested_scaffold.dart';
-import 'package:myrecipeapp/presentation/favorites/bookmarks_screen.dart';
 import 'package:myrecipeapp/presentation/home/details/details_screen.dart';
 import 'package:myrecipeapp/presentation/home/widget/home_screen.dart';
 

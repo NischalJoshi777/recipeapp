@@ -14,16 +14,23 @@ final getIt = GetIt.instance;
 void setupLocator() {
   getIt.registerLazySingleton<RemoteSource>(() => RemoteSourceImpl());
 
+  // Register HiveLocalSource only once
+  getIt.registerLazySingleton<HiveLocalSource<RecipeDetails>>(
+    () => HiveLocalSource<RecipeDetails>('recipesBox'),
+  );
+
+  // Use the registered HiveLocalSource instance
   getIt.registerLazySingleton<RecipeService>(
     () => RecipeServiceImpl(
       remoteSource: getIt<RemoteSource>(),
+      localSource: getIt<HiveLocalSource<RecipeDetails>>(),
     ),
   );
 
   getIt.registerLazySingleton<RecipeDetailService>(
     () => RecipeDetailsServiceImpl(
       remoteSource: getIt<RemoteSource>(),
-      localSource: HiveLocalSource<RecipeDetails>('recipesBox'),
+      localSource: getIt<HiveLocalSource<RecipeDetails>>(),
     ),
   );
 }
