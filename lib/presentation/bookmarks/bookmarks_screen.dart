@@ -15,9 +15,10 @@ class FavoritesScreen extends StatelessWidget {
       )..fetchLocalRecipes(),
       child: Scaffold(
         body: BlocBuilder<BookmarkListCubit, BookmarkListState>(
-            builder: (context, state) {
-          return Center(child: Text('Bookmarks Screen'));
-        }),
+          builder: (context, state) {
+            return const Center(child: Text('Bookmarks Screen'));
+          },
+        ),
       ),
     );
   }

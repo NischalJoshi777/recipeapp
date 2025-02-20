@@ -20,42 +20,24 @@ RecipeDetails _$RecipeDetailsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RecipeDetails {
-  @HiveField(0)
   int get id => throw _privateConstructorUsedError;
-  @HiveField(1)
   bool get vegan => throw _privateConstructorUsedError;
-  @HiveField(2)
   bool get vegetarian => throw _privateConstructorUsedError;
-  @HiveField(3)
   bool get dairyFree => throw _privateConstructorUsedError;
-  @HiveField(4)
   bool get glutenFree => throw _privateConstructorUsedError;
-  @HiveField(5)
   bool get ketogenic => throw _privateConstructorUsedError;
-  @HiveField(6)
-  int get preparationMinutes => throw _privateConstructorUsedError;
-  @HiveField(7)
-  int get cookingMinutes => throw _privateConstructorUsedError;
-  @HiveField(8)
-  int get aggregateLikes => throw _privateConstructorUsedError;
-  @HiveField(9)
-  List<String> get dishTypes => throw _privateConstructorUsedError;
-  @HiveField(10)
-  String get summary => throw _privateConstructorUsedError;
-  @HiveField(11)
-  String get title => throw _privateConstructorUsedError;
-  @HiveField(12)
-  String get image => throw _privateConstructorUsedError;
-  @HiveField(13)
+  int get preparationMinutes => throw _privateConstructorUsedError; //
+  int get cookingMinutes => throw _privateConstructorUsedError; //
+  int get aggregateLikes => throw _privateConstructorUsedError; //
+  List<String> get dishTypes => throw _privateConstructorUsedError; //
+  String get summary => throw _privateConstructorUsedError; //
+  String get title => throw _privateConstructorUsedError; //
+  String get image => throw _privateConstructorUsedError; //
   String get instructions => throw _privateConstructorUsedError;
-  @HiveField(14)
-  double get healthScore => throw _privateConstructorUsedError;
-  @HiveField(15)
+  double get healthScore => throw _privateConstructorUsedError; //
   int get servings => throw _privateConstructorUsedError;
-  @HiveField(16)
   List<Ingredients> get extendedIngredients =>
       throw _privateConstructorUsedError;
-  @HiveField(17)
   Nutrition get nutrition => throw _privateConstructorUsedError;
 
   /// Serializes this RecipeDetails to a JSON map.
@@ -75,24 +57,24 @@ abstract class $RecipeDetailsCopyWith<$Res> {
       _$RecipeDetailsCopyWithImpl<$Res, RecipeDetails>;
   @useResult
   $Res call(
-      {@HiveField(0) int id,
-      @HiveField(1) bool vegan,
-      @HiveField(2) bool vegetarian,
-      @HiveField(3) bool dairyFree,
-      @HiveField(4) bool glutenFree,
-      @HiveField(5) bool ketogenic,
-      @HiveField(6) int preparationMinutes,
-      @HiveField(7) int cookingMinutes,
-      @HiveField(8) int aggregateLikes,
-      @HiveField(9) List<String> dishTypes,
-      @HiveField(10) String summary,
-      @HiveField(11) String title,
-      @HiveField(12) String image,
-      @HiveField(13) String instructions,
-      @HiveField(14) double healthScore,
-      @HiveField(15) int servings,
-      @HiveField(16) List<Ingredients> extendedIngredients,
-      @HiveField(17) Nutrition nutrition});
+      {int id,
+      bool vegan,
+      bool vegetarian,
+      bool dairyFree,
+      bool glutenFree,
+      bool ketogenic,
+      int preparationMinutes,
+      int cookingMinutes,
+      int aggregateLikes,
+      List<String> dishTypes,
+      String summary,
+      String title,
+      String image,
+      String instructions,
+      double healthScore,
+      int servings,
+      List<Ingredients> extendedIngredients,
+      Nutrition nutrition});
 
   $NutritionCopyWith<$Res> get nutrition;
 }
@@ -227,24 +209,24 @@ abstract class _$$RecipeDetailsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@HiveField(0) int id,
-      @HiveField(1) bool vegan,
-      @HiveField(2) bool vegetarian,
-      @HiveField(3) bool dairyFree,
-      @HiveField(4) bool glutenFree,
-      @HiveField(5) bool ketogenic,
-      @HiveField(6) int preparationMinutes,
-      @HiveField(7) int cookingMinutes,
-      @HiveField(8) int aggregateLikes,
-      @HiveField(9) List<String> dishTypes,
-      @HiveField(10) String summary,
-      @HiveField(11) String title,
-      @HiveField(12) String image,
-      @HiveField(13) String instructions,
-      @HiveField(14) double healthScore,
-      @HiveField(15) int servings,
-      @HiveField(16) List<Ingredients> extendedIngredients,
-      @HiveField(17) Nutrition nutrition});
+      {int id,
+      bool vegan,
+      bool vegetarian,
+      bool dairyFree,
+      bool glutenFree,
+      bool ketogenic,
+      int preparationMinutes,
+      int cookingMinutes,
+      int aggregateLikes,
+      List<String> dishTypes,
+      String summary,
+      String title,
+      String image,
+      String instructions,
+      double healthScore,
+      int servings,
+      List<Ingredients> extendedIngredients,
+      Nutrition nutrition});
 
   @override
   $NutritionCopyWith<$Res> get nutrition;
@@ -361,27 +343,26 @@ class __$$RecipeDetailsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 0)
 class _$RecipeDetailsImpl implements _RecipeDetails {
   const _$RecipeDetailsImpl(
-      {@HiveField(0) required this.id,
-      @HiveField(1) this.vegan = false,
-      @HiveField(2) this.vegetarian = false,
-      @HiveField(3) this.dairyFree = false,
-      @HiveField(4) this.glutenFree = false,
-      @HiveField(5) this.ketogenic = false,
-      @HiveField(6) this.preparationMinutes = 0,
-      @HiveField(7) this.cookingMinutes = 0,
-      @HiveField(8) this.aggregateLikes = 0,
-      @HiveField(9) final List<String> dishTypes = const [],
-      @HiveField(10) this.summary = 'N/A',
-      @HiveField(11) this.title = 'N/A',
-      @HiveField(12) required this.image,
-      @HiveField(13) required this.instructions,
-      @HiveField(14) this.healthScore = 0.0,
-      @HiveField(15) required this.servings,
-      @HiveField(16) final List<Ingredients> extendedIngredients = const [],
-      @HiveField(17) required this.nutrition})
+      {required this.id,
+      this.vegan = false,
+      this.vegetarian = false,
+      this.dairyFree = false,
+      this.glutenFree = false,
+      this.ketogenic = false,
+      this.preparationMinutes = 0,
+      this.cookingMinutes = 0,
+      this.aggregateLikes = 0,
+      final List<String> dishTypes = const [],
+      this.summary = 'N/A',
+      this.title = 'N/A',
+      required this.image,
+      required this.instructions,
+      this.healthScore = 0.0,
+      required this.servings,
+      final List<Ingredients> extendedIngredients = const [],
+      required this.nutrition})
       : _dishTypes = dishTypes,
         _extendedIngredients = extendedIngredients;
 
@@ -389,75 +370,67 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
       _$$RecipeDetailsImplFromJson(json);
 
   @override
-  @HiveField(0)
   final int id;
   @override
   @JsonKey()
-  @HiveField(1)
   final bool vegan;
   @override
   @JsonKey()
-  @HiveField(2)
   final bool vegetarian;
   @override
   @JsonKey()
-  @HiveField(3)
   final bool dairyFree;
   @override
   @JsonKey()
-  @HiveField(4)
   final bool glutenFree;
   @override
   @JsonKey()
-  @HiveField(5)
   final bool ketogenic;
   @override
   @JsonKey()
-  @HiveField(6)
   final int preparationMinutes;
+//
   @override
   @JsonKey()
-  @HiveField(7)
   final int cookingMinutes;
+//
   @override
   @JsonKey()
-  @HiveField(8)
   final int aggregateLikes;
+//
   final List<String> _dishTypes;
+//
   @override
   @JsonKey()
-  @HiveField(9)
   List<String> get dishTypes {
     if (_dishTypes is EqualUnmodifiableListView) return _dishTypes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_dishTypes);
   }
 
+//
   @override
   @JsonKey()
-  @HiveField(10)
   final String summary;
+//
   @override
   @JsonKey()
-  @HiveField(11)
   final String title;
+//
   @override
-  @HiveField(12)
   final String image;
+//
   @override
-  @HiveField(13)
   final String instructions;
   @override
   @JsonKey()
-  @HiveField(14)
   final double healthScore;
+//
   @override
-  @HiveField(15)
   final int servings;
   final List<Ingredients> _extendedIngredients;
   @override
   @JsonKey()
-  @HiveField(16)
   List<Ingredients> get extendedIngredients {
     if (_extendedIngredients is EqualUnmodifiableListView)
       return _extendedIngredients;
@@ -466,7 +439,6 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
   }
 
   @override
-  @HiveField(17)
   final Nutrition nutrition;
 
   @override
@@ -553,81 +525,63 @@ class _$RecipeDetailsImpl implements _RecipeDetails {
 
 abstract class _RecipeDetails implements RecipeDetails {
   const factory _RecipeDetails(
-      {@HiveField(0) required final int id,
-      @HiveField(1) final bool vegan,
-      @HiveField(2) final bool vegetarian,
-      @HiveField(3) final bool dairyFree,
-      @HiveField(4) final bool glutenFree,
-      @HiveField(5) final bool ketogenic,
-      @HiveField(6) final int preparationMinutes,
-      @HiveField(7) final int cookingMinutes,
-      @HiveField(8) final int aggregateLikes,
-      @HiveField(9) final List<String> dishTypes,
-      @HiveField(10) final String summary,
-      @HiveField(11) final String title,
-      @HiveField(12) required final String image,
-      @HiveField(13) required final String instructions,
-      @HiveField(14) final double healthScore,
-      @HiveField(15) required final int servings,
-      @HiveField(16) final List<Ingredients> extendedIngredients,
-      @HiveField(17) required final Nutrition nutrition}) = _$RecipeDetailsImpl;
+      {required final int id,
+      final bool vegan,
+      final bool vegetarian,
+      final bool dairyFree,
+      final bool glutenFree,
+      final bool ketogenic,
+      final int preparationMinutes,
+      final int cookingMinutes,
+      final int aggregateLikes,
+      final List<String> dishTypes,
+      final String summary,
+      final String title,
+      required final String image,
+      required final String instructions,
+      final double healthScore,
+      required final int servings,
+      final List<Ingredients> extendedIngredients,
+      required final Nutrition nutrition}) = _$RecipeDetailsImpl;
 
   factory _RecipeDetails.fromJson(Map<String, dynamic> json) =
       _$RecipeDetailsImpl.fromJson;
 
   @override
-  @HiveField(0)
   int get id;
   @override
-  @HiveField(1)
   bool get vegan;
   @override
-  @HiveField(2)
   bool get vegetarian;
   @override
-  @HiveField(3)
   bool get dairyFree;
   @override
-  @HiveField(4)
   bool get glutenFree;
   @override
-  @HiveField(5)
   bool get ketogenic;
   @override
-  @HiveField(6)
-  int get preparationMinutes;
+  int get preparationMinutes; //
   @override
-  @HiveField(7)
-  int get cookingMinutes;
+  int get cookingMinutes; //
   @override
-  @HiveField(8)
-  int get aggregateLikes;
+  int get aggregateLikes; //
   @override
-  @HiveField(9)
-  List<String> get dishTypes;
+  List<String> get dishTypes; //
   @override
-  @HiveField(10)
-  String get summary;
+  String get summary; //
   @override
-  @HiveField(11)
-  String get title;
+  String get title; //
   @override
-  @HiveField(12)
-  String get image;
+  String get image; //
   @override
-  @HiveField(13)
   String get instructions;
   @override
-  @HiveField(14)
-  double get healthScore;
+  double get healthScore; //
   @override
-  @HiveField(15)
   int get servings;
   @override
-  @HiveField(16)
   List<Ingredients> get extendedIngredients;
   @override
-  @HiveField(17)
   Nutrition get nutrition;
 
   /// Create a copy of RecipeDetails
@@ -644,9 +598,7 @@ Nutrition _$NutritionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Nutrition {
-  @HiveField(0)
   CaloricBreakDown get caloricBreakdown => throw _privateConstructorUsedError;
-  @HiveField(1)
   List<Nutrients> get nutrients => throw _privateConstructorUsedError;
 
   /// Serializes this Nutrition to a JSON map.
@@ -664,9 +616,7 @@ abstract class $NutritionCopyWith<$Res> {
   factory $NutritionCopyWith(Nutrition value, $Res Function(Nutrition) then) =
       _$NutritionCopyWithImpl<$Res, Nutrition>;
   @useResult
-  $Res call(
-      {@HiveField(0) CaloricBreakDown caloricBreakdown,
-      @HiveField(1) List<Nutrients> nutrients});
+  $Res call({CaloricBreakDown caloricBreakdown, List<Nutrients> nutrients});
 
   $CaloricBreakDownCopyWith<$Res> get caloricBreakdown;
 }
@@ -720,9 +670,7 @@ abstract class _$$NutritionImplCopyWith<$Res>
       __$$NutritionImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@HiveField(0) CaloricBreakDown caloricBreakdown,
-      @HiveField(1) List<Nutrients> nutrients});
+  $Res call({CaloricBreakDown caloricBreakdown, List<Nutrients> nutrients});
 
   @override
   $CaloricBreakDownCopyWith<$Res> get caloricBreakdown;
@@ -759,23 +707,20 @@ class __$$NutritionImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 1)
 class _$NutritionImpl implements _Nutrition {
   const _$NutritionImpl(
-      {@HiveField(0) required this.caloricBreakdown,
-      @HiveField(1) final List<Nutrients> nutrients = const []})
+      {required this.caloricBreakdown,
+      final List<Nutrients> nutrients = const []})
       : _nutrients = nutrients;
 
   factory _$NutritionImpl.fromJson(Map<String, dynamic> json) =>
       _$$NutritionImplFromJson(json);
 
   @override
-  @HiveField(0)
   final CaloricBreakDown caloricBreakdown;
   final List<Nutrients> _nutrients;
   @override
   @JsonKey()
-  @HiveField(1)
   List<Nutrients> get nutrients {
     if (_nutrients is EqualUnmodifiableListView) return _nutrients;
     // ignore: implicit_dynamic_type
@@ -821,17 +766,15 @@ class _$NutritionImpl implements _Nutrition {
 
 abstract class _Nutrition implements Nutrition {
   const factory _Nutrition(
-      {@HiveField(0) required final CaloricBreakDown caloricBreakdown,
-      @HiveField(1) final List<Nutrients> nutrients}) = _$NutritionImpl;
+      {required final CaloricBreakDown caloricBreakdown,
+      final List<Nutrients> nutrients}) = _$NutritionImpl;
 
   factory _Nutrition.fromJson(Map<String, dynamic> json) =
       _$NutritionImpl.fromJson;
 
   @override
-  @HiveField(0)
   CaloricBreakDown get caloricBreakdown;
   @override
-  @HiveField(1)
   List<Nutrients> get nutrients;
 
   /// Create a copy of Nutrition
@@ -848,11 +791,8 @@ Nutrients _$NutrientsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Nutrients {
-  @HiveField(0)
   String get name => throw _privateConstructorUsedError;
-  @HiveField(1)
   double get amount => throw _privateConstructorUsedError;
-  @HiveField(2)
   String get unit => throw _privateConstructorUsedError;
 
   /// Serializes this Nutrients to a JSON map.
@@ -870,10 +810,7 @@ abstract class $NutrientsCopyWith<$Res> {
   factory $NutrientsCopyWith(Nutrients value, $Res Function(Nutrients) then) =
       _$NutrientsCopyWithImpl<$Res, Nutrients>;
   @useResult
-  $Res call(
-      {@HiveField(0) String name,
-      @HiveField(1) double amount,
-      @HiveField(2) String unit});
+  $Res call({String name, double amount, String unit});
 }
 
 /// @nodoc
@@ -920,10 +857,7 @@ abstract class _$$NutrientsImplCopyWith<$Res>
       __$$NutrientsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@HiveField(0) String name,
-      @HiveField(1) double amount,
-      @HiveField(2) String unit});
+  $Res call({String name, double amount, String unit});
 }
 
 /// @nodoc
@@ -962,24 +896,18 @@ class __$$NutrientsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 2)
 class _$NutrientsImpl implements _Nutrients {
   const _$NutrientsImpl(
-      {@HiveField(0) required this.name,
-      @HiveField(1) required this.amount,
-      @HiveField(2) required this.unit});
+      {required this.name, required this.amount, required this.unit});
 
   factory _$NutrientsImpl.fromJson(Map<String, dynamic> json) =>
       _$$NutrientsImplFromJson(json);
 
   @override
-  @HiveField(0)
   final String name;
   @override
-  @HiveField(1)
   final double amount;
   @override
-  @HiveField(2)
   final String unit;
 
   @override
@@ -1019,21 +947,18 @@ class _$NutrientsImpl implements _Nutrients {
 
 abstract class _Nutrients implements Nutrients {
   const factory _Nutrients(
-      {@HiveField(0) required final String name,
-      @HiveField(1) required final double amount,
-      @HiveField(2) required final String unit}) = _$NutrientsImpl;
+      {required final String name,
+      required final double amount,
+      required final String unit}) = _$NutrientsImpl;
 
   factory _Nutrients.fromJson(Map<String, dynamic> json) =
       _$NutrientsImpl.fromJson;
 
   @override
-  @HiveField(0)
   String get name;
   @override
-  @HiveField(1)
   double get amount;
   @override
-  @HiveField(2)
   String get unit;
 
   /// Create a copy of Nutrients
@@ -1050,11 +975,8 @@ CaloricBreakDown _$CaloricBreakDownFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CaloricBreakDown {
-  @HiveField(0)
   double get percentProtein => throw _privateConstructorUsedError;
-  @HiveField(1)
   double get percentFat => throw _privateConstructorUsedError;
-  @HiveField(2)
   double get percentCarbs => throw _privateConstructorUsedError;
 
   /// Serializes this CaloricBreakDown to a JSON map.
@@ -1073,10 +995,7 @@ abstract class $CaloricBreakDownCopyWith<$Res> {
           CaloricBreakDown value, $Res Function(CaloricBreakDown) then) =
       _$CaloricBreakDownCopyWithImpl<$Res, CaloricBreakDown>;
   @useResult
-  $Res call(
-      {@HiveField(0) double percentProtein,
-      @HiveField(1) double percentFat,
-      @HiveField(2) double percentCarbs});
+  $Res call({double percentProtein, double percentFat, double percentCarbs});
 }
 
 /// @nodoc
@@ -1123,10 +1042,7 @@ abstract class _$$CaloricBreakDownImplCopyWith<$Res>
       __$$CaloricBreakDownImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@HiveField(0) double percentProtein,
-      @HiveField(1) double percentFat,
-      @HiveField(2) double percentCarbs});
+  $Res call({double percentProtein, double percentFat, double percentCarbs});
 }
 
 /// @nodoc
@@ -1165,24 +1081,20 @@ class __$$CaloricBreakDownImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 3)
 class _$CaloricBreakDownImpl implements _CaloricBreakDown {
   const _$CaloricBreakDownImpl(
-      {@HiveField(0) required this.percentProtein,
-      @HiveField(1) required this.percentFat,
-      @HiveField(2) required this.percentCarbs});
+      {required this.percentProtein,
+      required this.percentFat,
+      required this.percentCarbs});
 
   factory _$CaloricBreakDownImpl.fromJson(Map<String, dynamic> json) =>
       _$$CaloricBreakDownImplFromJson(json);
 
   @override
-  @HiveField(0)
   final double percentProtein;
   @override
-  @HiveField(1)
   final double percentFat;
   @override
-  @HiveField(2)
   final double percentCarbs;
 
   @override
@@ -1227,22 +1139,18 @@ class _$CaloricBreakDownImpl implements _CaloricBreakDown {
 
 abstract class _CaloricBreakDown implements CaloricBreakDown {
   const factory _CaloricBreakDown(
-          {@HiveField(0) required final double percentProtein,
-          @HiveField(1) required final double percentFat,
-          @HiveField(2) required final double percentCarbs}) =
-      _$CaloricBreakDownImpl;
+      {required final double percentProtein,
+      required final double percentFat,
+      required final double percentCarbs}) = _$CaloricBreakDownImpl;
 
   factory _CaloricBreakDown.fromJson(Map<String, dynamic> json) =
       _$CaloricBreakDownImpl.fromJson;
 
   @override
-  @HiveField(0)
   double get percentProtein;
   @override
-  @HiveField(1)
   double get percentFat;
   @override
-  @HiveField(2)
   double get percentCarbs;
 
   /// Create a copy of CaloricBreakDown
@@ -1259,11 +1167,8 @@ Ingredients _$IngredientsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Ingredients {
-  @HiveField(0)
   String? get image => throw _privateConstructorUsedError;
-  @HiveField(1)
   String get name => throw _privateConstructorUsedError;
-  @HiveField(2)
   Measure get measures => throw _privateConstructorUsedError;
 
   /// Serializes this Ingredients to a JSON map.
@@ -1282,10 +1187,7 @@ abstract class $IngredientsCopyWith<$Res> {
           Ingredients value, $Res Function(Ingredients) then) =
       _$IngredientsCopyWithImpl<$Res, Ingredients>;
   @useResult
-  $Res call(
-      {@HiveField(0) String? image,
-      @HiveField(1) String name,
-      @HiveField(2) Measure measures});
+  $Res call({String? image, String name, Measure measures});
 
   $MeasureCopyWith<$Res> get measures;
 }
@@ -1344,10 +1246,7 @@ abstract class _$$IngredientsImplCopyWith<$Res>
       __$$IngredientsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@HiveField(0) String? image,
-      @HiveField(1) String name,
-      @HiveField(2) Measure measures});
+  $Res call({String? image, String name, Measure measures});
 
   @override
   $MeasureCopyWith<$Res> get measures;
@@ -1389,25 +1288,19 @@ class __$$IngredientsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 4)
 class _$IngredientsImpl implements _Ingredients {
   const _$IngredientsImpl(
-      {@HiveField(0) this.image,
-      @HiveField(1) this.name = 'N/A',
-      @HiveField(2) required this.measures});
+      {this.image, this.name = 'N/A', required this.measures});
 
   factory _$IngredientsImpl.fromJson(Map<String, dynamic> json) =>
       _$$IngredientsImplFromJson(json);
 
   @override
-  @HiveField(0)
   final String? image;
   @override
   @JsonKey()
-  @HiveField(1)
   final String name;
   @override
-  @HiveField(2)
   final Measure measures;
 
   @override
@@ -1448,21 +1341,18 @@ class _$IngredientsImpl implements _Ingredients {
 
 abstract class _Ingredients implements Ingredients {
   const factory _Ingredients(
-      {@HiveField(0) final String? image,
-      @HiveField(1) final String name,
-      @HiveField(2) required final Measure measures}) = _$IngredientsImpl;
+      {final String? image,
+      final String name,
+      required final Measure measures}) = _$IngredientsImpl;
 
   factory _Ingredients.fromJson(Map<String, dynamic> json) =
       _$IngredientsImpl.fromJson;
 
   @override
-  @HiveField(0)
   String? get image;
   @override
-  @HiveField(1)
   String get name;
   @override
-  @HiveField(2)
   Measure get measures;
 
   /// Create a copy of Ingredients
@@ -1479,9 +1369,7 @@ Measure _$MeasureFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Measure {
-  @HiveField(0)
   UnitMeasure get metric => throw _privateConstructorUsedError;
-  @HiveField(1)
   UnitMeasure get us => throw _privateConstructorUsedError;
 
   /// Serializes this Measure to a JSON map.
@@ -1498,7 +1386,7 @@ abstract class $MeasureCopyWith<$Res> {
   factory $MeasureCopyWith(Measure value, $Res Function(Measure) then) =
       _$MeasureCopyWithImpl<$Res, Measure>;
   @useResult
-  $Res call({@HiveField(0) UnitMeasure metric, @HiveField(1) UnitMeasure us});
+  $Res call({UnitMeasure metric, UnitMeasure us});
 
   $UnitMeasureCopyWith<$Res> get metric;
   $UnitMeasureCopyWith<$Res> get us;
@@ -1562,7 +1450,7 @@ abstract class _$$MeasureImplCopyWith<$Res> implements $MeasureCopyWith<$Res> {
       __$$MeasureImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@HiveField(0) UnitMeasure metric, @HiveField(1) UnitMeasure us});
+  $Res call({UnitMeasure metric, UnitMeasure us});
 
   @override
   $UnitMeasureCopyWith<$Res> get metric;
@@ -1601,19 +1489,15 @@ class __$$MeasureImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 5)
 class _$MeasureImpl implements _Measure {
-  const _$MeasureImpl(
-      {@HiveField(0) required this.metric, @HiveField(1) required this.us});
+  const _$MeasureImpl({required this.metric, required this.us});
 
   factory _$MeasureImpl.fromJson(Map<String, dynamic> json) =>
       _$$MeasureImplFromJson(json);
 
   @override
-  @HiveField(0)
   final UnitMeasure metric;
   @override
-  @HiveField(1)
   final UnitMeasure us;
 
   @override
@@ -1652,16 +1536,14 @@ class _$MeasureImpl implements _Measure {
 
 abstract class _Measure implements Measure {
   const factory _Measure(
-      {@HiveField(0) required final UnitMeasure metric,
-      @HiveField(1) required final UnitMeasure us}) = _$MeasureImpl;
+      {required final UnitMeasure metric,
+      required final UnitMeasure us}) = _$MeasureImpl;
 
   factory _Measure.fromJson(Map<String, dynamic> json) = _$MeasureImpl.fromJson;
 
   @override
-  @HiveField(0)
   UnitMeasure get metric;
   @override
-  @HiveField(1)
   UnitMeasure get us;
 
   /// Create a copy of Measure
@@ -1678,9 +1560,7 @@ UnitMeasure _$UnitMeasureFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UnitMeasure {
-  @HiveField(0)
   double get amount => throw _privateConstructorUsedError;
-  @HiveField(1)
   String get unitShort => throw _privateConstructorUsedError;
   String get unitLong => throw _privateConstructorUsedError;
 
@@ -1700,10 +1580,7 @@ abstract class $UnitMeasureCopyWith<$Res> {
           UnitMeasure value, $Res Function(UnitMeasure) then) =
       _$UnitMeasureCopyWithImpl<$Res, UnitMeasure>;
   @useResult
-  $Res call(
-      {@HiveField(0) double amount,
-      @HiveField(1) String unitShort,
-      String unitLong});
+  $Res call({double amount, String unitShort, String unitLong});
 }
 
 /// @nodoc
@@ -1750,10 +1627,7 @@ abstract class _$$UnitMeasureImplCopyWith<$Res>
       __$$UnitMeasureImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@HiveField(0) double amount,
-      @HiveField(1) String unitShort,
-      String unitLong});
+  $Res call({double amount, String unitShort, String unitLong});
 }
 
 /// @nodoc
@@ -1792,21 +1666,16 @@ class __$$UnitMeasureImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 6)
 class _$UnitMeasureImpl implements _UnitMeasure {
   const _$UnitMeasureImpl(
-      {@HiveField(0) required this.amount,
-      @HiveField(1) required this.unitShort,
-      this.unitLong = 'N/A'});
+      {required this.amount, required this.unitShort, this.unitLong = 'N/A'});
 
   factory _$UnitMeasureImpl.fromJson(Map<String, dynamic> json) =>
       _$$UnitMeasureImplFromJson(json);
 
   @override
-  @HiveField(0)
   final double amount;
   @override
-  @HiveField(1)
   final String unitShort;
   @override
   @JsonKey()
@@ -1851,18 +1720,16 @@ class _$UnitMeasureImpl implements _UnitMeasure {
 
 abstract class _UnitMeasure implements UnitMeasure {
   const factory _UnitMeasure(
-      {@HiveField(0) required final double amount,
-      @HiveField(1) required final String unitShort,
+      {required final double amount,
+      required final String unitShort,
       final String unitLong}) = _$UnitMeasureImpl;
 
   factory _UnitMeasure.fromJson(Map<String, dynamic> json) =
       _$UnitMeasureImpl.fromJson;
 
   @override
-  @HiveField(0)
   double get amount;
   @override
-  @HiveField(1)
   String get unitShort;
   @override
   String get unitLong;

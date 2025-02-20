@@ -16,8 +16,8 @@ class BookmarkListCubit extends Cubit<BookmarkListState> {
   }
 
   Future<void> fetchLocalRecipes() async {
+    emit(const BookmarkListState.loading());
     final value = await recipeService.fetchLocalRecipes();
-    print('****');
-    print(value);
+    // emit(BookmarkListState.loaded(DetailCubit()));
   }
 }

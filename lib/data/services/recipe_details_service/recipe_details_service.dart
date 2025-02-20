@@ -1,3 +1,4 @@
+import 'package:myrecipeapp/data/model/recipe_bookmark/recipe_bookmarks.dart';
 import 'package:myrecipeapp/data/model/recipe_details/recipe_details.dart';
 
 abstract class RecipeDetailService {
@@ -5,14 +6,14 @@ abstract class RecipeDetailService {
 
   Future<void> addToFavorites({
     required String key,
-    required RecipeDetails recipeDetails,
+    required RecipeBookmark recipeBookmark,
   });
 
   Future<void> removeFromFavorites({
     required String key,
   });
 
-  Future<RecipeDetails?> fetchFromLocal({
+  Future<RecipeBookmark?> fetchFromLocal({
     required String key,
   });
 }

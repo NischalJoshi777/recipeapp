@@ -1,11 +1,12 @@
 import 'package:myrecipeapp/data/data_source/local_source.dart';
 import 'package:myrecipeapp/data/data_source/remote_source.dart';
+import 'package:myrecipeapp/data/model/recipe_bookmark/recipe_bookmarks.dart';
 import 'package:myrecipeapp/data/model/recipe_details/recipe_details.dart';
 import 'package:myrecipeapp/data/services/recipe_details_service/recipe_details_service.dart';
 
 class RecipeDetailsServiceImpl extends RecipeDetailService {
   final RemoteSource remoteSource;
-  final LocalSource<RecipeDetails> localSource;
+  final LocalSource<RecipeBookmark> localSource;
 
   RecipeDetailsServiceImpl({
     required this.remoteSource,
@@ -30,12 +31,12 @@ class RecipeDetailsServiceImpl extends RecipeDetailService {
   @override
   Future<void> addToFavorites({
     required String key,
-    required RecipeDetails recipeDetails,
+    required RecipeBookmark recipeBookmark,
   }) async {
     try {
       await localSource.save(
         key: key,
-        value: recipeDetails,
+        value: recipeBookmark,
       );
     } catch (e) {
       throw Exception(e.toString());
@@ -43,7 +44,7 @@ class RecipeDetailsServiceImpl extends RecipeDetailService {
   }
 
   @override
-  Future<RecipeDetails?> fetchFromLocal({required String key}) async {
+  Future<RecipeBookmark?> fetchFromLocal({required String key}) async {
     try {
       return localSource.get(key: key);
     } catch (e) {

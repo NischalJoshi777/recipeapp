@@ -1,5 +1,5 @@
 import 'package:myrecipeapp/data/model/recipe/recipe.dart';
-import 'package:myrecipeapp/data/model/recipe_details/recipe_details.dart';
+import 'package:myrecipeapp/data/model/recipe_bookmark/recipe_bookmarks.dart';
 
 abstract class RecipeService {
   Future<RecipeResponse> fetchRecipesByCategory({
@@ -8,5 +8,5 @@ abstract class RecipeService {
     int number = 10,
   });
 
-  Future<List<RecipeDetails>> fetchLocalRecipes();
+  Future<List<RecipeBookmark>> fetchLocalRecipes();
 }

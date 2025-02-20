@@ -1,12 +1,12 @@
 import 'package:myrecipeapp/data/data_source/local_source.dart';
 import 'package:myrecipeapp/data/data_source/remote_source.dart';
 import 'package:myrecipeapp/data/model/recipe/recipe.dart';
-import 'package:myrecipeapp/data/model/recipe_details/recipe_details.dart';
+import 'package:myrecipeapp/data/model/recipe_bookmark/recipe_bookmarks.dart';
 import 'package:myrecipeapp/data/services/recipe_service.dart';
 
 class RecipeServiceImpl implements RecipeService {
   final RemoteSource remoteSource;
-  final LocalSource<RecipeDetails> localSource;
+  final LocalSource<RecipeBookmark> localSource;
 
   RecipeServiceImpl({
     required this.remoteSource,
@@ -36,7 +36,7 @@ class RecipeServiceImpl implements RecipeService {
   }
 
   @override
-  Future<List<RecipeDetails>> fetchLocalRecipes() {
+  Future<List<RecipeBookmark>> fetchLocalRecipes() {
     try {
       final value = localSource.getAll();
       return value;

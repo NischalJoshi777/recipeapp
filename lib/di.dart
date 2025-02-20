@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:myrecipeapp/data/data_source/hive_local_source.dart';
 import 'package:myrecipeapp/data/data_source/remote_source.dart';
 import 'package:myrecipeapp/data/data_source/remote_source_impl.dart';
-import 'package:myrecipeapp/data/model/recipe_details/recipe_details.dart';
+import 'package:myrecipeapp/data/model/recipe_bookmark/recipe_bookmarks.dart';
 import 'package:myrecipeapp/data/services/recipe_details_service/recipe_details_service.dart';
 import 'package:myrecipeapp/data/services/recipe_details_service/recipe_details_service_impl.dart';
 import 'package:myrecipeapp/data/services/recipe_service.dart';
@@ -15,22 +15,22 @@ void setupLocator() {
   getIt.registerLazySingleton<RemoteSource>(() => RemoteSourceImpl());
 
   // Register HiveLocalSource only once
-  getIt.registerLazySingleton<HiveLocalSource<RecipeDetails>>(
-    () => HiveLocalSource<RecipeDetails>('recipesBox'),
+  getIt.registerLazySingleton<HiveLocalSource<RecipeBookmark>>(
+    () => HiveLocalSource<RecipeBookmark>('recipesBox'),
   );
 
   // Use the registered HiveLocalSource instance
   getIt.registerLazySingleton<RecipeService>(
     () => RecipeServiceImpl(
       remoteSource: getIt<RemoteSource>(),
-      localSource: getIt<HiveLocalSource<RecipeDetails>>(),
+      localSource: getIt<HiveLocalSource<RecipeBookmark>>(),
     ),
   );
 
   getIt.registerLazySingleton<RecipeDetailService>(
     () => RecipeDetailsServiceImpl(
       remoteSource: getIt<RemoteSource>(),
-      localSource: getIt<HiveLocalSource<RecipeDetails>>(),
+      localSource: getIt<HiveLocalSource<RecipeBookmark>>(),
     ),
   );
 }
