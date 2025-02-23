@@ -31,7 +31,7 @@ final GoRouter myRouter = GoRouter(
               routes: <RouteBase>[
                 GoRoute(
                   path: "/details",
-                  name: 'details',
+                  name: 'home_details',
                   builder: (_, state) => DetailsScreen(
                     id: state.extra as int,
                   ),
@@ -56,7 +56,15 @@ final GoRouter myRouter = GoRouter(
             GoRoute(
               path: "/favorite",
               builder: (_, __) => const FavoritesScreen(),
-              routes: const <RouteBase>[],
+              routes: <RouteBase>[
+                GoRoute(
+                  path: "/details",
+                  name: 'favorite_details',
+                  builder: (_, state) => DetailsScreen(
+                    id: state.extra as int,
+                  ),
+                ),
+              ],
             ),
           ],
         ),

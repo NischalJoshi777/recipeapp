@@ -19,22 +19,25 @@ mixin _$BookmarkListState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<DetailCubit> cubit) loaded,
+    required TResult Function(List<BookmarkViewModel> bookmark) loaded,
     required TResult Function(String message) error,
+    required TResult Function(List<BookmarkViewModel> bookmark) deleteError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<DetailCubit> cubit)? loaded,
+    TResult? Function(List<BookmarkViewModel> bookmark)? loaded,
     TResult? Function(String message)? error,
+    TResult? Function(List<BookmarkViewModel> bookmark)? deleteError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<DetailCubit> cubit)? loaded,
+    TResult Function(List<BookmarkViewModel> bookmark)? loaded,
     TResult Function(String message)? error,
+    TResult Function(List<BookmarkViewModel> bookmark)? deleteError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$BookmarkListState {
     required TResult Function(BookmarkListStateLoading value) loading,
     required TResult Function(BookmarkListStateLoaded value) loaded,
     required TResult Function(BookmarkListStateError value) error,
+    required TResult Function(BookmarkListStateDeleteError value) deleteError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$BookmarkListState {
     TResult? Function(BookmarkListStateLoading value)? loading,
     TResult? Function(BookmarkListStateLoaded value)? loaded,
     TResult? Function(BookmarkListStateError value)? error,
+    TResult? Function(BookmarkListStateDeleteError value)? deleteError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$BookmarkListState {
     TResult Function(BookmarkListStateLoading value)? loading,
     TResult Function(BookmarkListStateLoaded value)? loaded,
     TResult Function(BookmarkListStateError value)? error,
+    TResult Function(BookmarkListStateDeleteError value)? deleteError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -129,8 +135,9 @@ class _$BookmarkListStateLoadingImpl implements BookmarkListStateLoading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<DetailCubit> cubit) loaded,
+    required TResult Function(List<BookmarkViewModel> bookmark) loaded,
     required TResult Function(String message) error,
+    required TResult Function(List<BookmarkViewModel> bookmark) deleteError,
   }) {
     return loading();
   }
@@ -139,8 +146,9 @@ class _$BookmarkListStateLoadingImpl implements BookmarkListStateLoading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<DetailCubit> cubit)? loaded,
+    TResult? Function(List<BookmarkViewModel> bookmark)? loaded,
     TResult? Function(String message)? error,
+    TResult? Function(List<BookmarkViewModel> bookmark)? deleteError,
   }) {
     return loading?.call();
   }
@@ -149,8 +157,9 @@ class _$BookmarkListStateLoadingImpl implements BookmarkListStateLoading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<DetailCubit> cubit)? loaded,
+    TResult Function(List<BookmarkViewModel> bookmark)? loaded,
     TResult Function(String message)? error,
+    TResult Function(List<BookmarkViewModel> bookmark)? deleteError,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -165,6 +174,7 @@ class _$BookmarkListStateLoadingImpl implements BookmarkListStateLoading {
     required TResult Function(BookmarkListStateLoading value) loading,
     required TResult Function(BookmarkListStateLoaded value) loaded,
     required TResult Function(BookmarkListStateError value) error,
+    required TResult Function(BookmarkListStateDeleteError value) deleteError,
   }) {
     return loading(this);
   }
@@ -175,6 +185,7 @@ class _$BookmarkListStateLoadingImpl implements BookmarkListStateLoading {
     TResult? Function(BookmarkListStateLoading value)? loading,
     TResult? Function(BookmarkListStateLoaded value)? loaded,
     TResult? Function(BookmarkListStateError value)? error,
+    TResult? Function(BookmarkListStateDeleteError value)? deleteError,
   }) {
     return loading?.call(this);
   }
@@ -185,6 +196,7 @@ class _$BookmarkListStateLoadingImpl implements BookmarkListStateLoading {
     TResult Function(BookmarkListStateLoading value)? loading,
     TResult Function(BookmarkListStateLoaded value)? loaded,
     TResult Function(BookmarkListStateError value)? error,
+    TResult Function(BookmarkListStateDeleteError value)? deleteError,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -205,7 +217,7 @@ abstract class _$$BookmarkListStateLoadedImplCopyWith<$Res> {
           $Res Function(_$BookmarkListStateLoadedImpl) then) =
       __$$BookmarkListStateLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<DetailCubit> cubit});
+  $Res call({List<BookmarkViewModel> bookmark});
 }
 
 /// @nodoc
@@ -222,13 +234,13 @@ class __$$BookmarkListStateLoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cubit = null,
+    Object? bookmark = null,
   }) {
     return _then(_$BookmarkListStateLoadedImpl(
-      null == cubit
-          ? _value._cubit
-          : cubit // ignore: cast_nullable_to_non_nullable
-              as List<DetailCubit>,
+      null == bookmark
+          ? _value._bookmark
+          : bookmark // ignore: cast_nullable_to_non_nullable
+              as List<BookmarkViewModel>,
     ));
   }
 }
@@ -236,20 +248,20 @@ class __$$BookmarkListStateLoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BookmarkListStateLoadedImpl implements BookmarkListStateLoaded {
-  const _$BookmarkListStateLoadedImpl(final List<DetailCubit> cubit)
-      : _cubit = cubit;
+  const _$BookmarkListStateLoadedImpl(final List<BookmarkViewModel> bookmark)
+      : _bookmark = bookmark;
 
-  final List<DetailCubit> _cubit;
+  final List<BookmarkViewModel> _bookmark;
   @override
-  List<DetailCubit> get cubit {
-    if (_cubit is EqualUnmodifiableListView) return _cubit;
+  List<BookmarkViewModel> get bookmark {
+    if (_bookmark is EqualUnmodifiableListView) return _bookmark;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_cubit);
+    return EqualUnmodifiableListView(_bookmark);
   }
 
   @override
   String toString() {
-    return 'BookmarkListState.loaded(cubit: $cubit)';
+    return 'BookmarkListState.loaded(bookmark: $bookmark)';
   }
 
   @override
@@ -257,12 +269,12 @@ class _$BookmarkListStateLoadedImpl implements BookmarkListStateLoaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BookmarkListStateLoadedImpl &&
-            const DeepCollectionEquality().equals(other._cubit, _cubit));
+            const DeepCollectionEquality().equals(other._bookmark, _bookmark));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_cubit));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_bookmark));
 
   /// Create a copy of BookmarkListState
   /// with the given fields replaced by the non-null parameter values.
@@ -277,32 +289,35 @@ class _$BookmarkListStateLoadedImpl implements BookmarkListStateLoaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<DetailCubit> cubit) loaded,
+    required TResult Function(List<BookmarkViewModel> bookmark) loaded,
     required TResult Function(String message) error,
+    required TResult Function(List<BookmarkViewModel> bookmark) deleteError,
   }) {
-    return loaded(cubit);
+    return loaded(bookmark);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<DetailCubit> cubit)? loaded,
+    TResult? Function(List<BookmarkViewModel> bookmark)? loaded,
     TResult? Function(String message)? error,
+    TResult? Function(List<BookmarkViewModel> bookmark)? deleteError,
   }) {
-    return loaded?.call(cubit);
+    return loaded?.call(bookmark);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<DetailCubit> cubit)? loaded,
+    TResult Function(List<BookmarkViewModel> bookmark)? loaded,
     TResult Function(String message)? error,
+    TResult Function(List<BookmarkViewModel> bookmark)? deleteError,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(cubit);
+      return loaded(bookmark);
     }
     return orElse();
   }
@@ -313,6 +328,7 @@ class _$BookmarkListStateLoadedImpl implements BookmarkListStateLoaded {
     required TResult Function(BookmarkListStateLoading value) loading,
     required TResult Function(BookmarkListStateLoaded value) loaded,
     required TResult Function(BookmarkListStateError value) error,
+    required TResult Function(BookmarkListStateDeleteError value) deleteError,
   }) {
     return loaded(this);
   }
@@ -323,6 +339,7 @@ class _$BookmarkListStateLoadedImpl implements BookmarkListStateLoaded {
     TResult? Function(BookmarkListStateLoading value)? loading,
     TResult? Function(BookmarkListStateLoaded value)? loaded,
     TResult? Function(BookmarkListStateError value)? error,
+    TResult? Function(BookmarkListStateDeleteError value)? deleteError,
   }) {
     return loaded?.call(this);
   }
@@ -333,6 +350,7 @@ class _$BookmarkListStateLoadedImpl implements BookmarkListStateLoaded {
     TResult Function(BookmarkListStateLoading value)? loading,
     TResult Function(BookmarkListStateLoaded value)? loaded,
     TResult Function(BookmarkListStateError value)? error,
+    TResult Function(BookmarkListStateDeleteError value)? deleteError,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -343,10 +361,10 @@ class _$BookmarkListStateLoadedImpl implements BookmarkListStateLoaded {
 }
 
 abstract class BookmarkListStateLoaded implements BookmarkListState {
-  const factory BookmarkListStateLoaded(final List<DetailCubit> cubit) =
-      _$BookmarkListStateLoadedImpl;
+  const factory BookmarkListStateLoaded(
+      final List<BookmarkViewModel> bookmark) = _$BookmarkListStateLoadedImpl;
 
-  List<DetailCubit> get cubit;
+  List<BookmarkViewModel> get bookmark;
 
   /// Create a copy of BookmarkListState
   /// with the given fields replaced by the non-null parameter values.
@@ -427,8 +445,9 @@ class _$BookmarkListStateErrorImpl implements BookmarkListStateError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<DetailCubit> cubit) loaded,
+    required TResult Function(List<BookmarkViewModel> bookmark) loaded,
     required TResult Function(String message) error,
+    required TResult Function(List<BookmarkViewModel> bookmark) deleteError,
   }) {
     return error(message);
   }
@@ -437,8 +456,9 @@ class _$BookmarkListStateErrorImpl implements BookmarkListStateError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<DetailCubit> cubit)? loaded,
+    TResult? Function(List<BookmarkViewModel> bookmark)? loaded,
     TResult? Function(String message)? error,
+    TResult? Function(List<BookmarkViewModel> bookmark)? deleteError,
   }) {
     return error?.call(message);
   }
@@ -447,8 +467,9 @@ class _$BookmarkListStateErrorImpl implements BookmarkListStateError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<DetailCubit> cubit)? loaded,
+    TResult Function(List<BookmarkViewModel> bookmark)? loaded,
     TResult Function(String message)? error,
+    TResult Function(List<BookmarkViewModel> bookmark)? deleteError,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -463,6 +484,7 @@ class _$BookmarkListStateErrorImpl implements BookmarkListStateError {
     required TResult Function(BookmarkListStateLoading value) loading,
     required TResult Function(BookmarkListStateLoaded value) loaded,
     required TResult Function(BookmarkListStateError value) error,
+    required TResult Function(BookmarkListStateDeleteError value) deleteError,
   }) {
     return error(this);
   }
@@ -473,6 +495,7 @@ class _$BookmarkListStateErrorImpl implements BookmarkListStateError {
     TResult? Function(BookmarkListStateLoading value)? loading,
     TResult? Function(BookmarkListStateLoaded value)? loaded,
     TResult? Function(BookmarkListStateError value)? error,
+    TResult? Function(BookmarkListStateDeleteError value)? deleteError,
   }) {
     return error?.call(this);
   }
@@ -483,6 +506,7 @@ class _$BookmarkListStateErrorImpl implements BookmarkListStateError {
     TResult Function(BookmarkListStateLoading value)? loading,
     TResult Function(BookmarkListStateLoaded value)? loaded,
     TResult Function(BookmarkListStateError value)? error,
+    TResult Function(BookmarkListStateDeleteError value)? deleteError,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -502,5 +526,174 @@ abstract class BookmarkListStateError implements BookmarkListState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BookmarkListStateErrorImplCopyWith<_$BookmarkListStateErrorImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BookmarkListStateDeleteErrorImplCopyWith<$Res> {
+  factory _$$BookmarkListStateDeleteErrorImplCopyWith(
+          _$BookmarkListStateDeleteErrorImpl value,
+          $Res Function(_$BookmarkListStateDeleteErrorImpl) then) =
+      __$$BookmarkListStateDeleteErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<BookmarkViewModel> bookmark});
+}
+
+/// @nodoc
+class __$$BookmarkListStateDeleteErrorImplCopyWithImpl<$Res>
+    extends _$BookmarkListStateCopyWithImpl<$Res,
+        _$BookmarkListStateDeleteErrorImpl>
+    implements _$$BookmarkListStateDeleteErrorImplCopyWith<$Res> {
+  __$$BookmarkListStateDeleteErrorImplCopyWithImpl(
+      _$BookmarkListStateDeleteErrorImpl _value,
+      $Res Function(_$BookmarkListStateDeleteErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BookmarkListState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? bookmark = null,
+  }) {
+    return _then(_$BookmarkListStateDeleteErrorImpl(
+      null == bookmark
+          ? _value._bookmark
+          : bookmark // ignore: cast_nullable_to_non_nullable
+              as List<BookmarkViewModel>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$BookmarkListStateDeleteErrorImpl
+    implements BookmarkListStateDeleteError {
+  const _$BookmarkListStateDeleteErrorImpl(
+      final List<BookmarkViewModel> bookmark)
+      : _bookmark = bookmark;
+
+  final List<BookmarkViewModel> _bookmark;
+  @override
+  List<BookmarkViewModel> get bookmark {
+    if (_bookmark is EqualUnmodifiableListView) return _bookmark;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bookmark);
+  }
+
+  @override
+  String toString() {
+    return 'BookmarkListState.deleteError(bookmark: $bookmark)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BookmarkListStateDeleteErrorImpl &&
+            const DeepCollectionEquality().equals(other._bookmark, _bookmark));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_bookmark));
+
+  /// Create a copy of BookmarkListState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BookmarkListStateDeleteErrorImplCopyWith<
+          _$BookmarkListStateDeleteErrorImpl>
+      get copyWith => __$$BookmarkListStateDeleteErrorImplCopyWithImpl<
+          _$BookmarkListStateDeleteErrorImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(List<BookmarkViewModel> bookmark) loaded,
+    required TResult Function(String message) error,
+    required TResult Function(List<BookmarkViewModel> bookmark) deleteError,
+  }) {
+    return deleteError(bookmark);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function(List<BookmarkViewModel> bookmark)? loaded,
+    TResult? Function(String message)? error,
+    TResult? Function(List<BookmarkViewModel> bookmark)? deleteError,
+  }) {
+    return deleteError?.call(bookmark);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(List<BookmarkViewModel> bookmark)? loaded,
+    TResult Function(String message)? error,
+    TResult Function(List<BookmarkViewModel> bookmark)? deleteError,
+    required TResult orElse(),
+  }) {
+    if (deleteError != null) {
+      return deleteError(bookmark);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BookmarkListStateLoading value) loading,
+    required TResult Function(BookmarkListStateLoaded value) loaded,
+    required TResult Function(BookmarkListStateError value) error,
+    required TResult Function(BookmarkListStateDeleteError value) deleteError,
+  }) {
+    return deleteError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BookmarkListStateLoading value)? loading,
+    TResult? Function(BookmarkListStateLoaded value)? loaded,
+    TResult? Function(BookmarkListStateError value)? error,
+    TResult? Function(BookmarkListStateDeleteError value)? deleteError,
+  }) {
+    return deleteError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BookmarkListStateLoading value)? loading,
+    TResult Function(BookmarkListStateLoaded value)? loaded,
+    TResult Function(BookmarkListStateError value)? error,
+    TResult Function(BookmarkListStateDeleteError value)? deleteError,
+    required TResult orElse(),
+  }) {
+    if (deleteError != null) {
+      return deleteError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class BookmarkListStateDeleteError implements BookmarkListState {
+  const factory BookmarkListStateDeleteError(
+          final List<BookmarkViewModel> bookmark) =
+      _$BookmarkListStateDeleteErrorImpl;
+
+  List<BookmarkViewModel> get bookmark;
+
+  /// Create a copy of BookmarkListState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BookmarkListStateDeleteErrorImplCopyWith<
+          _$BookmarkListStateDeleteErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

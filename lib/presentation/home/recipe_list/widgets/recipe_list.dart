@@ -113,7 +113,7 @@ class _RecipeItem extends StatelessWidget {
               Positioned(
                   right: 2.0,
                   bottom: 2.0,
-                  child: _CookingTime(cookingMins: cookingMins)),
+                  child: CookingTime(cookingMins: cookingMins)),
             ],
           ),
           Text(
@@ -127,10 +127,10 @@ class _RecipeItem extends StatelessWidget {
   }
 }
 
-class _CookingTime extends StatelessWidget {
+class CookingTime extends StatelessWidget {
   final int cookingMins;
 
-  const _CookingTime({
+  const CookingTime({
     super.key,
     required this.cookingMins,
   });
