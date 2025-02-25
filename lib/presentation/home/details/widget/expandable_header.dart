@@ -16,6 +16,7 @@ class ExpandableHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final GlobalKey expansionTileKey = GlobalKey();
     return ExpansionTile(
+      initiallyExpanded: true,
       key: expansionTileKey,
       onExpansionChanged: (value) {
         if (value) {
