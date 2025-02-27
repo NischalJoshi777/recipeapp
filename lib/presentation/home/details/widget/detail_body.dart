@@ -77,7 +77,6 @@ class _DetailBodyState extends State<DetailBody>
 
   Widget _buildDetails() {
     return ListView(
-      // crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 12.0),
         CookingTimeLikesScore(

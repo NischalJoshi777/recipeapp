@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:myrecipeapp/presentation/auth/widget/login_screen.dart';
 import 'package:myrecipeapp/presentation/bookmarks/bookmarks_screen.dart';
 import 'package:myrecipeapp/presentation/custom_navbar_cubit/nested_scaffold.dart';
 import 'package:myrecipeapp/presentation/home/details/details_screen.dart';
@@ -12,9 +13,13 @@ final _favoriteNavigatorKey = GlobalKey<NavigatorState>();
 final _profileNavigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter myRouter = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/Login',
   navigatorKey: _rootNavigatorKey,
   routes: <RouteBase>[
+    GoRoute(
+      path: "/Login",
+      builder: (_, state) => const LoginScreen(),
+    ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, shell) {
         return NestedScaffold(
