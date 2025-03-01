@@ -14,7 +14,6 @@ class GoogleSignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(right: 12.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16.0),
@@ -27,24 +26,25 @@ class GoogleSignInButton extends StatelessWidget {
         ],
       ),
       child: Material(
-        borderRadius: BorderRadius.circular(16.0),
         color: Colors.transparent,
         child: InkWell(
+          borderRadius: BorderRadius.circular(16.0),
           onTap: onPressed,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 12.0,
             children: [
               Image.asset(
                 "assets/image/google.png",
                 height: 60,
                 width: 60,
               ),
-              const SizedBox(width: 12.0),
               Text(
                 'Continue With Google',
                 style: context.appTheme.bodyRegular.bold,
               ),
+              const SizedBox(width: 12.0),
             ],
           ),
         ),
