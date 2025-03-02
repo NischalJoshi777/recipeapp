@@ -54,18 +54,11 @@ class CustomBottomNavigationBar extends StatelessWidget {
                       ..._items.asMap().entries.expand(
                         (e) {
                           final widgets = <Widget>[
-                            _myIcons(
-                              e.value.icons,
-                              state == e.key,
-                              e.key,
-                              onPressed: (value) {
-                                if (value < 3) {
-                                  /// this logic will be removed
-                                  onDestinationSelected!(value);
-                                  cubit.onNavBarItemPressed(e.key);
-                                }
-                              },
-                            ),
+                            _myIcons(e.value.icons, state == e.key, e.key,
+                                onPressed: (value) {
+                              onDestinationSelected!(value);
+                              cubit.onNavBarItemPressed(e.key);
+                            }),
                           ];
                           // Add SizedBox after index 1
                           if (e.key == 1) {

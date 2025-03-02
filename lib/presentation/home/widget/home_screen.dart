@@ -69,14 +69,14 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Flexible(
+        const Flexible(
           flex: 2,
           child: WelcomeText(),
         ),
-        CircleAvatar(
+        const CircleAvatar(
           radius: 20.0,
           backgroundColor: Palette.primaryGreen,
         ),

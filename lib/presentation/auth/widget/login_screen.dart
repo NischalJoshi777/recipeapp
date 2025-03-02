@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myrecipeapp/config/theme/app_theme.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/config/theme/text_styles.dart';
+import 'package:myrecipeapp/presentation/auth/auth_cubit/auth_cubit.dart';
 import 'package:myrecipeapp/presentation/auth/widget/google_signin_button.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -39,9 +41,14 @@ class LoginScreen extends StatelessWidget {
                         context.appTheme.h2.semiBold.withColor(Colors.black87),
                   ),
                   const SizedBox(height: 30.0),
-                  GoogleSignInButton(
-                    onPressed: () {
-                      print('pressed');
+                  BlocBuilder<AuthCubit, AuthState>(
+                    builder: (context, state) {
+                      //TODO: Handle authenticating state
+                      return GoogleSignInButton(
+                        onPressed: () {
+                          context.read<AuthCubit>().signInWithGoogle();
+                        },
+                      );
                     },
                   ),
                 ],
