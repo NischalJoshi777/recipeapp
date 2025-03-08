@@ -86,7 +86,9 @@ final GoRouter myRouter = GoRouter(
           routes: [
             GoRoute(
               path: "/favorite",
-              builder: (_, __) => const FavoritesScreen(),
+              builder: (_, __) => FavoritesScreen(
+                key: UniqueKey(),
+              ),
               routes: <RouteBase>[
                 GoRoute(
                   path: "/details",

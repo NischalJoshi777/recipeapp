@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myrecipeapp/config/theme/app_theme.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/config/theme/text_styles.dart';
+import 'package:myrecipeapp/presentation/animations/fade_transition_wrapper.dart';
 import 'package:myrecipeapp/presentation/auth/auth_cubit/auth_cubit.dart';
 import 'package:myrecipeapp/presentation/auth/widget/google_signin_button.dart';
 
@@ -34,20 +35,24 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    'Delicious Recipes, Made Simple!',
-                    textAlign: TextAlign.center,
-                    style:
-                        context.appTheme.h2.semiBold.withColor(Colors.black87),
+                  FadeTransitionWrapper(
+                    child: Text(
+                      'Delicious Recipes, Made Simple!',
+                      textAlign: TextAlign.center,
+                      style: context.appTheme.h2.semiBold
+                          .withColor(Colors.black87),
+                    ),
                   ),
                   const SizedBox(height: 30.0),
                   BlocBuilder<AuthCubit, AuthState>(
                     builder: (context, state) {
-                      //TODO: Handle authenticating state
-                      return GoogleSignInButton(
-                        onPressed: () {
-                          context.read<AuthCubit>().signInWithGoogle();
-                        },
+                      return state.maybeWhen(
+                        orElse: () => GoogleSignInButton(
+                          onPressed: () {
+                            context.read<AuthCubit>().signInWithGoogle();
+                          },
+                        ),
+                        authenticating: () => const CircularProgressIndicator(),
                       );
                     },
                   ),

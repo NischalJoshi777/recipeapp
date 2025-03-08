@@ -16,6 +16,7 @@ class RecipeServiceImpl implements RecipeService {
   @override
   Future<RecipeResponse> fetchRecipesByCategory({
     required String type,
+    required String query,
     int offset = 0,
     int number = 10,
   }) async {
@@ -26,11 +27,13 @@ class RecipeServiceImpl implements RecipeService {
           "type": type,
           "offset": offset,
           "number": number,
+          "query": query,
           "addRecipeInformation": "True",
         },
       );
       return RecipeResponse.fromJson(response);
     } catch (e) {
+      print(e.toString());
       throw Exception(e.toString());
     }
   }

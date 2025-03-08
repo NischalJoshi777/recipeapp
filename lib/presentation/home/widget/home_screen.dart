@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 10.0),
                   const _Header(),
                   const SizedBox(),
-                  const SearchTextField(),
+                  SearchTextField(),
                   const HeaderText(text: 'Categories'),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * .075,
@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * .50,
+                    height: MediaQuery.of(context).size.height * .20,
                     child: const RecipeList(),
                   ),
                 ],
@@ -69,14 +69,14 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Flexible(
+        Flexible(
           flex: 2,
           child: WelcomeText(),
         ),
-        const CircleAvatar(
+        CircleAvatar(
           radius: 20.0,
           backgroundColor: Palette.primaryGreen,
         ),

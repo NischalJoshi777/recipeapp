@@ -20,6 +20,7 @@ class RecipeListCubit extends Cubit<RecipeListState> {
       (data) {
         fetchRecipeListBasedOnCategory(
           category: category[data],
+          query: state.query,
         );
       },
     );
@@ -41,35 +42,45 @@ class RecipeListCubit extends Cubit<RecipeListState> {
   bool get hasError => state.listStatus is RecipeListStatusError;
 
   /// current selected category
-  String _currentCategory = "";
+  // String _currentCategory = "";
 
   Future<void> fetchRecipeListBasedOnCategory({
     String category = "lunch",
+    String query = "",
   }) async {
     try {
-      if (_currentCategory != category.toLowerCase()) {
+      if (state.category != category.toLowerCase() || state.query != query) {
         recommendations.clear();
         _offset = 0;
-        _currentCategory = category.toLowerCase();
       }
       emit(
         state.copyWith(
+          category: category.toLowerCase(),
+          query: query.toLowerCase(),
           isFirstFetch: _offset == 0,
           listStatus: const RecipeListStatus.loading(),
         ),
       );
 
       final recipes = await recipeService.fetchRecipesByCategory(
-        type: _currentCategory,
+        type: state.category.toLowerCase(),
         offset: _offset,
         number: _number,
+        query: state.query.toLowerCase(),
       );
+      if (recipes.totalResults == 0) {
+        emit(
+          state.copyWith(
+            listStatus: const RecipeListStatus.empty(),
+          ),
+        );
+        return;
+      }
 
       /// If fewer items are returned than expected, no more data is available.
       if (recipes.results.length < _number) {
         _hasMore = false;
       }
-
       recommendations.addAll(
         recipes.results
             .map((recipe) => RecipeVM(

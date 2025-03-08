@@ -8,7 +8,7 @@ class PaginatedList extends StatefulWidget {
   final bool hasMore;
   final bool hasError;
   final int itemCount;
-  final Widget? footerWidget;
+  final Widget? errorWidget;
   final Widget? loadingWidget;
 
   const PaginatedList({
@@ -18,7 +18,7 @@ class PaginatedList extends StatefulWidget {
     required this.hasError,
     required this.itemBuilder,
     required this.itemCount,
-    this.footerWidget,
+    this.errorWidget,
     this.loadingWidget,
   });
 
@@ -60,12 +60,11 @@ class PaginatedListState extends State<PaginatedList> {
                   );
             }
             return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: widget.footerWidget ??
-                  const Center(
-                    child: Text('Error'),
-                  ),
-            );
+                padding: const EdgeInsets.all(16.0),
+                child: widget.errorWidget ??
+                    const Text(
+                      'Error',
+                    ));
           }
           return widget.itemBuilder(context, index);
         },

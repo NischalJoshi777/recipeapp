@@ -16,6 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$RecipeListState {
+  int get offset => throw _privateConstructorUsedError;
+  String get query => throw _privateConstructorUsedError;
+  String get category => throw _privateConstructorUsedError;
   dynamic get isFirstFetch => throw _privateConstructorUsedError;
   List<RecipeVM> get recipes => throw _privateConstructorUsedError;
   RecipeListStatus get listStatus => throw _privateConstructorUsedError;
@@ -34,7 +37,10 @@ abstract class $RecipeListStateCopyWith<$Res> {
       _$RecipeListStateCopyWithImpl<$Res, RecipeListState>;
   @useResult
   $Res call(
-      {dynamic isFirstFetch,
+      {int offset,
+      String query,
+      String category,
+      dynamic isFirstFetch,
       List<RecipeVM> recipes,
       RecipeListStatus listStatus});
 
@@ -56,11 +62,26 @@ class _$RecipeListStateCopyWithImpl<$Res, $Val extends RecipeListState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? offset = null,
+    Object? query = null,
+    Object? category = null,
     Object? isFirstFetch = freezed,
     Object? recipes = null,
     Object? listStatus = null,
   }) {
     return _then(_value.copyWith(
+      offset: null == offset
+          ? _value.offset
+          : offset // ignore: cast_nullable_to_non_nullable
+              as int,
+      query: null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
       isFirstFetch: freezed == isFirstFetch
           ? _value.isFirstFetch
           : isFirstFetch // ignore: cast_nullable_to_non_nullable
@@ -96,7 +117,10 @@ abstract class _$$RecipeListStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {dynamic isFirstFetch,
+      {int offset,
+      String query,
+      String category,
+      dynamic isFirstFetch,
       List<RecipeVM> recipes,
       RecipeListStatus listStatus});
 
@@ -117,11 +141,26 @@ class __$$RecipeListStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? offset = null,
+    Object? query = null,
+    Object? category = null,
     Object? isFirstFetch = freezed,
     Object? recipes = null,
     Object? listStatus = null,
   }) {
     return _then(_$RecipeListStateImpl(
+      offset: null == offset
+          ? _value.offset
+          : offset // ignore: cast_nullable_to_non_nullable
+              as int,
+      query: null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
       isFirstFetch:
           freezed == isFirstFetch ? _value.isFirstFetch! : isFirstFetch,
       recipes: null == recipes
@@ -140,11 +179,23 @@ class __$$RecipeListStateImplCopyWithImpl<$Res>
 
 class _$RecipeListStateImpl implements _RecipeListState {
   const _$RecipeListStateImpl(
-      {this.isFirstFetch = true,
+      {this.offset = 0,
+      this.query = '',
+      this.category = '',
+      this.isFirstFetch = true,
       final List<RecipeVM> recipes = const [],
       this.listStatus = const RecipeListStatus.loading()})
       : _recipes = recipes;
 
+  @override
+  @JsonKey()
+  final int offset;
+  @override
+  @JsonKey()
+  final String query;
+  @override
+  @JsonKey()
+  final String category;
   @override
   @JsonKey()
   final dynamic isFirstFetch;
@@ -163,7 +214,7 @@ class _$RecipeListStateImpl implements _RecipeListState {
 
   @override
   String toString() {
-    return 'RecipeListState(isFirstFetch: $isFirstFetch, recipes: $recipes, listStatus: $listStatus)';
+    return 'RecipeListState(offset: $offset, query: $query, category: $category, isFirstFetch: $isFirstFetch, recipes: $recipes, listStatus: $listStatus)';
   }
 
   @override
@@ -171,6 +222,10 @@ class _$RecipeListStateImpl implements _RecipeListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RecipeListStateImpl &&
+            (identical(other.offset, offset) || other.offset == offset) &&
+            (identical(other.query, query) || other.query == query) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
             const DeepCollectionEquality()
                 .equals(other.isFirstFetch, isFirstFetch) &&
             const DeepCollectionEquality().equals(other._recipes, _recipes) &&
@@ -181,6 +236,9 @@ class _$RecipeListStateImpl implements _RecipeListState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      offset,
+      query,
+      category,
       const DeepCollectionEquality().hash(isFirstFetch),
       const DeepCollectionEquality().hash(_recipes),
       listStatus);
@@ -197,10 +255,19 @@ class _$RecipeListStateImpl implements _RecipeListState {
 
 abstract class _RecipeListState implements RecipeListState {
   const factory _RecipeListState(
-      {final dynamic isFirstFetch,
+      {final int offset,
+      final String query,
+      final String category,
+      final dynamic isFirstFetch,
       final List<RecipeVM> recipes,
       final RecipeListStatus listStatus}) = _$RecipeListStateImpl;
 
+  @override
+  int get offset;
+  @override
+  String get query;
+  @override
+  String get category;
   @override
   dynamic get isFirstFetch;
   @override
@@ -220,6 +287,7 @@ abstract class _RecipeListState implements RecipeListState {
 mixin _$RecipeListStatus {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() empty,
     required TResult Function() loading,
     required TResult Function() loaded,
     required TResult Function(String message) error,
@@ -227,6 +295,7 @@ mixin _$RecipeListStatus {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? empty,
     TResult? Function()? loading,
     TResult? Function()? loaded,
     TResult? Function(String message)? error,
@@ -234,6 +303,7 @@ mixin _$RecipeListStatus {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? empty,
     TResult Function()? loading,
     TResult Function()? loaded,
     TResult Function(String message)? error,
@@ -242,6 +312,7 @@ mixin _$RecipeListStatus {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(RecipeListStatusEmpty value) empty,
     required TResult Function(RecipeListStatusLoading value) loading,
     required TResult Function(RecipeListStatusLoaded value) loaded,
     required TResult Function(RecipeListStatusError value) error,
@@ -249,6 +320,7 @@ mixin _$RecipeListStatus {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(RecipeListStatusEmpty value)? empty,
     TResult? Function(RecipeListStatusLoading value)? loading,
     TResult? Function(RecipeListStatusLoaded value)? loaded,
     TResult? Function(RecipeListStatusError value)? error,
@@ -256,6 +328,7 @@ mixin _$RecipeListStatus {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(RecipeListStatusEmpty value)? empty,
     TResult Function(RecipeListStatusLoading value)? loading,
     TResult Function(RecipeListStatusLoaded value)? loaded,
     TResult Function(RecipeListStatusError value)? error,
@@ -283,6 +356,125 @@ class _$RecipeListStatusCopyWithImpl<$Res, $Val extends RecipeListStatus>
 
   /// Create a copy of RecipeListStatus
   /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$RecipeListStatusEmptyImplCopyWith<$Res> {
+  factory _$$RecipeListStatusEmptyImplCopyWith(
+          _$RecipeListStatusEmptyImpl value,
+          $Res Function(_$RecipeListStatusEmptyImpl) then) =
+      __$$RecipeListStatusEmptyImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RecipeListStatusEmptyImplCopyWithImpl<$Res>
+    extends _$RecipeListStatusCopyWithImpl<$Res, _$RecipeListStatusEmptyImpl>
+    implements _$$RecipeListStatusEmptyImplCopyWith<$Res> {
+  __$$RecipeListStatusEmptyImplCopyWithImpl(_$RecipeListStatusEmptyImpl _value,
+      $Res Function(_$RecipeListStatusEmptyImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of RecipeListStatus
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$RecipeListStatusEmptyImpl implements RecipeListStatusEmpty {
+  const _$RecipeListStatusEmptyImpl();
+
+  @override
+  String toString() {
+    return 'RecipeListStatus.empty()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RecipeListStatusEmptyImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() empty,
+    required TResult Function() loading,
+    required TResult Function() loaded,
+    required TResult Function(String message) error,
+  }) {
+    return empty();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? empty,
+    TResult? Function()? loading,
+    TResult? Function()? loaded,
+    TResult? Function(String message)? error,
+  }) {
+    return empty?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? empty,
+    TResult Function()? loading,
+    TResult Function()? loaded,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(RecipeListStatusEmpty value) empty,
+    required TResult Function(RecipeListStatusLoading value) loading,
+    required TResult Function(RecipeListStatusLoaded value) loaded,
+    required TResult Function(RecipeListStatusError value) error,
+  }) {
+    return empty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(RecipeListStatusEmpty value)? empty,
+    TResult? Function(RecipeListStatusLoading value)? loading,
+    TResult? Function(RecipeListStatusLoaded value)? loaded,
+    TResult? Function(RecipeListStatusError value)? error,
+  }) {
+    return empty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(RecipeListStatusEmpty value)? empty,
+    TResult Function(RecipeListStatusLoading value)? loading,
+    TResult Function(RecipeListStatusLoaded value)? loaded,
+    TResult Function(RecipeListStatusError value)? error,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RecipeListStatusEmpty implements RecipeListStatus {
+  const factory RecipeListStatusEmpty() = _$RecipeListStatusEmptyImpl;
 }
 
 /// @nodoc
@@ -329,6 +521,7 @@ class _$RecipeListStatusLoadingImpl implements RecipeListStatusLoading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() empty,
     required TResult Function() loading,
     required TResult Function() loaded,
     required TResult Function(String message) error,
@@ -339,6 +532,7 @@ class _$RecipeListStatusLoadingImpl implements RecipeListStatusLoading {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? empty,
     TResult? Function()? loading,
     TResult? Function()? loaded,
     TResult? Function(String message)? error,
@@ -349,6 +543,7 @@ class _$RecipeListStatusLoadingImpl implements RecipeListStatusLoading {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? empty,
     TResult Function()? loading,
     TResult Function()? loaded,
     TResult Function(String message)? error,
@@ -363,6 +558,7 @@ class _$RecipeListStatusLoadingImpl implements RecipeListStatusLoading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(RecipeListStatusEmpty value) empty,
     required TResult Function(RecipeListStatusLoading value) loading,
     required TResult Function(RecipeListStatusLoaded value) loaded,
     required TResult Function(RecipeListStatusError value) error,
@@ -373,6 +569,7 @@ class _$RecipeListStatusLoadingImpl implements RecipeListStatusLoading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(RecipeListStatusEmpty value)? empty,
     TResult? Function(RecipeListStatusLoading value)? loading,
     TResult? Function(RecipeListStatusLoaded value)? loaded,
     TResult? Function(RecipeListStatusError value)? error,
@@ -383,6 +580,7 @@ class _$RecipeListStatusLoadingImpl implements RecipeListStatusLoading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(RecipeListStatusEmpty value)? empty,
     TResult Function(RecipeListStatusLoading value)? loading,
     TResult Function(RecipeListStatusLoaded value)? loaded,
     TResult Function(RecipeListStatusError value)? error,
@@ -443,6 +641,7 @@ class _$RecipeListStatusLoadedImpl implements RecipeListStatusLoaded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() empty,
     required TResult Function() loading,
     required TResult Function() loaded,
     required TResult Function(String message) error,
@@ -453,6 +652,7 @@ class _$RecipeListStatusLoadedImpl implements RecipeListStatusLoaded {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? empty,
     TResult? Function()? loading,
     TResult? Function()? loaded,
     TResult? Function(String message)? error,
@@ -463,6 +663,7 @@ class _$RecipeListStatusLoadedImpl implements RecipeListStatusLoaded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? empty,
     TResult Function()? loading,
     TResult Function()? loaded,
     TResult Function(String message)? error,
@@ -477,6 +678,7 @@ class _$RecipeListStatusLoadedImpl implements RecipeListStatusLoaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(RecipeListStatusEmpty value) empty,
     required TResult Function(RecipeListStatusLoading value) loading,
     required TResult Function(RecipeListStatusLoaded value) loaded,
     required TResult Function(RecipeListStatusError value) error,
@@ -487,6 +689,7 @@ class _$RecipeListStatusLoadedImpl implements RecipeListStatusLoaded {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(RecipeListStatusEmpty value)? empty,
     TResult? Function(RecipeListStatusLoading value)? loading,
     TResult? Function(RecipeListStatusLoaded value)? loaded,
     TResult? Function(RecipeListStatusError value)? error,
@@ -497,6 +700,7 @@ class _$RecipeListStatusLoadedImpl implements RecipeListStatusLoaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(RecipeListStatusEmpty value)? empty,
     TResult Function(RecipeListStatusLoading value)? loading,
     TResult Function(RecipeListStatusLoaded value)? loaded,
     TResult Function(RecipeListStatusError value)? error,
@@ -583,6 +787,7 @@ class _$RecipeListStatusErrorImpl implements RecipeListStatusError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() empty,
     required TResult Function() loading,
     required TResult Function() loaded,
     required TResult Function(String message) error,
@@ -593,6 +798,7 @@ class _$RecipeListStatusErrorImpl implements RecipeListStatusError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? empty,
     TResult? Function()? loading,
     TResult? Function()? loaded,
     TResult? Function(String message)? error,
@@ -603,6 +809,7 @@ class _$RecipeListStatusErrorImpl implements RecipeListStatusError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? empty,
     TResult Function()? loading,
     TResult Function()? loaded,
     TResult Function(String message)? error,
@@ -617,6 +824,7 @@ class _$RecipeListStatusErrorImpl implements RecipeListStatusError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(RecipeListStatusEmpty value) empty,
     required TResult Function(RecipeListStatusLoading value) loading,
     required TResult Function(RecipeListStatusLoaded value) loaded,
     required TResult Function(RecipeListStatusError value) error,
@@ -627,6 +835,7 @@ class _$RecipeListStatusErrorImpl implements RecipeListStatusError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(RecipeListStatusEmpty value)? empty,
     TResult? Function(RecipeListStatusLoading value)? loading,
     TResult? Function(RecipeListStatusLoaded value)? loaded,
     TResult? Function(RecipeListStatusError value)? error,
@@ -637,6 +846,7 @@ class _$RecipeListStatusErrorImpl implements RecipeListStatusError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(RecipeListStatusEmpty value)? empty,
     TResult Function(RecipeListStatusLoading value)? loading,
     TResult Function(RecipeListStatusLoaded value)? loaded,
     TResult Function(RecipeListStatusError value)? error,

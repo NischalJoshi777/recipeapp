@@ -23,7 +23,18 @@ class RecipeList extends StatelessWidget {
     return BlocBuilder<RecipeListCubit, RecipeListState>(
       builder: (cubit, state) {
         if (state.isFirstFetch) {
+          print(state.isFirstFetch);
           return state.listStatus.when(
+            empty: () => const Center(
+                child: Column(
+              children: [
+                Icon(Icons.error),
+                SizedBox(
+                  height: 12.0,
+                ),
+                Text('No recipe found'),
+              ],
+            )),
             loading: () => const RecipeShimmerList(),
             loaded: () => _RecipeListWidget(recipeList: state.recipes),
             error: (message) => const RecipeListError(),
@@ -65,6 +76,8 @@ class _RecipeListWidget extends StatelessWidget {
       ),
       itemCount: recipeList.length,
       loadingWidget: const RecipeShimmerItem(),
+      errorWidget:
+          !context.read<RecipeListCubit>().hasMore ? SizedBox() : Text('Error'),
     );
   }
 }
@@ -104,6 +117,10 @@ class _RecipeItem extends StatelessWidget {
                 child: CachedNetworkImage(
                   imageUrl: image,
                   fit: BoxFit.cover,
+                  errorWidget: (_, __, ___) => const ShimmerItem(
+                    width: 160.0,
+                    height: 120.0,
+                  ),
                   placeholder: (_, __) => const ShimmerItem(
                     width: 160.0,
                     height: 120.0,
