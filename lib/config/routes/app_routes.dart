@@ -32,15 +32,38 @@ final GoRouter myRouter = GoRouter(
     final authCubit = getIt<AuthCubit>();
     final authState = authCubit.state;
     final isAuthenticated = authState is Authenticated;
-    final isLoggingIn = state.uri.toString() == Routes.login;
-    if (isAuthenticated && isLoggingIn) {
-      return Routes.home;
-    } else if (!isAuthenticated && !isLoggingIn) {
-      return Routes.login;
+    final isAuthenticating = authState is Authenticating;
+
+    /// If the app is authenticating, show the splash screen
+    if (isAuthenticating) {
+      return Routes.splash;
     }
-    return null;
+
+    /// If the user is authenticated and the current location is the splash screen, redirect to home
+    final isInSplash = state.uri.toString() == Routes.splash;
+    final isInLogin = state.uri.toString() == Routes.login;
+    if (isAuthenticated) {
+      if (isInSplash) {
+        return Routes.home; // Redirect splash to home
+      } else if (isInLogin) {
+        return Routes.home; // Redirect login to home
+      }
+    }
+
+    ///If the user is not authenticated and not in splash or login screen, redirect to login
+    if (!isAuthenticated) {
+      if (!isInSplash && !isInLogin) {
+        return Routes.login;
+      }
+    }
+    return null; // No redirection needed
   },
   routes: <RouteBase>[
+    GoRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      path: "/splash",
+      builder: (_, state) => const Scaffold(),
+    ),
     GoRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: "/login",

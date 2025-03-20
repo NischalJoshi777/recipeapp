@@ -19,6 +19,7 @@ class BookmarkCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
+          border: Border.all(color: Colors.white.withOpacity(0.2)),
           borderRadius: BorderRadius.circular(12.0),
           boxShadow: const [
             BoxShadow(

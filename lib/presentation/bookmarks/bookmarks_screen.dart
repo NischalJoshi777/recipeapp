@@ -12,6 +12,7 @@ import 'package:myrecipeapp/presentation/bookmarks/bookmark_card.dart';
 import 'package:myrecipeapp/presentation/bookmarks/bookmark_list_cubit.dart';
 import 'package:myrecipeapp/presentation/bookmarks/bookmark_viewmodel.dart';
 import 'package:myrecipeapp/presentation/home/widget/header_text.dart';
+import 'package:myrecipeapp/presentation/home/widget/search_text_field.dart';
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
@@ -32,17 +33,17 @@ class FavoritesScreen extends StatelessWidget {
                     context.read<BookmarkListCubit>().fetchLocalRecipes(),
                 child: CustomScrollView(
                   slivers: [
-                    const SliverAppBar(
+                    SliverAppBar(
                       toolbarHeight: 120.0,
                       backgroundColor: Palette.lightGray,
                       floating: true,
                       title: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 12.0),
-                          HeaderText(text: 'Your Bookmarks'),
-                          SizedBox(height: 12.0),
-                          // SearchTextField(),
+                          const SizedBox(height: 12.0),
+                          const HeaderText(text: 'Your Bookmarks'),
+                          const SizedBox(height: 12.0),
+                          SearchTextField(),
                         ],
                       ),
                     ),

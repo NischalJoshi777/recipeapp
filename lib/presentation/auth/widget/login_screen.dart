@@ -12,55 +12,58 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: CustomPaint(
-              painter: _SecondCurveViewPainter(),
-            ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.height,
-            child: CustomPaint(
-              painter: _FirstCurveViewPainter(),
-            ),
-          ),
-          Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  FadeTransitionWrapper(
-                    child: Text(
-                      'Delicious Recipes, Made Simple!',
-                      textAlign: TextAlign.center,
-                      style: context.appTheme.h2.semiBold
-                          .withColor(Colors.black87),
-                    ),
-                  ),
-                  const SizedBox(height: 30.0),
-                  BlocBuilder<AuthCubit, AuthState>(
-                    builder: (context, state) {
-                      return state.maybeWhen(
-                        orElse: () => GoogleSignInButton(
-                          onPressed: () {
-                            context.read<AuthCubit>().signInWithGoogle();
-                          },
-                        ),
-                        authenticating: () => const CircularProgressIndicator(),
-                      );
-                    },
-                  ),
-                ],
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: CustomPaint(
+                painter: _SecondCurveViewPainter(),
               ),
             ),
-          ),
-        ],
+            SizedBox(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.height,
+              child: CustomPaint(
+                painter: _FirstCurveViewPainter(),
+              ),
+            ),
+            Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    FadeTransitionWrapper(
+                      child: Text(
+                        'Delicious Recipes, Made Simple!',
+                        textAlign: TextAlign.center,
+                        style: context.appTheme.h2.semiBold
+                            .withColor(Colors.black87),
+                      ),
+                    ),
+                    const SizedBox(height: 30.0),
+                    BlocBuilder<AuthCubit, AuthState>(
+                      builder: (context, state) {
+                        return state.maybeWhen(
+                          orElse: () => GoogleSignInButton(
+                            onPressed: () {
+                              context.read<AuthCubit>().signInWithGoogle();
+                            },
+                          ),
+                          authenticating: () =>
+                              const CircularProgressIndicator(),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
