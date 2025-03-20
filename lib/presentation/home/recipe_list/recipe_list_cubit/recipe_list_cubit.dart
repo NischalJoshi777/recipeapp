@@ -50,18 +50,13 @@ class RecipeListCubit extends Cubit<RecipeListState> {
   }) async {
     try {
       if (state.category != category.toLowerCase() || state.query != query) {
-        recommendations.clear();
-        _offset = 0;
+        ///reset everything if a new search query is made.
+        _reset();
       }
-      emit(
-        state.copyWith(
-          category: category.toLowerCase(),
-          query: query.toLowerCase(),
-          isFirstFetch: _offset == 0,
-          listStatus: const RecipeListStatus.loading(),
-        ),
+      _emitInitialLoading(
+        category: category.toLowerCase(),
+        query: query.toLowerCase(),
       );
-
       final recipes = await recipeService.fetchRecipesByCategory(
         type: state.category.toLowerCase(),
         offset: _offset,
@@ -110,5 +105,25 @@ class RecipeListCubit extends Cubit<RecipeListState> {
         ),
       );
     }
+  }
+
+  void _reset() {
+    recommendations.clear();
+    _offset = 0;
+    _hasMore = true;
+  }
+
+  void _emitInitialLoading({
+    required String category,
+    required String query,
+  }) {
+    emit(
+      state.copyWith(
+        category: category,
+        query: query,
+        isFirstFetch: _offset == 0,
+        listStatus: const RecipeListStatus.loading(),
+      ),
+    );
   }
 }

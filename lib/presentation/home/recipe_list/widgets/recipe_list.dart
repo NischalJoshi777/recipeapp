@@ -6,11 +6,8 @@ import 'package:myrecipeapp/config/theme/app_theme.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/config/theme/text_styles.dart';
 import 'package:myrecipeapp/presentation/animations/size_transition_wrapper.dart';
-import 'package:myrecipeapp/presentation/home/recipe_category/constants.dart';
-import 'package:myrecipeapp/presentation/home/recipe_category/recipe_category_cubit.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/recipe_list_cubit/recipe_list_cubit.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/view_model/recipe_view_model.dart';
-import 'package:myrecipeapp/presentation/home/recipe_list/widgets/recipe_error_list.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/widgets/recipe_shimmer_item.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/widgets/recipe_shimmer_list.dart';
 import 'package:myrecipeapp/presentation/home/widget/paginated_list.dart';
@@ -23,25 +20,72 @@ class RecipeList extends StatelessWidget {
     return BlocBuilder<RecipeListCubit, RecipeListState>(
       builder: (cubit, state) {
         if (state.isFirstFetch) {
-          print(state.isFirstFetch);
           return state.listStatus.when(
-            empty: () => const Center(
-                child: Column(
-              children: [
-                Icon(Icons.error),
-                SizedBox(
-                  height: 12.0,
-                ),
-                Text('No recipe found'),
-              ],
-            )),
+            empty: () => const _EmptyWidget(),
             loading: () => const RecipeShimmerList(),
             loaded: () => _RecipeListWidget(recipeList: state.recipes),
-            error: (message) => const RecipeListError(),
+            error: (message) => const _ErrorWidget(),
           );
         }
         return _RecipeListWidget(recipeList: state.recipes);
       },
+    );
+  }
+}
+
+class _ErrorWidget extends StatelessWidget {
+  const _ErrorWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          Image.asset(
+            'assets/image/error.png',
+            height: 140.0,
+          ),
+          const SizedBox(height: 8.0),
+          Text(
+            'Oop! Something went wrong!',
+            style: context.appTheme.bodySmall.semiBold,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              final listCubit = context.read<RecipeListCubit>();
+              final category = listCubit.state.category;
+              final query = listCubit.state.query;
+              listCubit.fetchRecipeListBasedOnCategory(
+                category: category,
+                query: query,
+              );
+            },
+            child: Text(
+              'Refresh',
+              style: context.appTheme.bodySmall.withColor(Colors.white),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _EmptyWidget extends StatelessWidget {
+  const _EmptyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: [
+          Image.asset('assets/image/error.png', height: 140.0),
+          const SizedBox(
+            height: 12.0,
+          ),
+          const Text('No recipe found'),
+        ],
+      ),
     );
   }
 }
@@ -57,9 +101,13 @@ class _RecipeListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return PaginatedList(
       onLoadMore: () {
-        final state = context.read<RecipeCategoryCubit>().state;
+        final cubit = context.read<RecipeListCubit>();
+        final category = cubit.state.category;
+        final query = cubit.state.query;
+
         return context.read<RecipeListCubit>().fetchRecipeListBasedOnCategory(
-              category: category[state],
+              category: category,
+              query: query,
             );
       },
       hasMore: context.read<RecipeListCubit>().hasMore,
@@ -76,9 +124,25 @@ class _RecipeListWidget extends StatelessWidget {
       ),
       itemCount: recipeList.length,
       loadingWidget: const RecipeShimmerItem(),
-      errorWidget:
-          !context.read<RecipeListCubit>().hasMore ? SizedBox() : Text('Error'),
+      errorWidget: !context.read<RecipeListCubit>().hasMore
+          ? _buildEndErroWidget()
+          : const Text('Error'),
     );
+  }
+
+  Widget _buildEndErroWidget() {
+    return Builder(builder: (context) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.asset('assets/image/error.png', height: 120.0),
+          Text(
+            'Woops! thats it ',
+            style: context.appTheme.bodySmall.semiBold,
+          ),
+        ],
+      );
+    });
   }
 }
 

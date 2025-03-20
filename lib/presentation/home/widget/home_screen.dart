@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * .20,
+                    height: MediaQuery.of(context).size.height * .30,
                     child: const RecipeList(),
                   ),
                 ],
