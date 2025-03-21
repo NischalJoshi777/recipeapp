@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:myrecipeapp/config/theme/app_theme.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/config/theme/text_styles.dart';
+import 'package:myrecipeapp/presentation/home/widget/filter/calories_slider.dart';
 import 'package:myrecipeapp/presentation/home/widget/filter/cuisine_preference.dart';
+import 'package:myrecipeapp/presentation/home/widget/filter/intolerances.dart';
 import 'package:myrecipeapp/presentation/home/widget/header_text.dart';
 
 import 'dietary_preference.dart';
@@ -25,43 +27,69 @@ class FilterContent extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: 40,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[400],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                const SizedBox(height: 8.0),
-                const HeaderText(text: 'Set Filter'),
-                const SizedBox(height: 8.0),
                 Align(
-                  alignment: Alignment.centerLeft,
-                  child: HeaderText(
-                    text: 'Dietary Preference',
-                    style: context.appTheme.bodyLarge.bold,
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: 40,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[400],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 8.0),
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: DietaryPreference(),
                 ),
                 const SizedBox(height: 16.0),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: HeaderText(
-                    text: 'Cuisine Preference',
-                    style: context.appTheme.bodyLarge.bold,
-                  ),
+                HeaderText(
+                  text: 'Calories',
+                  style: context.appTheme.bodyLarge.bold,
                 ),
-                const SizedBox(height: 8.0),
                 const Align(
                   alignment: Alignment.centerLeft,
-                  child: CuisinePreference(),
+                  child: CaloriesSlider(),
                 ),
+                const SizedBox(height: 16.0),
+                HeaderText(
+                  text: 'Dietary Preference',
+                  style: context.appTheme.bodyLarge.bold,
+                ),
+                const SizedBox(height: 8.0),
+                const DietaryPreference(),
+                const SizedBox(height: 16.0),
+                HeaderText(
+                  text: 'Cuisine Preference',
+                  style: context.appTheme.bodyLarge.bold,
+                ),
+                const SizedBox(height: 8.0),
+                const CuisinePreference(),
+                const SizedBox(height: 16.0),
+                HeaderText(
+                  text: 'Intolerances',
+                  style: context.appTheme.bodyLarge.bold,
+                ),
+                const SizedBox(height: 8.0),
+                Intolerances(),
+                const SizedBox(height: 16.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(onPressed: () {}, child: const Text('Clear')),
+                    const SizedBox(width: 12.0),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation: 4.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(8.0), // Rounded corners
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: const Text('Apply'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 80.0),
               ],
             ),
           ),
