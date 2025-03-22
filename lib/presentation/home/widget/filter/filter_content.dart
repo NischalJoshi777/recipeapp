@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myrecipeapp/config/theme/app_theme.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/config/theme/text_styles.dart';
+import 'package:myrecipeapp/presentation/home/recipe_list/recipe_list_cubit/recipe_list_cubit.dart';
 import 'package:myrecipeapp/presentation/home/widget/filter/calories_slider.dart';
 import 'package:myrecipeapp/presentation/home/widget/filter/cuisine_preference.dart';
 import 'package:myrecipeapp/presentation/home/widget/filter/intolerances.dart';
@@ -22,7 +25,10 @@ class FilterContent extends StatelessWidget {
           borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(
+            vertical: 10.0,
+            horizontal: 24.0,
+          ),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -42,12 +48,17 @@ class FilterContent extends StatelessWidget {
                 ),
                 const SizedBox(height: 16.0),
                 HeaderText(
-                  text: 'Calories',
+                  text: 'Calorie Count',
                   style: context.appTheme.bodyLarge.bold,
                 ),
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: CaloriesSlider(),
+                ),
+                Text(
+                  'Note: The minimum calorie per serving is 80 kcal.',
+                  style: context.appTheme.bodySmall.semiBold
+                      .withColor(Palette.darkGray.withAlpha(150)),
                 ),
                 const SizedBox(height: 16.0),
                 HeaderText(
@@ -55,14 +66,14 @@ class FilterContent extends StatelessWidget {
                   style: context.appTheme.bodyLarge.bold,
                 ),
                 const SizedBox(height: 8.0),
-                const DietaryPreference(),
+                DietaryPreference(),
                 const SizedBox(height: 16.0),
                 HeaderText(
                   text: 'Cuisine Preference',
                   style: context.appTheme.bodyLarge.bold,
                 ),
                 const SizedBox(height: 8.0),
-                const CuisinePreference(),
+                CuisinePreference(),
                 const SizedBox(height: 16.0),
                 HeaderText(
                   text: 'Intolerances',
@@ -74,7 +85,12 @@ class FilterContent extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    TextButton(onPressed: () {}, child: const Text('Clear')),
+                    TextButton(
+                      onPressed: () {
+                        context.read<RecipeListCubit>().clearFilter();
+                      },
+                      child: const Text('Clear'),
+                    ),
                     const SizedBox(width: 12.0),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -84,7 +100,12 @@ class FilterContent extends StatelessWidget {
                               BorderRadius.circular(8.0), // Rounded corners
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        context
+                            .read<RecipeListCubit>()
+                            .fetchRecipeListBasedOnCategory();
+                        context.pop();
+                      },
                       child: const Text('Apply'),
                     ),
                   ],

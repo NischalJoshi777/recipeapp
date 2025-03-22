@@ -17,6 +17,9 @@ class RecipeServiceImpl implements RecipeService {
   Future<RecipeResponse> fetchRecipesByCategory({
     required String type,
     required String query,
+    required String cuisine,
+    required String intolerances,
+    required String dietaryPreferences,
     int offset = 0,
     int number = 10,
   }) async {
@@ -28,6 +31,9 @@ class RecipeServiceImpl implements RecipeService {
           "offset": offset,
           "number": number,
           "query": query,
+          "cuisine": cuisine,
+          "diet": dietaryPreferences,
+          "intolerances": intolerances,
           "addRecipeInformation": "True",
         },
       );

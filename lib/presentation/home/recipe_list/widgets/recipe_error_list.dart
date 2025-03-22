@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
-import 'package:myrecipeapp/presentation/home/recipe_category/constants.dart';
-import 'package:myrecipeapp/presentation/home/recipe_category/recipe_category_cubit.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/recipe_list_cubit/recipe_list_cubit.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/widgets/recipe_shimmer_item.dart';
 
@@ -38,11 +36,11 @@ class RecipeErrorShimmerItem extends StatelessWidget {
             child: IconButton(
               color: Colors.white,
               onPressed: () {
-                final state = context.read<RecipeCategoryCubit>().state;
-                final selectedCategory = category[state];
-                context.read<RecipeListCubit>().fetchRecipeListBasedOnCategory(
-                      category: selectedCategory,
-                    );
+                // final state = context.read<RecipeCategoryCubit>().state;
+                // final selectedCategory = category[state];
+                context
+                    .read<RecipeListCubit>()
+                    .fetchRecipeListBasedOnCategory();
               },
               icon: const Icon(
                 size: 32.0,

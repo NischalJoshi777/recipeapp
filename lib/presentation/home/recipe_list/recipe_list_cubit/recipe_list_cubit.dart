@@ -15,13 +15,12 @@ class RecipeListCubit extends Cubit<RecipeListState> {
   RecipeListCubit({
     required this.recipeService,
     required this.categoryCubit,
-  }) : super(const RecipeListState(listStatus: RecipeListStatus.loading())) {
+  }) : super(RecipeListState(listStatus: const RecipeListStatus.loading())) {
     categoryCubit.stream.listen(
       (data) {
-        fetchRecipeListBasedOnCategory(
-          category: category[data],
-          query: state.query,
-        );
+        emit(state.copyWith(category: category[data]));
+        _reset();
+        fetchRecipeListBasedOnCategory();
       },
     );
   }
@@ -42,26 +41,17 @@ class RecipeListCubit extends Cubit<RecipeListState> {
   bool get hasError => state.listStatus is RecipeListStatusError;
 
   /// current selected category
-  // String _currentCategory = "";
-
-  Future<void> fetchRecipeListBasedOnCategory({
-    String category = "lunch",
-    String query = "",
-  }) async {
+  Future<void> fetchRecipeListBasedOnCategory() async {
     try {
-      if (state.category != category.toLowerCase() || state.query != query) {
-        ///reset everything if a new search query is made.
-        _reset();
-      }
-      _emitInitialLoading(
-        category: category.toLowerCase(),
-        query: query.toLowerCase(),
-      );
+      _emitInitialLoading();
       final recipes = await recipeService.fetchRecipesByCategory(
         type: state.category.toLowerCase(),
         offset: _offset,
         number: _number,
         query: state.query.toLowerCase(),
+        cuisine: state.filter.cuisines,
+        intolerances: state.filter.intolerancesString,
+        dietaryPreferences: state.filter.diets,
       );
       if (recipes.totalResults == 0) {
         emit(
@@ -113,17 +103,72 @@ class RecipeListCubit extends Cubit<RecipeListState> {
     _hasMore = true;
   }
 
-  void _emitInitialLoading({
-    required String category,
-    required String query,
-  }) {
+  void _emitInitialLoading() {
     emit(
       state.copyWith(
-        category: category,
-        query: query,
         isFirstFetch: _offset == 0,
         listStatus: const RecipeListStatus.loading(),
       ),
     );
+  }
+
+  // Generic method to toggle an item in a Set<String>
+  Set<String> _toggleSetItem(Set<String> set, String item) {
+    return set.contains(item)
+        ? set.where((p) => p != item).toSet() // Remove item
+        : {...set, item}; //returning a new set.
+  }
+
+  void toggleDietaryPreference(String newPreference) {
+    final newPreferences = _toggleSetItem(
+      state.filter.dietaryPreference,
+      newPreference,
+    );
+    _reset();
+    emit(
+      state.copyWith(
+        filter: state.filter.copyWith(dietaryPreference: newPreferences),
+      ),
+    );
+  }
+
+  void toggleCuisinePreference(String newCuisine) {
+    final newCuisinePreference = _toggleSetItem(
+      state.filter.cuisinePreferences,
+      newCuisine,
+    );
+    _reset();
+    emit(
+      state.copyWith(
+        filter: state.filter.copyWith(
+          cuisinePreferences: newCuisinePreference,
+        ),
+      ),
+    );
+  }
+
+  void toggleIntolerances(String newIntolerance) {
+    final intolerances = _toggleSetItem(
+      state.filter.intolerances,
+      newIntolerance,
+    );
+    _reset();
+    emit(
+      state.copyWith(
+        filter: state.filter.copyWith(
+          intolerances: intolerances,
+        ),
+      ),
+    );
+  }
+
+  void clearFilter() {
+    emit(state.copyWith(filter: const Filter()));
+  }
+
+  void onQueryChange(String query) {
+    _reset();
+    emit(state.copyWith(query: query));
+    fetchRecipeListBasedOnCategory();
   }
 }

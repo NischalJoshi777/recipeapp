@@ -7,6 +7,9 @@ abstract class RecipeService {
     required String query,
     int offset = 0,
     int number = 10,
+    required String cuisine,
+    required String intolerances,
+    required String dietaryPreferences,
   });
 
   Future<List<RecipeBookmark>> fetchLocalRecipes();

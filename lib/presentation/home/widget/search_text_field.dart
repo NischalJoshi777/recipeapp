@@ -5,8 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myrecipeapp/config/theme/app_theme.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/config/theme/text_styles.dart';
-import 'package:myrecipeapp/presentation/home/recipe_category/constants.dart';
-import 'package:myrecipeapp/presentation/home/recipe_category/recipe_category_cubit.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/recipe_list_cubit/recipe_list_cubit.dart';
 
 import 'filter/filter_content.dart';
@@ -24,12 +22,7 @@ class SearchTextField extends StatelessWidget {
       elevation: 4.0,
       child: TextField(
         onSubmitted: (value) {
-          int categoryIndex = context.read<RecipeCategoryCubit>().state;
-          final recipeListCubit = context.read<RecipeListCubit>();
-          recipeListCubit.fetchRecipeListBasedOnCategory(
-            category: category[categoryIndex],
-            query: value,
-          );
+          context.read<RecipeListCubit>().onQueryChange(value);
         },
         style: context.appTheme.bodyRegular,
         cursorHeight: 18.0,
@@ -67,7 +60,10 @@ void _openFilter(BuildContext context) {
 void _showAlertDialog(BuildContext context) {
   showAdaptiveDialog(
     context: context,
-    builder: (context) => const FilterContent(),
+    builder: (_) => BlocProvider.value(
+      value: context.read<RecipeListCubit>(),
+      child: const FilterContent(),
+    ),
   );
 }
 
@@ -77,7 +73,10 @@ void _showModalSheet(BuildContext context) {
     isScrollControlled: true,
     useSafeArea: true,
     backgroundColor: Colors.transparent,
-    builder: (context) => const FilterContent(),
+    builder: (_) => BlocProvider.value(
+      value: context.read<RecipeListCubit>(),
+      child: const FilterContent(),
+    ),
   );
 }
 

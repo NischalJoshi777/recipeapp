@@ -55,10 +55,7 @@ class _ErrorWidget extends StatelessWidget {
               final listCubit = context.read<RecipeListCubit>();
               final category = listCubit.state.category;
               final query = listCubit.state.query;
-              listCubit.fetchRecipeListBasedOnCategory(
-                category: category,
-                query: query,
-              );
+              listCubit.fetchRecipeListBasedOnCategory();
             },
             child: Text(
               'Refresh',
@@ -102,13 +99,10 @@ class _RecipeListWidget extends StatelessWidget {
     return PaginatedList(
       onLoadMore: () {
         final cubit = context.read<RecipeListCubit>();
-        final category = cubit.state.category;
-        final query = cubit.state.query;
+        // final category = cubit.state.category;
+        // final query = cubit.state.query;
 
-        return context.read<RecipeListCubit>().fetchRecipeListBasedOnCategory(
-              category: category,
-              query: query,
-            );
+        return context.read<RecipeListCubit>().fetchRecipeListBasedOnCategory();
       },
       hasMore: context.read<RecipeListCubit>().hasMore,
       hasError: context.read<RecipeListCubit>().hasError,
