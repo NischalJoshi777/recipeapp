@@ -909,6 +909,7 @@ abstract class RecipeListStatusError implements RecipeListStatus {
 
 /// @nodoc
 mixin _$Filter {
+  int? get maxCalorie => throw _privateConstructorUsedError;
   Set<String> get dietaryPreference => throw _privateConstructorUsedError;
   Set<String> get intolerances => throw _privateConstructorUsedError;
   Set<String> get cuisinePreferences => throw _privateConstructorUsedError;
@@ -925,7 +926,8 @@ abstract class $FilterCopyWith<$Res> {
       _$FilterCopyWithImpl<$Res, Filter>;
   @useResult
   $Res call(
-      {Set<String> dietaryPreference,
+      {int? maxCalorie,
+      Set<String> dietaryPreference,
       Set<String> intolerances,
       Set<String> cuisinePreferences});
 }
@@ -945,11 +947,16 @@ class _$FilterCopyWithImpl<$Res, $Val extends Filter>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? maxCalorie = freezed,
     Object? dietaryPreference = null,
     Object? intolerances = null,
     Object? cuisinePreferences = null,
   }) {
     return _then(_value.copyWith(
+      maxCalorie: freezed == maxCalorie
+          ? _value.maxCalorie
+          : maxCalorie // ignore: cast_nullable_to_non_nullable
+              as int?,
       dietaryPreference: null == dietaryPreference
           ? _value.dietaryPreference
           : dietaryPreference // ignore: cast_nullable_to_non_nullable
@@ -974,7 +981,8 @@ abstract class _$$FilterImplCopyWith<$Res> implements $FilterCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {Set<String> dietaryPreference,
+      {int? maxCalorie,
+      Set<String> dietaryPreference,
       Set<String> intolerances,
       Set<String> cuisinePreferences});
 }
@@ -992,11 +1000,16 @@ class __$$FilterImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? maxCalorie = freezed,
     Object? dietaryPreference = null,
     Object? intolerances = null,
     Object? cuisinePreferences = null,
   }) {
     return _then(_$FilterImpl(
+      maxCalorie: freezed == maxCalorie
+          ? _value.maxCalorie
+          : maxCalorie // ignore: cast_nullable_to_non_nullable
+              as int?,
       dietaryPreference: null == dietaryPreference
           ? _value._dietaryPreference
           : dietaryPreference // ignore: cast_nullable_to_non_nullable
@@ -1017,7 +1030,8 @@ class __$$FilterImplCopyWithImpl<$Res>
 
 class _$FilterImpl extends _Filter {
   const _$FilterImpl(
-      {final Set<String> dietaryPreference = const <String>{},
+      {this.maxCalorie,
+      final Set<String> dietaryPreference = const <String>{},
       final Set<String> intolerances = const <String>{},
       final Set<String> cuisinePreferences = const <String>{}})
       : _dietaryPreference = dietaryPreference,
@@ -1025,6 +1039,8 @@ class _$FilterImpl extends _Filter {
         _cuisinePreferences = cuisinePreferences,
         super._();
 
+  @override
+  final int? maxCalorie;
   final Set<String> _dietaryPreference;
   @override
   @JsonKey()
@@ -1056,7 +1072,7 @@ class _$FilterImpl extends _Filter {
 
   @override
   String toString() {
-    return 'Filter(dietaryPreference: $dietaryPreference, intolerances: $intolerances, cuisinePreferences: $cuisinePreferences)';
+    return 'Filter(maxCalorie: $maxCalorie, dietaryPreference: $dietaryPreference, intolerances: $intolerances, cuisinePreferences: $cuisinePreferences)';
   }
 
   @override
@@ -1064,6 +1080,8 @@ class _$FilterImpl extends _Filter {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FilterImpl &&
+            (identical(other.maxCalorie, maxCalorie) ||
+                other.maxCalorie == maxCalorie) &&
             const DeepCollectionEquality()
                 .equals(other._dietaryPreference, _dietaryPreference) &&
             const DeepCollectionEquality()
@@ -1075,6 +1093,7 @@ class _$FilterImpl extends _Filter {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      maxCalorie,
       const DeepCollectionEquality().hash(_dietaryPreference),
       const DeepCollectionEquality().hash(_intolerances),
       const DeepCollectionEquality().hash(_cuisinePreferences));
@@ -1090,11 +1109,14 @@ class _$FilterImpl extends _Filter {
 
 abstract class _Filter extends Filter {
   const factory _Filter(
-      {final Set<String> dietaryPreference,
+      {final int? maxCalorie,
+      final Set<String> dietaryPreference,
       final Set<String> intolerances,
       final Set<String> cuisinePreferences}) = _$FilterImpl;
   const _Filter._() : super._();
 
+  @override
+  int? get maxCalorie;
   @override
   Set<String> get dietaryPreference;
   @override

@@ -14,32 +14,35 @@ class RecipeServiceImpl implements RecipeService {
   });
 
   @override
-  Future<RecipeResponse> fetchRecipesByCategory({
-    required String type,
-    required String query,
-    required String cuisine,
-    required String intolerances,
-    required String dietaryPreferences,
-    int offset = 0,
-    int number = 10,
-  }) async {
+  Future<RecipeResponse> fetchRecipesByCategory(
+      {required String type,
+      required String query,
+      required String cuisine,
+      required String intolerances,
+      required String dietaryPreferences,
+      int offset = 0,
+      int number = 10,
+      int? maxCalorie}) async {
     try {
+      Map<String, dynamic> queryParams = {
+        "type": type,
+        "offset": offset,
+        "number": number,
+        "query": query,
+        "cuisine": cuisine,
+        "diet": dietaryPreferences,
+        "intolerances": intolerances,
+        "addRecipeInformation": "True",
+      };
+      if (maxCalorie != null) {
+        queryParams.addAll({"maxCalories": maxCalorie});
+      }
       final response = await remoteSource.get(
         path: _EndPoints.categorySearch,
-        queryParams: {
-          "type": type,
-          "offset": offset,
-          "number": number,
-          "query": query,
-          "cuisine": cuisine,
-          "diet": dietaryPreferences,
-          "intolerances": intolerances,
-          "addRecipeInformation": "True",
-        },
+        queryParams: queryParams,
       );
       return RecipeResponse.fromJson(response);
     } catch (e) {
-      print(e.toString());
       throw Exception(e.toString());
     }
   }

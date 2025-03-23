@@ -51,7 +51,7 @@ class FilterContent extends StatelessWidget {
                   text: 'Calorie Count',
                   style: context.appTheme.bodyLarge.bold,
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: CaloriesSlider(),
                 ),

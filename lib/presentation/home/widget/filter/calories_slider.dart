@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myrecipeapp/config/theme/app_theme.dart';
 import 'package:myrecipeapp/config/theme/color.dart';
+import 'package:myrecipeapp/presentation/home/recipe_list/recipe_list_cubit/recipe_list_cubit.dart';
 
-class CaloriesSlider extends StatefulWidget {
+class CaloriesSlider extends StatelessWidget {
   const CaloriesSlider({super.key});
 
-  @override
-  State<CaloriesSlider> createState() => _CaloriesSliderState();
-}
-
-class _CaloriesSliderState extends State<CaloriesSlider> {
-  double _value = 80.0;
   final double _min = 80.0;
   final double _max = 800.0;
 
@@ -20,28 +16,33 @@ class _CaloriesSliderState extends State<CaloriesSlider> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text("${_min.toInt()} kcal", style: context.appTheme.bodyRegular),
-        Expanded(
-          child: SliderTheme(
-            data: SliderTheme.of(context).copyWith(
-              thumbShape: CustomSliderThumb(
-                thumbRadius: 18,
+        BlocBuilder<RecipeListCubit, RecipeListState>(
+            builder: (context, state) {
+          double _value = state.filter.maxCalorie?.toDouble() ?? _min;
+          return Expanded(
+            child: SliderTheme(
+              data: SliderTheme.of(context).copyWith(
+                thumbShape: CustomSliderThumb(
+                  thumbRadius: 18,
+                  value: _value,
+                ),
+              ),
+              child: Slider(
+                max: _max,
+                min: _min,
                 value: _value,
+                activeColor: Palette.primaryGreen,
+                inactiveColor: Palette.darkGray.withAlpha(50),
+                onChanged: (newVal) {
+                  context.read<RecipeListCubit>().toggleCalorieChange(
+                        newVal.toInt(),
+                      );
+                  _value = newVal;
+                },
               ),
             ),
-            child: Slider(
-              max: _max,
-              min: _min,
-              value: _value,
-              activeColor: Palette.primaryGreen,
-              inactiveColor: Palette.darkGray.withAlpha(50),
-              onChanged: (newVal) {
-                setState(() {
-                  _value = newVal;
-                });
-              },
-            ),
-          ),
-        ),
+          );
+        }),
         Text(
           "${_max.toInt()} kcal",
           style: context.appTheme.bodyRegular,

@@ -52,6 +52,7 @@ class RecipeListCubit extends Cubit<RecipeListState> {
         cuisine: state.filter.cuisines,
         intolerances: state.filter.intolerancesString,
         dietaryPreferences: state.filter.diets,
+        maxCalorie: state.filter.maxCalorie,
       );
       if (recipes.totalResults == 0) {
         emit(
@@ -157,6 +158,17 @@ class RecipeListCubit extends Cubit<RecipeListState> {
       state.copyWith(
         filter: state.filter.copyWith(
           intolerances: intolerances,
+        ),
+      ),
+    );
+  }
+
+  void toggleCalorieChange(int maxCalorie) {
+    _reset();
+    emit(
+      state.copyWith(
+        filter: state.filter.copyWith(
+          maxCalorie: maxCalorie,
         ),
       ),
     );

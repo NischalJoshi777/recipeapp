@@ -16,8 +16,11 @@ class RecipeListState with _$RecipeListState {
 @freezed
 class RecipeListStatus with _$RecipeListStatus {
   const factory RecipeListStatus.empty() = RecipeListStatusEmpty;
+
   const factory RecipeListStatus.loading() = RecipeListStatusLoading;
+
   const factory RecipeListStatus.loaded() = RecipeListStatusLoaded;
+
   const factory RecipeListStatus.error({
     required String message,
   }) = RecipeListStatusError;
@@ -26,13 +29,22 @@ class RecipeListStatus with _$RecipeListStatus {
 @freezed
 class Filter with _$Filter {
   const Filter._();
+
   const factory Filter({
+    int? maxCalorie,
     @Default(<String>{}) Set<String> dietaryPreference,
     @Default(<String>{}) Set<String> intolerances,
     @Default(<String>{}) Set<String> cuisinePreferences,
   }) = _Filter;
 
+  int get filterCount =>
+      dietaryPreference.length +
+      cuisinePreferences.length +
+      intolerances.length;
+
   String get diets => dietaryPreference.join(',');
+
   String get cuisines => cuisinePreferences.join(',');
+
   String get intolerancesString => intolerances.join(',');
 }
