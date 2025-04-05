@@ -60,5 +60,4 @@ class RecipeServiceImpl implements RecipeService {
 
 class _EndPoints {
   static const String categorySearch = "/complexSearch";
-  static const String details = "/information";
 }

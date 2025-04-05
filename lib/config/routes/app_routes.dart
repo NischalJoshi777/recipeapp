@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:myrecipeapp/config/route_observer.dart';
 import 'package:myrecipeapp/config/routes/routes.dart';
 import 'package:myrecipeapp/di.dart';
 import 'package:myrecipeapp/presentation/auth/auth_cubit/auth_cubit.dart';
@@ -28,42 +29,24 @@ final GoRouter myRouter = GoRouter(
   initialLocation: Routes.login,
   navigatorKey: _rootNavigatorKey,
   refreshListenable: StreamListenable(getIt<AuthCubit>().stream),
+  observers: [
+    AnalyticsRouteObserver(),
+  ],
   redirect: (context, state) {
     final authCubit = getIt<AuthCubit>();
     final authState = authCubit.state;
     final isAuthenticated = authState is Authenticated;
-    final isAuthenticating = authState is Authenticating;
+    final isInLogin = state.uri.toString() == Routes.login;
 
     /// If the app is authenticating, show the splash screen
-    if (isAuthenticating) {
-      return Routes.splash;
-    }
-
-    /// If the user is authenticated and the current location is the splash screen, redirect to home
-    final isInSplash = state.uri.toString() == Routes.splash;
-    final isInLogin = state.uri.toString() == Routes.login;
-    if (isAuthenticated) {
-      if (isInSplash) {
-        return Routes.home; // Redirect splash to home
-      } else if (isInLogin) {
-        return Routes.home; // Redirect login to home
-      }
-    }
-
-    ///If the user is not authenticated and not in splash or login screen, redirect to login
-    if (!isAuthenticated) {
-      if (!isInSplash && !isInLogin) {
-        return Routes.login;
-      }
+    if (isAuthenticated && isInLogin) {
+      return Routes.home;
+    } else if (!isAuthenticated) {
+      return Routes.login; // Redirect splash to home
     }
     return null; // No redirection needed
   },
   routes: <RouteBase>[
-    GoRoute(
-      parentNavigatorKey: _rootNavigatorKey,
-      path: "/splash",
-      builder: (_, state) => const Scaffold(),
-    ),
     GoRoute(
       parentNavigatorKey: _rootNavigatorKey,
       path: "/login",

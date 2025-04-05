@@ -88,6 +88,7 @@ class FilterContent extends StatelessWidget {
                     TextButton(
                       onPressed: () {
                         context.read<RecipeListCubit>().clearFilter();
+                        context.pop();
                       },
                       child: const Text('Clear'),
                     ),

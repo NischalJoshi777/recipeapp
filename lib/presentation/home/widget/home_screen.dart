@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/data/services/recipe_service.dart';
 import 'package:myrecipeapp/di.dart';
 import 'package:myrecipeapp/presentation/home/recipe_category/category_list.dart';
 import 'package:myrecipeapp/presentation/home/recipe_category/recipe_category_cubit.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/recipe_list_cubit/recipe_list_cubit.dart';
 import 'package:myrecipeapp/presentation/home/recipe_list/widgets/recipe_list.dart';
+import 'package:myrecipeapp/presentation/home/recipe_list/widgets/recipe_shimmer_item.dart';
 import 'package:myrecipeapp/presentation/home/widget/header_text.dart';
 import 'package:myrecipeapp/presentation/home/widget/search_text_field.dart';
 import 'package:myrecipeapp/presentation/home/widget/see_all_text_button.dart';
 import 'package:myrecipeapp/presentation/home/widget/welcome_text.dart';
+import 'package:myrecipeapp/presentation/profile/cubit/profile_cubit.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -69,17 +70,31 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Flexible(
+        const Flexible(
           flex: 2,
           child: WelcomeText(),
         ),
-        CircleAvatar(
-          radius: 20.0,
-          backgroundColor: Palette.primaryGreen,
-        ),
+        const SizedBox(width: 4.0),
+        BlocBuilder<ProfileCubit, ProfileState>(builder: (context, state) {
+          return state.profileLoadStatus.when(
+            loading: () => const CircleAvatar(
+              child: ShimmerItem(width: 10, height: 10),
+            ),
+            error: () => const Icon(Icons.error),
+            loaded: () => ClipRRect(
+              borderRadius: BorderRadius.circular(40.0),
+              child: Image.network(
+                height: 50.0,
+                width: 50.0,
+                fit: BoxFit.cover,
+                state.profileModel.photoUrl ?? '',
+              ),
+            ),
+          );
+        }),
       ],
     );
   }

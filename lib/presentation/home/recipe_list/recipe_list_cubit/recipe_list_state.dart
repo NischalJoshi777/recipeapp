@@ -40,7 +40,8 @@ class Filter with _$Filter {
   int get filterCount =>
       dietaryPreference.length +
       cuisinePreferences.length +
-      intolerances.length;
+      intolerances.length +
+      (maxCalorie != null ? 1 : 0);
 
   String get diets => dietaryPreference.join(',');
 

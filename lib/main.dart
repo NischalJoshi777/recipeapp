@@ -10,11 +10,11 @@ import 'package:myrecipeapp/presentation/auth/auth_cubit/auth_cubit.dart';
 
 import 'config/theme/app_theme.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  setupLocator();
+  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Hive.initFlutter();
+  setupLocator();
   registerAdapters();
   runApp(const MyApp());
 }

@@ -78,6 +78,7 @@ final lightThemeData = ThemeData(
       borderRadius: BorderRadius.circular(30.0),
     ),
   ),
+  primaryColorDark: myTheme.primaryColor,
   textTheme: TextTheme(
     headlineLarge: myTheme.h1,
     headlineMedium: myTheme.h2,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myrecipeapp/config/theme/app_theme.dart';
+import 'package:myrecipeapp/config/theme/color.dart';
 import 'package:myrecipeapp/data/services/recipe_details_service/recipe_details_service.dart';
 import 'package:myrecipeapp/di.dart';
 import 'package:myrecipeapp/presentation/home/details/cubit/detail_cubit.dart';
@@ -23,23 +25,28 @@ class DetailsScreen extends StatelessWidget {
       create: (_) => DetailCubit(recipeService: getIt<RecipeDetailService>())
         ..fetchRecipeDetails(id),
       child: Scaffold(
-        body: BlocConsumer<DetailCubit, DetailState>(
-          listener: (context, state) {
-            state.detailsDataState.whenOrNull(
-              error: (message, isAddedToFavorites) {
-                if (isAddedToFavorites) {
-                  return _showErrorMessage(context, message);
-                }
-              },
-            );
+        body: PopScope(
+          onPopInvokedWithResult: (didpop, result) {
+            print(result);
           },
-          builder: (BuildContext context, state) {
-            return state.detailsDataState.when(
-              loading: () => const Center(child: CircularProgressIndicator()),
-              loaded: () => _DetailsLoaded(recipe: state.detailVM!),
-              error: (msg, _) => const Text('Error'),
-            );
-          },
+          child: BlocConsumer<DetailCubit, DetailState>(
+            listener: (context, state) {
+              state.detailsDataState.whenOrNull(
+                error: (message, isAddedToFavorites) {
+                  if (isAddedToFavorites) {
+                    return _showErrorMessage(context, message);
+                  }
+                },
+              );
+            },
+            builder: (BuildContext context, state) {
+              return state.detailsDataState.when(
+                loading: () => const Center(child: CircularProgressIndicator()),
+                loaded: () => _DetailsLoaded(recipe: state.detailVM!),
+                error: (msg, _) => const Text('Error'),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -53,7 +60,6 @@ class DetailsScreen extends StatelessWidget {
         behavior: SnackBarBehavior.floating,
         margin: EdgeInsets.only(
           bottom: MediaQuery.of(context).size.height - 80,
-          left: 20.0,
           right: 20.0,
         ),
         content: Text(
@@ -88,6 +94,20 @@ class _DetailsLoaded extends StatelessWidget {
             top: 10.0,
             right: 10.0,
             child: FavoriteButton(id: recipe.id.toString()),
+          ),
+          Positioned(
+            top: 10.0,
+            left: 10.0,
+            child: InkWell(
+              onTap: () => context.pop('value-from-back-button'),
+              child: const CircleAvatar(
+                backgroundColor: Palette.lightGray,
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Palette.darkGray,
+                ),
+              ),
+            ),
           ),
           DetailBody(recipe: recipe),
         ],

@@ -8,6 +8,8 @@ import 'package:myrecipeapp/data/services/authentication_service/firebase_authen
 import 'package:myrecipeapp/data/services/recipe_details_service/recipe_details_service.dart';
 import 'package:myrecipeapp/data/services/recipe_details_service/recipe_details_service_impl.dart';
 import 'package:myrecipeapp/data/services/recipe_service.dart';
+import 'package:myrecipeapp/data/services/user_detail_service/user_detail_service.dart';
+import 'package:myrecipeapp/data/services/user_detail_service/user_detail_service_impl.dart';
 import 'package:myrecipeapp/presentation/auth/auth_cubit/auth_cubit.dart';
 
 import 'data/services/recipe_service_impl.dart';
@@ -36,6 +38,8 @@ void setupLocator() {
   getIt.registerLazySingleton<AuthCubit>(
     () => AuthCubit(authService: getIt<AuthenticationService>()),
   );
+
+  getIt.registerLazySingleton<UserDetailService>(() => UserDetailServiceImpl());
 
   getIt.registerLazySingleton<RecipeDetailService>(
     () => RecipeDetailsServiceImpl(

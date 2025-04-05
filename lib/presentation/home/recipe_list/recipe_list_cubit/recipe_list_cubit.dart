@@ -175,7 +175,9 @@ class RecipeListCubit extends Cubit<RecipeListState> {
   }
 
   void clearFilter() {
-    emit(state.copyWith(filter: const Filter()));
+    _reset();
+    emit(state.copyWith(filter: const Filter(), query: ""));
+    fetchRecipeListBasedOnCategory();
   }
 
   void onQueryChange(String query) {

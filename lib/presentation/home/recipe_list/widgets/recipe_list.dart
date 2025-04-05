@@ -107,7 +107,11 @@ class _RecipeListWidget extends StatelessWidget {
       hasMore: context.read<RecipeListCubit>().hasMore,
       hasError: context.read<RecipeListCubit>().hasError,
       itemBuilder: (BuildContext context, int index) => GestureDetector(
-        onTap: () => context.push('/details', extra: recipeList[index].id),
+        onTap: () async {
+          final value =
+              await context.push('/details', extra: recipeList[index].id);
+          print(value);
+        },
         child: _RecipeItem(
           id: recipeList[index].id,
           image: recipeList[index].image,
@@ -119,12 +123,12 @@ class _RecipeListWidget extends StatelessWidget {
       itemCount: recipeList.length,
       loadingWidget: const RecipeShimmerItem(),
       errorWidget: !context.read<RecipeListCubit>().hasMore
-          ? _buildEndErroWidget()
+          ? _buildEndErrorWidget()
           : const Text('Error'),
     );
   }
 
-  Widget _buildEndErroWidget() {
+  Widget _buildEndErrorWidget() {
     return Builder(builder: (context) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,

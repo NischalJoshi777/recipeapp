@@ -35,7 +35,6 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> signOut() async {
     try {
-      emit(const AuthState.authenticating());
       await authService.signOutGoogle();
     } catch (e) {
       emit(const AuthState.unauthenticated(message: 'Error but logging out'));

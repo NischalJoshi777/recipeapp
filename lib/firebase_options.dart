@@ -74,6 +74,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '213008457005',
     projectId: 'recipe-app-8cb60',
     storageBucket: 'recipe-app-8cb60.firebasestorage.app',
+    iosClientId: '213008457005-454tq89rtgl0j4rs0ipti75jdvj2nm9g.apps.googleusercontent.com',
     iosBundleId: 'com.myrecipe.com.myrecipeapp',
   );
 
@@ -86,4 +87,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'recipe-app-8cb60.firebasestorage.app',
     measurementId: 'G-0RS842D7YV',
   );
+
 }
